@@ -1,129 +1,165 @@
 "use client";
 
 import React from "react";
-import { Globe } from "./ui/globe";
+import Image from "next/image";
 import {
   RiBriefcase2Line,
   RiBuilding4Line,
   RiTeamLine,
   RiAwardLine,
+  RiStarFill,
 } from "react-icons/ri";
 
 const stats = [
   {
     icon: RiBriefcase2Line,
-    value: "50K",
+    value: "50K+",
     label: "Active Projects",
+    color: "from-blue-500 to-indigo-500",
+    shadow: "shadow-blue-500/10",
   },
   {
     icon: RiBuilding4Line,
-    value: "12K",
-    label: "Agencies",
+    value: "12K+",
+    label: "Agencies Partnered",
+    color: "from-purple-500 to-fuchsia-500",
+    shadow: "shadow-purple-500/10",
   },
   {
     icon: RiTeamLine,
-    value: "2M",
+    value: "2M+",
     label: "Freelancers",
+    color: "from-pink-500 to-rose-500",
+    shadow: "shadow-pink-500/10",
   },
   {
     icon: RiAwardLine,
     value: "97%",
     label: "Satisfaction Rate",
+    color: "from-amber-500 to-orange-500",
+    shadow: "shadow-amber-500/10",
   },
 ];
 
-import { useTheme } from "next-themes";
-
 const StatsSection = () => {
-  const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const isDark = !mounted || resolvedTheme === "dark";
-
-  const customGlobeConfig = {
-    width: 1000,
-    height: 1000,
-    onRender: () => {},
-    devicePixelRatio: 2,
-    phi: 0,
-    theta: 0.3,
-    dark: isDark ? 1 : 0,
-    diffuse: 1.2,
-    mapSamples: 16000,
-    mapBrightness: isDark ? 6 : 1.2,
-    baseColor: isDark ? [0.15, 0.15, 0.25] : [0.93, 0.93, 0.98],
-    markerColor: [99 / 255, 102 / 255, 241 / 255],
-    glowColor: isDark ? [0.3, 0.3, 0.5] : [0.85, 0.85, 0.95],
-    markers: [
-      { location: [14.5995, 120.9842], size: 0.03 },
-      { location: [19.076, 72.8777], size: 0.1 },
-      { location: [23.8103, 90.4125], size: 0.05 },
-      { location: [30.0444, 31.2357], size: 0.07 },
-      { location: [39.9042, 116.4074], size: 0.08 },
-      { location: [-23.5505, -46.6333], size: 0.1 },
-      { location: [19.4326, -99.1332], size: 0.1 },
-      { location: [40.7128, -74.006], size: 0.1 },
-      { location: [34.6937, 135.5022], size: 0.05 },
-      { location: [41.0082, 28.9784], size: 0.06 },
-    ],
-  };
-
   return (
-    <div className="relative w-full bg-zinc-50 dark:bg-black py-20 flex flex-col items-center transition-colors duration-300">
-      {/* Globe & Text Container */}
-      <div className="relative w-full flex flex-col items-center">
-        <div className="relative w-full flex items-center justify-center overflow-hidden aspect-4/1.5 bg-zinc-50 dark:bg-black transition-colors duration-300">
-          {/* Interactive Globe component */}
-          <Globe
-            className="absolute top-0 w-full max-w-none aspect-square opacity-75"
-            config={customGlobeConfig}
-          />
+    <section className="relative w-full bg-zinc-50 dark:bg-zinc-950 py-24 border-t border-zinc-200 dark:border-zinc-900 overflow-hidden transition-colors duration-300">
+      {/* Background glow effects */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
 
-          {/* Bottom fade gradient overlay */}
-          <div className="absolute bottom-0 left-0 right-0 h-36 bg-linear-to-t from-zinc-50 via-zinc-50/40 to-transparent dark:from-black dark:via-black/40 dark:to-transparent pointer-events-none transition-colors duration-300" />
+      <div className="mx-auto container px-6 relative z-10 flex flex-col items-center gap-12">
+        
+        {/* Header content (Centered) */}
+        <div className="flex flex-col items-center text-center gap-6 max-w-3xl">
+          {/* Styled Pill Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-indigo-500/20 dark:border-indigo-400/25 bg-indigo-50/50 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-400 shadow-xs backdrop-blur-xs select-none">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+            </span>
+            <span className="text-[10px] sm:text-xs font-bold tracking-widest uppercase">
+              Worklix Core Platform
+            </span>
+          </div>
 
-          {/* Overlay Text positioned at the top of the container (above the globe curve) */}
-          <div className="absolute top-2 sm:top-6 md:top-12 inset-x-0 flex justify-center p-4 z-10 pointer-events-none">
-            <h2 className="text-xs sm:text-base md:text-3xl lg:text-4xl font-extrabold text-zinc-950 dark:text-white text-center max-w-2xl leading-relaxed tracking-tight drop-shadow-[0_4px_6px_rgba(255,255,255,0.05)] dark:drop-shadow-[0_4px_12px_rgba(0,0,0,0.95)] transition-colors duration-300">
-              Assisting over{" "}
-              <span className="text-indigo-600 dark:text-indigo-400 font-black">15,000</span>{" "}
-              freelancers find their dream projects.
-            </h2>
+          {/* Headline */}
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-zinc-950 dark:text-white tracking-tight leading-tight transition-colors duration-300">
+            Where high-growth teams connect and deliver.
+          </h2>
+
+          {/* Sub-description */}
+          <p className="text-zinc-655 dark:text-zinc-400 text-base sm:text-lg leading-relaxed font-normal transition-colors duration-300 max-w-2xl">
+            WorkLix gives digital agencies, startups, and expert freelancers a streamlined hub to coordinate contracts, pitch scopes, and scale client delivery without friction.
+          </p>
+
+          {/* Trust Ratings Stack */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-2">
+            {/* Avatars Stack */}
+            <div className="flex -space-x-3 overflow-hidden select-none shrink-0">
+              <Image
+                className="inline-block h-9 w-9 rounded-full ring-2 ring-white dark:ring-zinc-950 object-cover"
+                src="https://i.pravatar.cc/100?img=33"
+                alt="Freelancer"
+                width={36}
+                height={36}
+              />
+              <Image
+                className="inline-block h-9 w-9 rounded-full ring-2 ring-white dark:ring-zinc-950 object-cover"
+                src="https://i.pravatar.cc/100?img=12"
+                alt="Freelancer"
+                width={36}
+                height={36}
+              />
+              <Image
+                className="inline-block h-9 w-9 rounded-full ring-2 ring-white dark:ring-zinc-950 object-cover"
+                src="https://i.pravatar.cc/100?img=60"
+                alt="Freelancer"
+                width={36}
+                height={36}
+              />
+              <Image
+                className="inline-block h-9 w-9 rounded-full ring-2 ring-white dark:ring-zinc-950 object-cover"
+                src="https://i.pravatar.cc/100?img=47"
+                alt="Freelancer"
+                width={36}
+                height={36}
+              />
+            </div>
+
+            {/* Rating Text */}
+            <div className="flex flex-col text-center sm:text-left text-sm">
+              <div className="flex items-center justify-center sm:justify-start gap-1 text-amber-500">
+                <RiStarFill className="w-4 h-4" />
+                <RiStarFill className="w-4 h-4" />
+                <RiStarFill className="w-4 h-4" />
+                <RiStarFill className="w-4 h-4" />
+                <RiStarFill className="w-4 h-4" />
+                <span className="text-zinc-950 dark:text-white font-bold ml-1">4.9/5</span>
+              </div>
+              <span className="text-zinc-500 dark:text-zinc-550 text-xs mt-0.5">
+                Average freelancer rating from 15,000+ contracts
+              </span>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Overlapping Stats Grid */}
-      <div className="relative z-10 w-full container px-6 -mt-4 md:-mt-28">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {stats.map((item, idx) => {
-            const Icon = item.icon;
-            return (
-              <div
-                key={idx}
-                className="flex flex-col justify-between p-8 h-48 rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-700/80 hover:scale-[1.02] shadow-sm dark:shadow-xl"
-              >
-                <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-zinc-100 dark:bg-zinc-900 text-indigo-600 dark:text-indigo-400 shrink-0 transition-colors">
-                  <Icon className="w-5 h-5" />
+        {/* Stats Cards Grid (Centered 4 Columns) */}
+        <div className="w-full max-w-6xl">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {stats.map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={idx}
+                  className="group relative flex flex-col justify-between p-8 h-48 rounded-2xl border border-zinc-200 dark:border-zinc-900 bg-white dark:bg-zinc-950/40 backdrop-blur-md transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-800 hover:-translate-y-1 hover:shadow-lg dark:hover:shadow-indigo-500/5 select-none"
+                >
+                  {/* Top Section: Styled Icon */}
+                  <div className="flex items-center justify-between">
+                    <div className="w-11 h-11 flex items-center justify-center rounded-xl bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200/50 dark:border-zinc-800/30 text-indigo-600 dark:text-indigo-400 shrink-0 transition-all duration-300 group-hover:scale-105">
+                      <Icon className="w-5.5 h-5.5" />
+                    </div>
+                    
+                    {/* Accent glow corner */}
+                    <div className={`absolute top-0 right-0 w-16 h-16 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-10 rounded-tr-2xl blur-lg transition-opacity duration-500`} />
+                  </div>
+
+                  {/* Bottom Section: Stat details */}
+                  <div className="flex flex-col">
+                    <span className="text-4xl md:text-5xl font-black text-zinc-950 dark:text-white tracking-tight transition-colors">
+                      {item.value}
+                    </span>
+                    <span className="text-zinc-500 dark:text-zinc-550 text-xs font-bold uppercase tracking-widest mt-2 transition-colors">
+                      {item.label}
+                    </span>
+                  </div>
                 </div>
-                <div className="flex flex-col">
-                  <span className="text-4xl font-extrabold text-zinc-950 dark:text-white tracking-tight transition-colors">
-                    {item.value}
-                  </span>
-                  <span className="text-zinc-400 dark:text-zinc-500 text-xs font-semibold uppercase tracking-wider mt-1.5 transition-colors">
-                    {item.label}
-                  </span>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
+
       </div>
-    </div>
+    </section>
   );
 };
 

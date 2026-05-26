@@ -46,3 +46,4 @@ Project-requirements.md
 skills-lock.json
 tailwind_instruction.md
 .agents/
+.env*.local
