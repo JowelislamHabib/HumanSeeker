@@ -1,6 +1,7 @@
 import Banner from "@/components/Banner";
 import StatsSection from "@/components/StatsSection";
 import FeaturedJobs from "@/components/FeaturedJobs";
+import PricingSection from "@/components/PricingSection";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <Banner />
       <StatsSection />
       <FeaturedJobs />
+      <PricingSection />
     </div>
   );
 }

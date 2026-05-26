@@ -23,6 +23,7 @@
   },
   "registries": {
     "@magicui": "https://magicui.design/r/{name}",
-    "@cardcn": "https://cardcn.dev/r/{name}.json"
+    "@cardcn": "https://cardcn.dev/r/{name}.json",
+    "@unlumen-ui": "https://ui.unlumen.com/r/{name}.json"
   }
 }
