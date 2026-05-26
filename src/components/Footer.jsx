@@ -12,10 +12,10 @@ const footerLinks = [
   {
     title: "Product",
     links: [
-      { label: "Job discovery", href: "/jobs" },
+      { label: "Project discovery", href: "/projects" },
       { label: "Worker AI", href: "/worker-ai" },
-      { label: "Companies", href: "/companies" },
-      { label: "Salary data", href: "/salaries" },
+      { label: "Agencies", href: "/agencies" },
+      { label: "Budget insights", href: "/pricing" },
     ],
   },
   {
@@ -45,7 +45,7 @@ const Footer = () => {
           <div className="col-span-1 md:col-span-5 flex flex-col gap-4">
             <Link href="/" className="flex items-center gap-3 group w-fit">
               <div className="relative shrink-0 w-9 h-9 rounded-lg bg-linear-to-tr from-indigo-500 via-purple-500 to-pink-500 p-1.5 flex items-center justify-center shadow-lg shadow-purple-500/10 transition-transform duration-300 group-hover:scale-105">
-                <RiTeamFill className="w-5 h-5 text-white" />
+                <RiTeamFill className="w-30 h-30 text-white" />
               </div>
               <div className="flex flex-col select-none leading-[1.1]">
                 <span className="text-2xl font-bold text-white tracking-tight">
@@ -119,7 +119,7 @@ const Footer = () => {
 
           {/* Copyright and Policies */}
           <div className="flex flex-wrap items-center justify-center sm:justify-end gap-x-6 gap-y-2 text-xs text-zinc-500">
-            <span>Copyright {new Date().getFullYear()} — Human Seeker</span>
+            <span>Copyright {new Date().getFullYear()} — WorkLix</span>
             <Link
               href="/terms"
               className="hover:bg-indigo-600 hover:text-white transition-colors duration-200"

@@ -19,7 +19,7 @@ const Navbar = () => {
         {/* Logo & Brand */}
         <Link href="/" className="flex items-center gap-3 group">
           <div className="relative shrink-0 w-9 h-9 rounded-lg bg-linear-to-tr from-indigo-500 via-purple-500 to-pink-500 p-1.5 flex items-center justify-center shadow-lg shadow-purple-500/10 transition-transform duration-300 group-hover:scale-105">
-            <RiTeamFill />
+            <RiTeamFill className="w-30 h-30 text-white" />
           </div>
           <div className="flex flex-col select-none leading-[1.1]">
             <span className="text-2xl font-bold text-white tracking-tight">
