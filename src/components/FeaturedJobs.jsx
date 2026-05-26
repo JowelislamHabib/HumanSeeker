@@ -57,14 +57,14 @@ const dummyJobs = [
 
 const FeaturedJobs = () => {
   return (
-    <div className="relative w-full bg-zinc-950 py-20 border-t border-zinc-900">
+    <div className="relative w-full bg-zinc-50 dark:bg-zinc-950 py-20 border-t border-zinc-200 dark:border-zinc-900 transition-colors duration-300">
       <div className="mx-auto container px-6 flex flex-col items-center gap-12">
         {/* Header */}
         <div className="flex flex-col items-center text-center">
-          <span className="text-xs font-bold text-indigo-500 tracking-widest uppercase">
+          <span className="text-xs font-bold text-indigo-600 dark:text-indigo-500 tracking-widest uppercase">
             ■ SMART PROJECT DISCOVERY ■
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight mt-3 max-w-2xl leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-zinc-950 dark:text-white tracking-tight mt-3 max-w-2xl leading-tight transition-colors duration-300">
             The projects you'd never find by searching
           </h2>
         </div>
@@ -79,7 +79,7 @@ const FeaturedJobs = () => {
         {/* View all open projects button */}
         <Link
           href="/projects"
-          className="bg-white hover:bg-zinc-200 text-black font-semibold text-sm px-6 py-3 rounded-xl transition-all duration-200 active:scale-95 text-center shadow-lg shadow-white/5 cursor-pointer"
+          className="bg-zinc-950 hover:bg-zinc-800 text-white dark:bg-white dark:hover:bg-zinc-200 dark:text-black font-semibold text-sm px-6 py-3 rounded-xl transition-all duration-200 active:scale-95 text-center shadow-md shadow-zinc-900/5 dark:shadow-white/5 border border-zinc-900 dark:border-transparent cursor-pointer"
         >
           View all open projects
         </Link>

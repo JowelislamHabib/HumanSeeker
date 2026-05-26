@@ -69,26 +69,26 @@ const PricingSection = () => {
   const [billing, setBilling] = useState("monthly");
 
   return (
-    <section className="relative w-full bg-zinc-950 py-24 border-t border-zinc-900 overflow-hidden">
+    <section className="relative w-full bg-zinc-50 dark:bg-zinc-950 py-24 border-t border-zinc-200 dark:border-zinc-900 overflow-hidden transition-colors duration-300">
       <div className="mx-auto container px-6 flex flex-col items-center gap-12 relative z-10">
         
         {/* Header */}
         <div className="flex flex-col items-center text-center">
-          <span className="text-xs font-bold text-indigo-500 tracking-widest uppercase">
+          <span className="text-xs font-bold text-indigo-600 dark:text-indigo-500 tracking-widest uppercase">
             ■ PRICING ■
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight mt-3 max-w-2xl leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-zinc-950 dark:text-white tracking-tight mt-3 max-w-2xl leading-tight transition-colors duration-300">
             Pay for the leverage, not the listings
           </h2>
         </div>
 
         {/* Toggle */}
-        <div className="flex items-center bg-zinc-900 border border-zinc-800 p-1.5 rounded-full">
+        <div className="flex items-center bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-1.5 rounded-full transition-colors">
           <button
             onClick={() => setBilling("monthly")}
             className={cn(
               "px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all cursor-pointer",
-              billing === "monthly" ? "bg-white text-black shadow-lg shadow-white/5 font-bold" : "text-zinc-400 hover:text-white"
+              billing === "monthly" ? "bg-white dark:bg-zinc-950 text-zinc-950 dark:text-white shadow-md shadow-zinc-200/50 dark:shadow-zinc-950/50 font-bold" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
             )}
           >
             Monthly
@@ -97,7 +97,7 @@ const PricingSection = () => {
             onClick={() => setBilling("yearly")}
             className={cn(
               "px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 cursor-pointer",
-              billing === "yearly" ? "bg-white text-black shadow-lg shadow-white/5 font-bold" : "text-zinc-400 hover:text-white"
+              billing === "yearly" ? "bg-white dark:bg-zinc-950 text-zinc-950 dark:text-white shadow-md shadow-zinc-200/50 dark:shadow-zinc-950/50 font-bold" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
             )}
           >
             <span>Yearly</span>
@@ -126,28 +126,28 @@ const PricingSection = () => {
                 {/* Header Overlay content */}
                 <div className="absolute top-0 left-0 right-0 p-8 flex items-center justify-between pointer-events-none select-none z-20">
                   <div className="flex items-center gap-2.5">
-                    <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300">
-                      <Icon className="w-4.5 h-4.5 text-fuchsia-400" />
+                    <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 transition-colors">
+                      <Icon className="w-4.5 h-4.5 text-fuchsia-600 dark:text-fuchsia-400" />
                     </span>
-                    <span className="text-lg font-bold text-white tracking-tight">{plan.name}</span>
+                    <span className="text-lg font-bold text-zinc-950 dark:text-white tracking-tight transition-colors">{plan.name}</span>
                   </div>
-                  <div className="flex items-baseline text-white">
+                  <div className="flex items-baseline text-zinc-950 dark:text-white transition-colors">
                     <span className="text-3xl font-extrabold">${price}</span>
-                    <span className="text-zinc-400 text-xs ml-1">/month</span>
+                    <span className="text-zinc-500 dark:text-zinc-400 text-xs ml-1">/month</span>
                   </div>
                 </div>
 
                 {/* Card Body */}
-                <div className="p-8 pt-2 flex flex-col gap-6 bg-zinc-950 border-t border-zinc-900/50">
+                <div className="p-8 pt-2 flex flex-col gap-6 bg-white dark:bg-zinc-950 border-t border-zinc-100 dark:border-zinc-900/50 transition-colors h-full justify-between">
                   <div className="flex flex-col gap-4">
-                    <p className="text-zinc-400 text-sm font-medium">Start building your insights hub:</p>
+                    <p className="text-zinc-500 dark:text-zinc-400 text-sm font-medium">Start building your insights hub:</p>
                     <ul className="flex flex-col gap-3">
                       {plan.features.map((feature, idx) => (
                         <li key={idx} className="flex items-start gap-3">
-                          <span className="flex items-center justify-center w-5 h-5 rounded-md bg-zinc-900 border border-zinc-800 text-zinc-400 text-xs shrink-0 font-bold select-none">
+                          <span className="flex items-center justify-center w-5 h-5 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-500 dark:text-zinc-400 text-xs shrink-0 font-bold select-none transition-colors">
                             +
                           </span>
-                          <span className="text-zinc-300 text-sm leading-relaxed">{feature}</span>
+                          <span className="text-zinc-700 dark:text-zinc-300 text-sm leading-relaxed transition-colors">{feature}</span>
                         </li>
                       ))}
                     </ul>
@@ -156,7 +156,9 @@ const PricingSection = () => {
                   <button
                     className={cn(
                       "w-full py-3 px-4 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer active:scale-[0.98]",
-                      plan.buttonStyle
+                      plan.isFeatured 
+                        ? "bg-indigo-600 hover:bg-indigo-500 text-white dark:bg-white dark:hover:bg-zinc-200 dark:text-black" 
+                        : "bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white hover:bg-zinc-200 dark:hover:bg-zinc-850 hover:border-zinc-300 dark:hover:border-zinc-700"
                     )}
                   >
                     <span>Choose This Plan</span>
