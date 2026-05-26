@@ -18,21 +18,28 @@ const Banner = () => {
 
       <div className="mx-auto container px-6 relative z-10 flex flex-col items-center text-center gap-8">
         {/* Project count badge */}
-        <div className="inline-flex items-center gap-2.5 rounded-full border border-zinc-800 bg-zinc-900/60 px-4.5 py-1.5 text-xs text-zinc-300 shadow-md">
+        <div className="inline-flex items-start gap-2.5 rounded-full border border-zinc-800 bg-zinc-900/60 px-4.5 py-1.5 text-xs text-zinc-300 shadow-md">
           <RiBriefcaseFill className="text-amber-500 w-4 h-4 shrink-0" />
           <span className="font-bold text-white">50,000+</span>
-          <span className="uppercase tracking-wider text-[10px] text-zinc-500 font-bold">Active Projects Live</span>
+          <span className="uppercase tracking-wider text-[10px] text-zinc-500 font-bold">
+            Active Projects Live
+          </span>
         </div>
 
         {/* Heading */}
         <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold text-white tracking-tight max-w-4xl leading-tight">
-          Find Your Next <span className="bg-linear-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Dream Project</span> Today
+          Find Your Next{" "}
+          <span className="bg-linear-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            Dream Project
+          </span>{" "}
+          Today
         </h1>
 
         {/* Description */}
         <p className="max-w-2xl text-base sm:text-lg text-zinc-400 leading-relaxed font-normal">
-          WorkLix connects top-tier freelancers with leading startups, agencies, and global businesses. 
-          Pitch proposals, manage contracts, and scale your business — faster.
+          WorkLix connects top-tier freelancers with leading startups, agencies,
+          and global businesses. Pitch proposals, manage contracts, and scale
+          your business — faster.
         </p>
 
         {/* Search Bar Container */}
@@ -75,7 +82,9 @@ const Banner = () => {
 
         {/* Trending Positions */}
         <div className="flex flex-col sm:flex-row items-center gap-3 mt-4 text-sm">
-          <span className="text-zinc-500 font-semibold uppercase tracking-wider text-[11px]">Popular Categories</span>
+          <span className="text-zinc-500 font-semibold uppercase tracking-wider text-[11px]">
+            Popular Categories
+          </span>
           <div className="flex flex-wrap items-center justify-center gap-2">
             {popularCategories.map((cat) => (
               <a

@@ -1,4 +1,4 @@
-/** @type {import('next').NextConfig} */
+import { codeInspectorPlugin } from "code-inspector-plugin";
 const nextConfig = {
   /* config options here */
   reactCompiler: true,
