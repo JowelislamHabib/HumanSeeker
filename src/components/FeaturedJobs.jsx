@@ -7,45 +7,51 @@ import JobCard from "./JobCard";
 const dummyJobs = [
   {
     title: "React Frontend Developer",
-    description: "Build a high-performance analytics dashboard using React and Tailwind CSS.",
+    description:
+      "Build a high-performance analytics dashboard using React and Tailwind CSS.",
     location: "San Francisco, USA",
     type: "Remote",
-    rate: "$60–$90/hour",
+    rate: "$60-$90/hour",
   },
   {
     title: "UI/UX Product Designer",
-    description: "Design user journeys, wireframes, and design systems for a fintech SaaS platform.",
+    description:
+      "Design user journeys, wireframes, and design systems for a fintech SaaS platform.",
     location: "London, UK",
     type: "Hybrid",
-    rate: "$65–$95/hour",
+    rate: "$65-$95/hour",
   },
   {
     title: "DevOps & Infrastructure Lead",
-    description: "Architect and maintain cloud infrastructure pipelines, ensuring 99.9% platform uptime.",
+    description:
+      "Architect and maintain cloud infrastructure pipelines, ensuring 99.9% platform uptime.",
     location: "Seattle, USA",
     type: "Remote",
-    rate: "$85–$125/hour",
+    rate: "$85-$125/hour",
   },
   {
     title: "AI Integrations Engineer",
-    description: "Connect Large Language Models with client backends to automate business workflows.",
+    description:
+      "Connect Large Language Models with client backends to automate business workflows.",
     location: "Berlin, Germany",
     type: "Remote",
-    rate: "$75–$110/hour",
+    rate: "$75-$110/hour",
   },
   {
     title: "Backend API Developer",
-    description: "Optimize SQL/NoSQL database queries and set up secure serverless backend APIs.",
+    description:
+      "Optimize SQL/NoSQL database queries and set up secure serverless backend APIs.",
     location: "Toronto, Canada",
     type: "Hybrid",
-    rate: "$70–$100/hour",
+    rate: "$70-$100/hour",
   },
   {
     title: "React Native Mobile Developer",
-    description: "Build cross-platform mobile apps for delivery service agencies.",
+    description:
+      "Build cross-platform mobile apps for delivery service agencies.",
     location: "Sydney, Australia",
     type: "Remote",
-    rate: "$75–$105/hour",
+    rate: "$75-$105/hour",
   },
 ];
 
