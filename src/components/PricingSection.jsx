@@ -74,9 +74,15 @@ const PricingSection = () => {
         
         {/* Header */}
         <div className="flex flex-col items-center text-center">
-          <span className="text-xs font-bold text-indigo-600 dark:text-indigo-500 tracking-widest uppercase">
-            ■ PRICING ■
-          </span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-fuchsia-500/20 dark:border-fuchsia-400/25 bg-fuchsia-50/50 dark:bg-fuchsia-950/30 text-fuchsia-600 dark:text-fuchsia-400 shadow-xs backdrop-blur-xs select-none">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-fuchsia-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-fuchsia-500"></span>
+            </span>
+            <span className="text-[10px] sm:text-xs font-bold tracking-widest uppercase">
+              Pricing Plans
+            </span>
+          </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-zinc-950 dark:text-white tracking-tight mt-3 max-w-2xl leading-tight transition-colors duration-300">
             Pay for the leverage, not the listings
           </h2>

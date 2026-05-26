@@ -51,9 +51,15 @@ const CtaSection = () => {
       <div className="mx-auto container px-6 relative z-10 flex flex-col items-center text-center gap-8">
         
         {/* Sub-label */}
-        <span className="text-xs font-bold text-indigo-600 dark:text-indigo-500 tracking-widest uppercase">
-          ■ JOIN WORKLIX TODAY ■
-        </span>
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-indigo-500/20 dark:border-indigo-400/25 bg-indigo-50/50 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-400 shadow-xs backdrop-blur-xs select-none">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-450 dark:bg-indigo-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+          </span>
+          <span className="text-[10px] sm:text-xs font-bold tracking-widest uppercase">
+            Join Worklix Today
+          </span>
+        </div>
 
         {/* Heading */}
         <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-zinc-950 dark:text-white tracking-tight max-w-3xl leading-tight transition-colors duration-300">
