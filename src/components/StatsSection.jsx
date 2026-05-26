@@ -62,7 +62,7 @@ const customGlobeConfig = {
 
 const StatsSection = () => {
   return (
-    <div className="relative w-full bg-black py-20 -mt-40 flex flex-col items-center">
+    <div className="relative w-full bg-black py-20 flex flex-col items-center">
       {/* Globe & Text Container */}
       <div className="relative w-full flex flex-col items-center">
         <div className="relative w-full flex items-center justify-center overflow-hidden aspect-4/1.5 bg-black">
@@ -71,7 +71,7 @@ const StatsSection = () => {
             className="absolute top-0 w-full max-w-none aspect-square opacity-75"
             config={customGlobeConfig}
           />
-          
+
           {/* Bottom fade-to-black gradient overlay */}
           <div className="absolute bottom-0 left-0 right-0 h-36 bg-linear-to-t from-black via-black/40 to-transparent pointer-events-none" />
 
