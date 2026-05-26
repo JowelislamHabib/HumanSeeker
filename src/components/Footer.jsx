@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import {
-  RiUserSearchFill,
+  RiTeamFill,
   RiFacebookFill,
   RiPinterestFill,
   RiLinkedinFill,
@@ -45,20 +45,18 @@ const Footer = () => {
           <div className="col-span-1 md:col-span-5 flex flex-col gap-4">
             <Link href="/" className="flex items-center gap-3 group w-fit">
               <div className="relative shrink-0 w-9 h-9 rounded-lg bg-linear-to-tr from-indigo-500 via-purple-500 to-pink-500 p-1.5 flex items-center justify-center shadow-lg shadow-purple-500/10 transition-transform duration-300 group-hover:scale-105">
-                <RiUserSearchFill className="w-5 h-5 text-white" />
+                <RiTeamFill className="w-5 h-5 text-white" />
               </div>
               <div className="flex flex-col select-none leading-[1.1]">
-                <span className="text-[15px] font-bold text-white tracking-tight">
-                  Human
-                </span>
-                <span className="text-[15px] font-bold text-white tracking-tight">
-                  Seeker
+                <span className="text-2xl font-bold text-white tracking-tight">
+                  WorkLix
                 </span>
               </div>
             </Link>
             <p className="max-w-xs text-sm text-zinc-500 leading-relaxed">
-              The AI-native career platform. Built for people who take their
-              work seriously.
+              WorkLix is a full-featured freelance collaboration platform that
+              connects skilled freelancers with startups, agencies, and
+              businesses worldwide.
             </p>
           </div>
 
@@ -94,7 +92,7 @@ const Footer = () => {
               href="https://facebook.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 flex items-center justify-center rounded-lg bg-zinc-900 text-zinc-400 hover:text-white transition-colors duration-200"
+              className="w-9 h-9 flex items-center justify-center rounded-lg bg-zinc-900 text-zinc-400 hover:text-white hover:bg-indigo-600 transition-colors duration-200"
               aria-label="Facebook"
             >
               <RiFacebookFill className="w-5 h-5" />
@@ -103,7 +101,7 @@ const Footer = () => {
               href="https://pinterest.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 flex items-center justify-center rounded-lg bg-indigo-600 text-white hover:bg-indigo-500 transition-colors duration-200"
+              className="w-9 h-9 flex items-center justify-center rounded-lg bg-zinc-900 text-zinc-400 hover:text-white hover:bg-indigo-600 transition-colors duration-200"
               aria-label="Pinterest"
             >
               <RiPinterestFill className="w-5 h-5" />
@@ -112,7 +110,7 @@ const Footer = () => {
               href="https://linkedin.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 flex items-center justify-center rounded-lg bg-zinc-900 text-zinc-400 hover:text-white transition-colors duration-200"
+              className="w-9 h-9 flex items-center justify-center rounded-lg bg-zinc-900 text-zinc-400 hover:text-white hover:bg-indigo-600 transition-colors duration-200"
               aria-label="LinkedIn"
             >
               <RiLinkedinFill className="w-5 h-5" />
@@ -124,13 +122,13 @@ const Footer = () => {
             <span>Copyright {new Date().getFullYear()} — Human Seeker</span>
             <Link
               href="/terms"
-              className="hover:text-white transition-colors duration-200"
+              className="hover:bg-indigo-600 hover:text-white transition-colors duration-200"
             >
               Terms & Policy
             </Link>
             <Link
               href="/privacy"
-              className="hover:text-white transition-colors duration-200"
+              className="hover:bg-indigo-600 hover:text-white transition-colors duration-200"
             >
               Privacy Guideline
             </Link>
