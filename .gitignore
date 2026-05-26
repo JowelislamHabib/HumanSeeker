@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# caveman mode
+caveman-instructions.md
+Project-requirements.md
+skills-lock.json
+tailwind_instruction.md
