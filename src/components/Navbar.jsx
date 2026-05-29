@@ -132,15 +132,23 @@ const Navbar = () => {
     <nav className="sticky top-0 z-50 w-full border-b border-zinc-200 dark:border-zinc-900/80 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md transition-colors duration-300">
       <div className="mx-auto container px-6 h-20 flex items-center justify-between">
         {/* Logo & Brand */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="relative shrink-0 w-9 h-9 rounded-lg bg-linear-to-tr from-indigo-500 via-purple-500 to-pink-500 p-1.5 flex items-center justify-center shadow-lg shadow-purple-500/10 transition-transform duration-300 group-hover:scale-105">
-            <RiTeamFill className="w-30 h-30 text-white" />
-          </div>
-          <div className="flex flex-col select-none leading-[1.1]">
-            <span className="text-2xl font-bold text-zinc-950 dark:text-white tracking-tight transition-colors">
-              WorkLix
-            </span>
-          </div>
+        <Link href="/" className="flex items-center group outline-none">
+          <Image
+            src="/worklix-dark.png"
+            alt="WorkLix Logo"
+            width={120}
+            height={36}
+            priority
+            className="h-8 w-auto object-contain dark:hidden transition-transform duration-300 group-hover:scale-105"
+          />
+          <Image
+            src="/worklix-white.png"
+            alt="WorkLix Logo"
+            width={120}
+            height={36}
+            priority
+            className="h-8 w-auto object-contain hidden dark:block transition-transform duration-300 group-hover:scale-105"
+          />
         </Link>
 
         {/* Desktop Navigation */}

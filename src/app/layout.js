@@ -15,7 +15,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata = {
-  title: "WorkLix",
+  title: "WorkLix - The Modern Freelance Collaboration Platform",
   description:
     "WorkLix is a full-featured job hunting portal that bridges the gap between job seekers and employers. It streamlines job discovery, application management, and company recruitment — all in one platform.",
 };
@@ -23,7 +23,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="h-full" suppressHydrationWarning>
-      <body className={`${inter.variable} ${plusJakartaSans.variable} font-sans min-h-full flex flex-col antialiased`}>
+      <body
+        className={`${inter.variable} ${plusJakartaSans.variable} font-sans min-h-full flex flex-col antialiased`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

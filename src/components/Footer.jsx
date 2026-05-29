@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import {
   RiTeamFill,
   RiFacebookFill,
@@ -43,15 +44,21 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
           {/* Brand Info */}
           <div className="col-span-1 md:col-span-5 flex flex-col gap-4">
-            <Link href="/" className="flex items-center gap-3 group w-fit">
-              <div className="relative shrink-0 w-9 h-9 rounded-lg bg-linear-to-tr from-indigo-500 via-purple-500 to-pink-500 p-1.5 flex items-center justify-center shadow-lg shadow-purple-500/10 transition-transform duration-300 group-hover:scale-105">
-                <RiTeamFill className="w-30 h-30 text-white" />
-              </div>
-              <div className="flex flex-col select-none leading-[1.1]">
-                <span className="text-2xl font-bold text-zinc-950 dark:text-white tracking-tight transition-colors">
-                  WorkLix
-                </span>
-              </div>
+            <Link href="/" className="flex items-center group w-fit outline-none">
+              <Image
+                src="/worklix-dark.png"
+                alt="WorkLix Logo"
+                width={120}
+                height={36}
+                className="h-8 w-auto object-contain dark:hidden transition-transform duration-300 group-hover:scale-105"
+              />
+              <Image
+                src="/worklix-white.png"
+                alt="WorkLix Logo"
+                width={120}
+                height={36}
+                className="h-8 w-auto object-contain hidden dark:block transition-transform duration-300 group-hover:scale-105"
+              />
             </Link>
             <p className="max-w-xs text-sm text-zinc-550 dark:text-zinc-500 leading-relaxed transition-colors">
               WorkLix is a full-featured freelance collaboration platform that
