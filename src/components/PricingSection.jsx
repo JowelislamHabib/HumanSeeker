@@ -1,7 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { RiVipCrownLine, RiBarChartLine, RiFlashlightLine, RiArrowRightLine, RiCheckLine } from "react-icons/ri";
+import {
+  RiVipCrownLine,
+  RiBarChartLine,
+  RiFlashlightLine,
+  RiArrowRightLine,
+  RiCheckLine,
+} from "react-icons/ri";
 import { cn } from "@/lib/utils";
 import {
   Card,
@@ -81,7 +87,11 @@ const PricingSection = () => {
         <motion.div
           variants={{
             hidden: { opacity: 0, y: 30 },
-            visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 80, damping: 15 } },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: { type: "spring", stiffness: 80, damping: 15 },
+            },
           }}
           className="flex flex-col items-center text-center"
         >
@@ -103,7 +113,11 @@ const PricingSection = () => {
         <motion.div
           variants={{
             hidden: { opacity: 0, scale: 0.95 },
-            visible: { opacity: 1, scale: 1, transition: { type: "spring", stiffness: 100, damping: 15 } },
+            visible: {
+              opacity: 1,
+              scale: 1,
+              transition: { type: "spring", stiffness: 100, damping: 15 },
+            },
           }}
           className="relative flex items-center bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-1.5 rounded-full transition-colors"
         >
@@ -111,13 +125,15 @@ const PricingSection = () => {
             onClick={() => setBilling("monthly")}
             className={cn(
               "relative z-10 px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-colors cursor-pointer",
-              billing === "monthly" ? "text-zinc-950 dark:text-white font-bold" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+              billing === "monthly"
+                ? "text-white dark:text-zinc-950 font-bold"
+                : "text-zinc-500 hover:text-zinc-900 dark:text-white/70 dark:hover:text-white",
             )}
           >
             {billing === "monthly" && (
               <motion.span
                 layoutId="activeBilling"
-                className="absolute inset-0 bg-white dark:bg-zinc-950 rounded-full shadow-sm shadow-zinc-200/50 dark:shadow-zinc-950/50"
+                className="absolute inset-0 bg-zinc-950 dark:bg-white rounded-full shadow-sm"
                 transition={{ type: "spring", stiffness: 380, damping: 30 }}
               />
             )}
@@ -127,13 +143,15 @@ const PricingSection = () => {
             onClick={() => setBilling("yearly")}
             className={cn(
               "relative z-10 px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-colors flex items-center gap-1.5 cursor-pointer",
-              billing === "yearly" ? "text-zinc-950 dark:text-white font-bold" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+              billing === "yearly"
+                ? "text-white dark:text-zinc-950 font-bold"
+                : "text-zinc-500 hover:text-zinc-900 dark:text-white/70 dark:hover:text-white",
             )}
           >
             {billing === "yearly" && (
               <motion.span
                 layoutId="activeBilling"
-                className="absolute inset-0 bg-white dark:bg-zinc-950 rounded-full shadow-sm shadow-zinc-200/50 dark:shadow-zinc-950/50"
+                className="absolute inset-0 bg-zinc-950 dark:bg-white rounded-full shadow-sm"
                 transition={{ type: "spring", stiffness: 380, damping: 30 }}
               />
             )}
@@ -160,7 +178,8 @@ const PricingSection = () => {
         >
           {plans.map((plan, index) => {
             const Icon = plan.icon;
-            const price = billing === "monthly" ? plan.priceMonthly : plan.priceYearly;
+            const price =
+              billing === "monthly" ? plan.priceMonthly : plan.priceYearly;
 
             return (
               <motion.div
@@ -171,30 +190,32 @@ const PricingSection = () => {
                     opacity: 1,
                     y: 0,
                     scale: plan.isFeatured ? 1.05 : 1.0,
-                    transition: { type: "spring", stiffness: 80, damping: 14 }
-                  }
+                    transition: { type: "spring", stiffness: 80, damping: 14 },
+                  },
                 }}
                 whileHover={{
                   y: -12,
                   scale: plan.isFeatured ? 1.06 : 1.02,
-                  transition: { type: "spring", stiffness: 260, damping: 20 }
+                  transition: { type: "spring", stiffness: 260, damping: 20 },
                 }}
                 className="flex flex-col h-full w-full"
               >
                 <Card
                   className={cn(
-                    "group relative flex flex-col justify-between transition-all duration-300 border bg-white dark:bg-zinc-900/40 overflow-hidden h-full w-full",
+                    "group relative flex flex-col justify-between transition-all duration-300 border bg-white dark:bg-zinc-900/40 h-full w-full overflow-visible",
                     plan.isFeatured
                       ? "border-2 border-fuchsia-500 dark:border-fuchsia-400 shadow-xl shadow-fuchsia-500/10 dark:shadow-fuchsia-400/5 z-10"
-                      : "border-zinc-200 dark:border-zinc-900 hover:border-zinc-300 dark:hover:border-zinc-800 shadow-xs"
+                      : "border-zinc-200 dark:border-zinc-900 hover:border-zinc-300 dark:hover:border-zinc-800 shadow-xs",
                   )}
                 >
                   {/* Accent glow corner */}
-                  <div className={cn(
-                    "absolute top-0 right-0 w-24 h-24 bg-gradient-to-br opacity-0 transition-opacity duration-500 rounded-tr-xl blur-xl pointer-events-none z-0",
-                    plan.isFeatured ? "opacity-15" : "group-hover:opacity-15",
-                    plan.color
-                  )} />
+                  <div
+                    className={cn(
+                      "absolute top-0 right-0 w-24 h-24 bg-gradient-to-br opacity-0 transition-opacity duration-500 rounded-tr-xl blur-xl pointer-events-none z-0",
+                      plan.isFeatured ? "opacity-15" : "group-hover:opacity-15",
+                      plan.color,
+                    )}
+                  />
 
                   {plan.isFeatured && (
                     <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20">
@@ -223,14 +244,20 @@ const PricingSection = () => {
                             initial={{ y: -24, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             exit={{ y: 24, opacity: 0 }}
-                            transition={{ type: "spring", stiffness: 350, damping: 25 }}
+                            transition={{
+                              type: "spring",
+                              stiffness: 350,
+                              damping: 25,
+                            }}
                             className="relative z-10 inline-block"
                           >
                             {price}
                           </motion.span>
                         </AnimatePresence>
                       </span>
-                      <span className="text-zinc-500 dark:text-zinc-400 text-xs ml-1">/mo</span>
+                      <span className="text-zinc-500 dark:text-zinc-400 text-xs ml-1">
+                        /mo
+                      </span>
                     </div>
                   </CardHeader>
 
@@ -258,7 +285,7 @@ const PricingSection = () => {
                         "w-full py-3 px-4 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer active:scale-[0.98] group",
                         plan.isFeatured
                           ? "bg-fuchsia-600 hover:bg-fuchsia-500 text-white shadow-md shadow-fuchsia-500/25"
-                          : "bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-800"
+                          : "bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-800",
                       )}
                     >
                       <span>Choose This Plan</span>
@@ -276,4 +303,3 @@ const PricingSection = () => {
 };
 
 export default PricingSection;
-
