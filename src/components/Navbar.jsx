@@ -92,10 +92,10 @@ const Navbar = () => {
     return (
       <div
         className={cn(
-          "flex flex-col truncate",
+          "flex flex-col",
           isMobile
-            ? "min-w-0"
-            : "px-3 py-2 border-b border-zinc-150 dark:border-zinc-900 mb-1.5 gap-0.5",
+            ? "flex-1 min-w-0 pr-2"
+            : "px-3 py-2 border-b border-zinc-150 dark:border-zinc-900 mb-1.5 gap-0.5 min-w-0",
         )}
       >
         <span className="text-sm font-bold text-zinc-900 dark:text-white truncate">
@@ -269,71 +269,80 @@ const Navbar = () => {
       {/* Mobile Navigation Dropdown */}
       <div
         className={cn(
-          "md:hidden overflow-hidden transition-all duration-300 ease-in-out border-zinc-200 dark:border-zinc-900 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-lg",
+          "md:hidden overflow-hidden transition-all duration-300 ease-in-out border-zinc-200 dark:border-zinc-900 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-lg shadow-lg",
           isMenuOpen
-            ? "max-h-[350px] border-t py-4 opacity-100"
+            ? "max-h-[600px] border-t opacity-100"
             : "max-h-0 opacity-0 border-t-0 pointer-events-none",
         )}
       >
-        <div className="flex flex-col gap-4 px-6">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setIsMenuOpen(false)}
-              className="text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white py-2 text-base font-medium transition-colors border-b border-zinc-100 dark:border-zinc-900"
-            >
-              {link.label}
-            </Link>
-          ))}
+        <div className="flex flex-col px-6 py-5 gap-6">
+          {/* Main Links */}
+          <div className="flex flex-col gap-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setIsMenuOpen(false)}
+                className="text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white py-3 text-lg font-medium transition-colors border-b border-zinc-100 dark:border-zinc-800/60 last:border-0"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+
           {!isPending &&
             (session ? (
-              <div className="flex flex-col gap-3.5 pt-2 border-t border-zinc-150 dark:border-zinc-900">
-                <div className="flex items-center gap-3 px-1">
-                  {renderAvatar(true)}
-                  {renderUserInfo(true)}
+              <div className="flex flex-col gap-4 bg-zinc-50 dark:bg-zinc-900/50 -mx-3 px-3 py-4 rounded-2xl border border-zinc-100 dark:border-zinc-800/80">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-3 flex-1 min-w-0">
+                    {renderAvatar(true)}
+                    {renderUserInfo(true)}
+                  </div>
+                  {renderThemeToggle()}
                 </div>
 
-                <div className="flex flex-col gap-2">
+                <div className="h-px bg-zinc-200 dark:bg-zinc-800/80 w-full" />
+
+                <div className="flex flex-col gap-1">
                   {userLinks.map(({ label, href, Icon }) => (
                     <Link
                       key={href}
                       href={href}
                       onClick={() => setIsMenuOpen(false)}
-                      className="flex items-center gap-2.5 text-zinc-700 dark:text-zinc-300 py-1.5 text-base font-medium transition-colors"
+                      className="flex items-center gap-3 text-zinc-700 dark:text-zinc-300 py-2.5 px-3 -mx-3 hover:bg-zinc-100 dark:hover:bg-zinc-800/50 rounded-xl transition-colors font-medium"
                     >
-                      <Icon className="w-5 h-5 text-zinc-400" />
+                      <Icon className="w-5 h-5 text-zinc-400 dark:text-zinc-500" />
                       <span>{label}</span>
                     </Link>
                   ))}
-
-                  <div className="flex items-center justify-between pt-2 border-t border-zinc-150 dark:border-zinc-900">
-                    <button
-                      onClick={handleSignOut}
-                      className="flex items-center gap-2.5 text-rose-600 dark:text-rose-400 py-1.5 text-base font-medium transition-colors cursor-pointer"
-                    >
-                      <RiLogoutBoxRLine className="w-5 h-5 text-rose-500" />
-                      <span>Sign Out</span>
-                    </button>
-                    {renderThemeToggle()}
-                  </div>
                 </div>
+
+                <button
+                  onClick={handleSignOut}
+                  className="flex items-center justify-center w-full gap-2.5 text-rose-600 dark:text-rose-400 py-3 mt-1 bg-rose-50 dark:bg-rose-500/10 hover:bg-rose-100 dark:hover:bg-rose-500/20 rounded-xl font-semibold transition-colors cursor-pointer"
+                >
+                  <RiLogoutBoxRLine className="w-5 h-5" />
+                  <span>Sign Out</span>
+                </button>
               </div>
             ) : (
-              <div className="flex items-center justify-between pt-2">
-                <Link
-                  href="/login"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="text-indigo-600 hover:text-indigo-500 dark:text-indigo-500 dark:hover:text-indigo-400 text-base font-semibold py-2 transition-colors"
-                >
-                  Sign In
-                </Link>
-                <div className="flex items-center gap-3">
-                  {renderThemeToggle()}
+              <div className="flex flex-col gap-4 pt-2">
+                <div className="flex items-center justify-between w-full mb-1">
+                   <span className="text-zinc-600 dark:text-zinc-400 font-medium text-sm">Theme Appearance</span>
+                   {renderThemeToggle()}
+                </div>
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                  <Link
+                    href="/login"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="flex items-center justify-center py-3.5 px-5 bg-zinc-100 dark:bg-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-900 dark:text-white rounded-xl font-semibold transition-colors flex-1"
+                  >
+                    Sign In
+                  </Link>
                   <Link
                     href="/register"
                     onClick={() => setIsMenuOpen(false)}
-                    className="bg-zinc-950 hover:bg-zinc-800 text-white dark:bg-white dark:hover:bg-zinc-200 dark:text-black font-semibold text-sm px-5 py-2.5 rounded-xl transition-all duration-200 active:scale-95 text-center"
+                    className="flex items-center justify-center py-3.5 px-5 bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 rounded-xl font-bold transition-all active:scale-95 shadow-lg shadow-zinc-900/10 dark:shadow-white/10 flex-1"
                   >
                     Get Started
                   </Link>
