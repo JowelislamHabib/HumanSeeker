@@ -190,7 +190,7 @@ const StatsSection = () => {
                 },
               },
             }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+            className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
           >
             {stats.map((item, idx) => {
               const Icon = item.icon;
@@ -210,7 +210,7 @@ const StatsSection = () => {
                     },
                   }}
                   whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                  className="group relative flex flex-col justify-between p-8 h-48 rounded-2xl border border-zinc-200 dark:border-zinc-900 bg-white dark:bg-zinc-950/40 backdrop-blur-md transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-800 hover:shadow-lg dark:hover:shadow-indigo-500/5 select-none"
+                  className="group relative flex flex-col justify-between p-5 sm:p-8 h-40 sm:h-48 rounded-2xl border border-zinc-200 dark:border-zinc-900 bg-white dark:bg-zinc-950/40 backdrop-blur-md transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-800 hover:shadow-lg dark:hover:shadow-indigo-500/5 select-none"
                 >
                   {/* Top Section: Styled Icon */}
                   <div className="flex items-center justify-between">
@@ -226,10 +226,10 @@ const StatsSection = () => {
 
                   {/* Bottom Section: Stat details */}
                   <div className="flex flex-col">
-                    <span className="text-4xl md:text-5xl font-black text-zinc-950 dark:text-white tracking-tight transition-colors">
+                    <span className="text-3xl sm:text-4xl md:text-5xl font-black text-zinc-950 dark:text-white tracking-tight transition-colors">
                       {item.value}
                     </span>
-                    <span className="text-zinc-500 dark:text-zinc-550 text-xs font-bold uppercase tracking-widest mt-2 transition-colors">
+                    <span className="text-zinc-500 dark:text-zinc-550 text-[10px] sm:text-xs font-bold uppercase tracking-wide sm:tracking-widest mt-1 sm:mt-2 transition-colors">
                       {item.label}
                     </span>
                   </div>
