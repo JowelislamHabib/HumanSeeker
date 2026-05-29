@@ -10,6 +10,7 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
+import { motion, AnimatePresence } from "motion/react";
 
 const plans = [
   {
@@ -61,10 +62,29 @@ const PricingSection = () => {
 
   return (
     <section className="relative w-full bg-zinc-50 dark:bg-zinc-950 py-24 border-t border-zinc-200 dark:border-zinc-900 overflow-hidden transition-colors duration-300">
-      <div className="mx-auto container px-6 flex flex-col items-center gap-12 relative z-10">
-        
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={{
+          hidden: { opacity: 0 },
+          visible: {
+            opacity: 1,
+            transition: {
+              staggerChildren: 0.15,
+            },
+          },
+        }}
+        className="mx-auto container px-6 flex flex-col items-center gap-12 relative z-10"
+      >
         {/* Header */}
-        <div className="flex flex-col items-center text-center">
+        <motion.div
+          variants={{
+            hidden: { opacity: 0, y: 30 },
+            visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 80, damping: 15 } },
+          }}
+          className="flex flex-col items-center text-center"
+        >
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-fuchsia-500/20 dark:border-fuchsia-400/25 bg-fuchsia-50/50 dark:bg-fuchsia-950/30 text-fuchsia-600 dark:text-fuchsia-400 shadow-xs backdrop-blur-xs select-none">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-fuchsia-400 opacity-75"></span>
@@ -77,117 +97,180 @@ const PricingSection = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-zinc-950 dark:text-white tracking-tight mt-3 max-w-2xl leading-tight transition-colors duration-300">
             Pay for the leverage, not the listings
           </h2>
-        </div>
+        </motion.div>
 
         {/* Toggle */}
-        <div className="flex items-center bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-1.5 rounded-full transition-colors">
+        <motion.div
+          variants={{
+            hidden: { opacity: 0, scale: 0.95 },
+            visible: { opacity: 1, scale: 1, transition: { type: "spring", stiffness: 100, damping: 15 } },
+          }}
+          className="relative flex items-center bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-1.5 rounded-full transition-colors"
+        >
           <button
             onClick={() => setBilling("monthly")}
             className={cn(
-              "px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all cursor-pointer",
-              billing === "monthly" ? "bg-white dark:bg-zinc-950 text-zinc-950 dark:text-white shadow-md shadow-zinc-200/50 dark:shadow-zinc-950/50 font-bold" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+              "relative z-10 px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-colors cursor-pointer",
+              billing === "monthly" ? "text-zinc-950 dark:text-white font-bold" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
             )}
           >
-            Monthly
+            {billing === "monthly" && (
+              <motion.span
+                layoutId="activeBilling"
+                className="absolute inset-0 bg-white dark:bg-zinc-950 rounded-full shadow-sm shadow-zinc-200/50 dark:shadow-zinc-950/50"
+                transition={{ type: "spring", stiffness: 380, damping: 30 }}
+              />
+            )}
+            <span className="relative z-10">Monthly</span>
           </button>
           <button
             onClick={() => setBilling("yearly")}
             className={cn(
-              "px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 cursor-pointer",
-              billing === "yearly" ? "bg-white dark:bg-zinc-950 text-zinc-950 dark:text-white shadow-md shadow-zinc-200/50 dark:shadow-zinc-950/50 font-bold" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+              "relative z-10 px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-colors flex items-center gap-1.5 cursor-pointer",
+              billing === "yearly" ? "text-zinc-950 dark:text-white font-bold" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
             )}
           >
-            <span>Yearly</span>
-            <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-fuchsia-600 text-white font-bold">
-              25%
+            {billing === "yearly" && (
+              <motion.span
+                layoutId="activeBilling"
+                className="absolute inset-0 bg-white dark:bg-zinc-950 rounded-full shadow-sm shadow-zinc-200/50 dark:shadow-zinc-950/50"
+                transition={{ type: "spring", stiffness: 380, damping: 30 }}
+              />
+            )}
+            <span className="relative z-10 flex items-center gap-1.5">
+              <span>Yearly</span>
+              <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-fuchsia-600 text-white font-bold">
+                25%
+              </span>
             </span>
           </button>
-        </div>
+        </motion.div>
 
         {/* Grid of Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl mt-4 items-stretch">
+        <motion.div
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.1,
+              },
+            },
+          }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl mt-4 items-stretch"
+        >
           {plans.map((plan, index) => {
             const Icon = plan.icon;
             const price = billing === "monthly" ? plan.priceMonthly : plan.priceYearly;
 
             return (
-              <Card
+              <motion.div
                 key={index}
-                className={cn(
-                  "group relative flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 border bg-white dark:bg-zinc-900/40 overflow-hidden",
-                  plan.isFeatured
-                    ? "border-2 border-fuchsia-500 dark:border-fuchsia-400 shadow-xl shadow-fuchsia-500/10 dark:shadow-fuchsia-400/5 lg:scale-105 z-10"
-                    : "border-zinc-200 dark:border-zinc-900 hover:border-zinc-300 dark:hover:border-zinc-800 shadow-xs"
-                )}
+                variants={{
+                  hidden: { opacity: 0, y: 40, scale: 0.95 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    scale: plan.isFeatured ? 1.05 : 1.0,
+                    transition: { type: "spring", stiffness: 80, damping: 14 }
+                  }
+                }}
+                whileHover={{
+                  y: -12,
+                  scale: plan.isFeatured ? 1.06 : 1.02,
+                  transition: { type: "spring", stiffness: 260, damping: 20 }
+                }}
+                className="flex flex-col h-full w-full"
               >
-                {/* Accent glow corner */}
-                <div className={cn(
-                  "absolute top-0 right-0 w-24 h-24 bg-gradient-to-br opacity-0 transition-opacity duration-500 rounded-tr-xl blur-xl pointer-events-none z-0",
-                  plan.isFeatured ? "opacity-15" : "group-hover:opacity-15",
-                  plan.color
-                )} />
+                <Card
+                  className={cn(
+                    "group relative flex flex-col justify-between transition-all duration-300 border bg-white dark:bg-zinc-900/40 overflow-hidden h-full w-full",
+                    plan.isFeatured
+                      ? "border-2 border-fuchsia-500 dark:border-fuchsia-400 shadow-xl shadow-fuchsia-500/10 dark:shadow-fuchsia-400/5 z-10"
+                      : "border-zinc-200 dark:border-zinc-900 hover:border-zinc-300 dark:hover:border-zinc-800 shadow-xs"
+                  )}
+                >
+                  {/* Accent glow corner */}
+                  <div className={cn(
+                    "absolute top-0 right-0 w-24 h-24 bg-gradient-to-br opacity-0 transition-opacity duration-500 rounded-tr-xl blur-xl pointer-events-none z-0",
+                    plan.isFeatured ? "opacity-15" : "group-hover:opacity-15",
+                    plan.color
+                  )} />
 
-                {plan.isFeatured && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20">
-                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-fuchsia-600 text-white shadow-md shadow-fuchsia-600/20">
-                      <RiVipCrownLine className="w-3.5 h-3.5 animate-bounce" />
-                      Most Popular
-                    </span>
-                  </div>
-                )}
+                  {plan.isFeatured && (
+                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-fuchsia-600 text-white shadow-md shadow-fuchsia-600/20">
+                        <RiVipCrownLine className="w-3.5 h-3.5 animate-bounce" />
+                        Most Popular
+                      </span>
+                    </div>
+                  )}
 
-                <CardHeader className="flex flex-row items-center justify-between border-b border-zinc-100 dark:border-zinc-800/50 pb-6 pt-6 px-6">
-                  <div className="flex items-center gap-2.5">
-                    <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 transition-colors">
-                      <Icon className="w-5 h-5 text-fuchsia-600 dark:text-fuchsia-400" />
-                    </span>
-                    <CardTitle className="text-lg font-bold text-zinc-950 dark:text-white tracking-tight transition-colors">
-                      {plan.name}
-                    </CardTitle>
-                  </div>
-                  <div className="flex items-baseline text-zinc-950 dark:text-white transition-colors">
-                    <span className="text-3xl font-extrabold">${price}</span>
-                    <span className="text-zinc-500 dark:text-zinc-400 text-xs ml-1">/mo</span>
-                  </div>
-                </CardHeader>
+                  <CardHeader className="flex flex-row items-center justify-between border-b border-zinc-100 dark:border-zinc-800/50 pb-6 pt-6 px-6">
+                    <div className="flex items-center gap-2.5">
+                      <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 transition-colors">
+                        <Icon className="w-5 h-5 text-fuchsia-600 dark:text-fuchsia-400" />
+                      </span>
+                      <CardTitle className="text-lg font-bold text-zinc-950 dark:text-white tracking-tight transition-colors">
+                        {plan.name}
+                      </CardTitle>
+                    </div>
+                    <div className="flex items-baseline text-zinc-950 dark:text-white transition-colors">
+                      <span className="text-3xl font-extrabold flex items-center relative overflow-hidden h-9">
+                        <span className="relative z-10">$</span>
+                        <AnimatePresence mode="popLayout" initial={false}>
+                          <motion.span
+                            key={price}
+                            initial={{ y: -24, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            exit={{ y: 24, opacity: 0 }}
+                            transition={{ type: "spring", stiffness: 350, damping: 25 }}
+                            className="relative z-10 inline-block"
+                          >
+                            {price}
+                          </motion.span>
+                        </AnimatePresence>
+                      </span>
+                      <span className="text-zinc-500 dark:text-zinc-400 text-xs ml-1">/mo</span>
+                    </div>
+                  </CardHeader>
 
-                <CardContent className="flex-1 flex flex-col gap-6 pt-6 px-6 pb-6">
-                  <p className="text-zinc-500 dark:text-zinc-400 text-xs font-semibold uppercase tracking-wider">
-                    Start building your insights hub:
-                  </p>
-                  <ul className="flex flex-col gap-3">
-                    {plan.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start gap-3">
-                        <span className="flex items-center justify-center w-5 h-5 rounded-md bg-fuchsia-50 dark:bg-fuchsia-950/30 border border-fuchsia-100 dark:border-fuchsia-900/40 text-fuchsia-600 dark:text-fuchsia-400 shrink-0 select-none transition-colors">
-                          <RiCheckLine className="w-3.5 h-3.5" />
-                        </span>
-                        <span className="text-zinc-750 dark:text-zinc-300 text-sm leading-relaxed transition-colors">
-                          {feature}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
+                  <CardContent className="flex-1 flex flex-col gap-6 pt-6 px-6 pb-6">
+                    <p className="text-zinc-500 dark:text-zinc-400 text-xs font-semibold uppercase tracking-wider">
+                      Start building your insights hub:
+                    </p>
+                    <ul className="flex flex-col gap-3">
+                      {plan.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-start gap-3">
+                          <span className="flex items-center justify-center w-5 h-5 rounded-md bg-fuchsia-50 dark:bg-fuchsia-950/30 border border-fuchsia-100 dark:border-fuchsia-900/40 text-fuchsia-600 dark:text-fuchsia-400 shrink-0 select-none transition-colors">
+                            <RiCheckLine className="w-3.5 h-3.5" />
+                          </span>
+                          <span className="text-zinc-750 dark:text-zinc-300 text-sm leading-relaxed transition-colors">
+                            {feature}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
 
-                <CardFooter className="pt-2 pb-6 px-6">
-                  <button
-                    className={cn(
-                      "w-full py-3 px-4 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer active:scale-[0.98] group",
-                      plan.isFeatured
-                        ? "bg-fuchsia-600 hover:bg-fuchsia-500 text-white shadow-md shadow-fuchsia-500/25"
-                        : "bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-800"
-                    )}
-                  >
-                    <span>Choose This Plan</span>
-                    <RiArrowRightLine className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
-                  </button>
-                </CardFooter>
-              </Card>
+                  <CardFooter className="pt-2 pb-6 px-6">
+                    <button
+                      className={cn(
+                        "w-full py-3 px-4 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer active:scale-[0.98] group",
+                        plan.isFeatured
+                          ? "bg-fuchsia-600 hover:bg-fuchsia-500 text-white shadow-md shadow-fuchsia-500/25"
+                          : "bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-800"
+                      )}
+                    >
+                      <span>Choose This Plan</span>
+                      <RiArrowRightLine className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+                    </button>
+                  </CardFooter>
+                </Card>
+              </motion.div>
             );
           })}
-        </div>
-
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };

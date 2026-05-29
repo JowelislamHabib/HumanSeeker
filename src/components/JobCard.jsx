@@ -4,10 +4,18 @@ import React from "react";
 import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { RiMapPinLine, RiBriefcaseLine, RiMoneyDollarCircleLine } from "react-icons/ri";
+import { motion } from "motion/react";
 
 const JobCard = ({ job, id }) => {
   return (
-    <div className="group relative overflow-hidden rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-900 shadow-md dark:shadow-xl transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-700 hover:-translate-y-1 hover:shadow-2xl dark:hover:shadow-indigo-500/5">
+    <motion.div
+      variants={{
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 90, damping: 15 } },
+      }}
+      whileHover={{ y: -5, transition: { duration: 0.2 } }}
+      className="group relative overflow-hidden rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-900 shadow-md dark:shadow-xl transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-2xl dark:hover:shadow-indigo-500/5"
+    >
       {/* Background glow gradients from card-14 (only active/visible in dark mode) */}
       <div
         className="absolute inset-0 rounded-lg pointer-events-none opacity-0 dark:opacity-30 dark:group-hover:opacity-90 transition-opacity duration-500"
@@ -58,7 +66,7 @@ const JobCard = ({ job, id }) => {
           </Link>
         </CardFooter>
       </Card>
-    </div>
+    </motion.div>
   );
 };
 

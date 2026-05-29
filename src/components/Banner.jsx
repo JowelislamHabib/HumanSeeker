@@ -2,6 +2,7 @@
 
 import React from "react";
 import { RiSearchLine, RiMapPinLine, RiBriefcaseFill } from "react-icons/ri";
+import { motion } from "motion/react";
 
 const popularCategories = [
   { label: "UI/UX Design", href: "/projects?category=design" },
@@ -16,34 +17,71 @@ const Banner = () => {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[350px] bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute top-12 left-1/4 w-[150px] h-[150px] bg-purple-500/5 rounded-full blur-2xl pointer-events-none" />
 
-      <div className="mx-auto container px-6 relative z-10 flex flex-col items-center text-center gap-8">
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: { opacity: 0 },
+          visible: {
+            opacity: 1,
+            transition: {
+              staggerChildren: 0.12,
+            },
+          },
+        }}
+        className="mx-auto container px-6 relative z-10 flex flex-col items-center text-center gap-8"
+      >
         {/* Project count badge */}
-        <div className="inline-flex items-start gap-2.5 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white/60 dark:bg-zinc-900/60 px-4.5 py-1.5 text-xs text-zinc-600 dark:text-zinc-300 shadow-sm transition-colors duration-300">
+        <motion.div
+          variants={{
+            hidden: { opacity: 0, y: -15 },
+            visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } },
+          }}
+          className="inline-flex items-start gap-2.5 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white/60 dark:bg-zinc-900/60 px-4.5 py-1.5 text-xs text-zinc-600 dark:text-zinc-300 shadow-sm transition-colors duration-300"
+        >
           <RiBriefcaseFill className="text-amber-500 w-4 h-4 shrink-0" />
           <span className="font-bold text-zinc-950 dark:text-white">50,000+</span>
-          <span className="uppercase tracking-wider text-[10px] text-zinc-400 dark:text-zinc-500 font-bold">
+          <span className="uppercase tracking-wider text-[10px] text-zinc-400 dark:text-zinc-550 font-bold">
             Active Projects Live
           </span>
-        </div>
+        </motion.div>
 
         {/* Heading */}
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold text-zinc-950 dark:text-white tracking-tight max-w-4xl leading-tight transition-colors duration-300">
+        <motion.h1
+          variants={{
+            hidden: { opacity: 0, y: 25 },
+            visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 80, damping: 15 } },
+          }}
+          className="text-4xl sm:text-5xl md:text-7xl font-extrabold text-zinc-950 dark:text-white tracking-tight max-w-4xl leading-tight transition-colors duration-300"
+        >
           Find Your Next{" "}
           <span className="bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
             Dream Project
           </span>{" "}
           Today
-        </h1>
+        </motion.h1>
 
         {/* Description */}
-        <p className="max-w-2xl text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed font-normal transition-colors duration-300">
+        <motion.p
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 80, damping: 15 } },
+          }}
+          className="max-w-2xl text-base sm:text-lg text-zinc-600 dark:text-zinc-455 leading-relaxed font-normal transition-colors duration-300"
+        >
           WorkLix connects top-tier freelancers with leading startups, agencies,
           and global businesses. Pitch proposals, manage contracts, and scale
           your business — faster.
-        </p>
+        </motion.p>
 
         {/* Search Bar Container */}
-        <div className="w-full max-w-4xl mt-4">
+        <motion.div
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 80, damping: 15 } },
+          }}
+          className="w-full max-w-4xl mt-4"
+        >
           <form className="w-full flex flex-col md:flex-row items-center gap-2 p-2 rounded-2xl md:rounded-full border border-zinc-200 dark:border-zinc-800 bg-white/40 dark:bg-zinc-900/40 backdrop-blur-md transition-all duration-300 focus-within:border-indigo-500/55 focus-within:bg-white/80 dark:focus-within:bg-zinc-900/60 focus-within:ring-4 focus-within:ring-indigo-500/10">
             {/* Project Title Input */}
             <div className="w-full flex items-center gap-3 px-4 py-2.5 group">
@@ -78,10 +116,16 @@ const Banner = () => {
               <span className="md:hidden">Search Projects</span>
             </button>
           </form>
-        </div>
+        </motion.div>
 
         {/* Trending Positions */}
-        <div className="flex flex-col sm:flex-row items-center gap-3 mt-4 text-sm">
+        <motion.div
+          variants={{
+            hidden: { opacity: 0, y: 15 },
+            visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 80, damping: 15 } },
+          }}
+          className="flex flex-col sm:flex-row items-center gap-3 mt-4 text-sm"
+        >
           <span className="text-zinc-400 dark:text-zinc-500 font-semibold uppercase tracking-wider text-[11px] transition-colors duration-300">
             Popular Categories
           </span>
@@ -96,8 +140,8 @@ const Banner = () => {
               </a>
             ))}
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };

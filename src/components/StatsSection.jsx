@@ -9,6 +9,7 @@ import {
   RiAwardLine,
   RiStarFill,
 } from "react-icons/ri";
+import { motion } from "motion/react";
 
 const stats = [
   {
@@ -47,10 +48,29 @@ const StatsSection = () => {
       {/* Background glow effects */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="mx-auto container px-6 relative z-10 flex flex-col items-center gap-12">
-        
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={{
+          hidden: { opacity: 0 },
+          visible: {
+            opacity: 1,
+            transition: {
+              staggerChildren: 0.12,
+            },
+          },
+        }}
+        className="mx-auto container px-6 relative z-10 flex flex-col items-center gap-12"
+      >
         {/* Header content (Centered) */}
-        <div className="flex flex-col items-center text-center gap-6 max-w-3xl">
+        <motion.div
+          variants={{
+            hidden: { opacity: 0, y: 30 },
+            visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 80, damping: 15 } },
+          }}
+          className="flex flex-col items-center text-center gap-6 max-w-3xl"
+        >
           {/* Styled Pill Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-indigo-500/20 dark:border-indigo-400/25 bg-indigo-50/50 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-400 shadow-xs backdrop-blur-xs select-none">
             <span className="relative flex h-2 w-2">
@@ -121,17 +141,32 @@ const StatsSection = () => {
               </span>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Stats Cards Grid (Centered 4 Columns) */}
         <div className="w-full max-w-6xl">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <motion.div
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: 0.08,
+                },
+              },
+            }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          >
             {stats.map((item, idx) => {
               const Icon = item.icon;
               return (
-                <div
+                <motion.div
                   key={idx}
-                  className="group relative flex flex-col justify-between p-8 h-48 rounded-2xl border border-zinc-200 dark:border-zinc-900 bg-white dark:bg-zinc-950/40 backdrop-blur-md transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-800 hover:-translate-y-1 hover:shadow-lg dark:hover:shadow-indigo-500/5 select-none"
+                  variants={{
+                    hidden: { opacity: 0, y: 30 },
+                    visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 90, damping: 15 } },
+                  }}
+                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                  className="group relative flex flex-col justify-between p-8 h-48 rounded-2xl border border-zinc-200 dark:border-zinc-900 bg-white dark:bg-zinc-950/40 backdrop-blur-md transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-800 hover:shadow-lg dark:hover:shadow-indigo-500/5 select-none"
                 >
                   {/* Top Section: Styled Icon */}
                   <div className="flex items-center justify-between">
@@ -152,13 +187,12 @@ const StatsSection = () => {
                       {item.label}
                     </span>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
-
-      </div>
+      </motion.div>
     </section>
   );
 };
