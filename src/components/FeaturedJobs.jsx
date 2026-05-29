@@ -58,7 +58,7 @@ const dummyJobs = [
 
 const FeaturedJobs = () => {
   return (
-    <div className="relative w-full bg-zinc-50 dark:bg-zinc-950 py-20 border-t border-zinc-200 dark:border-zinc-900 transition-colors duration-300">
+    <div className="relative w-full bg-zinc-50 dark:bg-zinc-950 py-20  dark:border-zinc-900 transition-colors duration-300">
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -78,7 +78,11 @@ const FeaturedJobs = () => {
         <motion.div
           variants={{
             hidden: { opacity: 0, y: 30 },
-            visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 80, damping: 15 } },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: { type: "spring", stiffness: 80, damping: 15 },
+            },
           }}
           className="flex flex-col items-center text-center"
         >
@@ -117,7 +121,11 @@ const FeaturedJobs = () => {
         <motion.div
           variants={{
             hidden: { opacity: 0, y: 15 },
-            visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 80, damping: 15 } },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: { type: "spring", stiffness: 80, damping: 15 },
+            },
           }}
         >
           <Link

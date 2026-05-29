@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import {
   RiBriefcase2Line,
@@ -10,6 +10,8 @@ import {
   RiStarFill,
 } from "react-icons/ri";
 import { motion } from "motion/react";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import { useTheme } from "next-themes";
 
 const stats = [
   {
@@ -43,10 +45,36 @@ const stats = [
 ];
 
 const StatsSection = () => {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = !mounted || resolvedTheme === "dark";
+
   return (
-    <section className="relative w-full bg-zinc-50 dark:bg-zinc-950 py-24 border-t border-zinc-200 dark:border-zinc-900 overflow-hidden transition-colors duration-300">
+    <section className="relative w-full bg-zinc-50 dark:bg-zinc-950 pt-0 pb-24 overflow-hidden transition-colors duration-300">
       {/* Background glow effects */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
+
+      {/* Background Lottie Animation */}
+      <div className="absolute -top-145 left-1/2 -translate-x-1/2 translate-y-[18%] pointer-events-none flex items-center justify-center overflow-hidden z-0 select-none w-full aspect-[2/1]">
+        <div className="w-full h-[200%] absolute top-0 left-0 opacity-30 dark:opacity-40">
+          <DotLottieReact src="/globe.json" loop autoplay />
+        </div>
+      </div>
+
+      {/* Readability Vignette Shield */}
+      <div
+        className="absolute inset-0 pointer-events-none z-0"
+        style={{
+          backgroundImage: isDark
+            ? "radial-gradient(circle at 50% 45%, rgba(9, 9, 11, 0.95) 0%, rgba(9, 9, 11, 0.5) 45%, transparent 75%)"
+            : "radial-gradient(circle at 50% 45%, rgba(250, 250, 250, 0.95) 0%, rgba(250, 250, 250, 0.5) 45%, transparent 75%)",
+        }}
+      />
 
       <motion.div
         initial="hidden"
@@ -67,7 +95,11 @@ const StatsSection = () => {
         <motion.div
           variants={{
             hidden: { opacity: 0, y: 30 },
-            visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 80, damping: 15 } },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: { type: "spring", stiffness: 80, damping: 15 },
+            },
           }}
           className="flex flex-col items-center text-center gap-6 max-w-3xl"
         >
@@ -89,7 +121,9 @@ const StatsSection = () => {
 
           {/* Sub-description */}
           <p className="text-zinc-655 dark:text-zinc-400 text-base sm:text-lg leading-relaxed font-normal transition-colors duration-300 max-w-2xl">
-            WorkLix gives digital agencies, startups, and expert freelancers a streamlined hub to coordinate contracts, pitch scopes, and scale client delivery without friction.
+            WorkLix gives digital agencies, startups, and expert freelancers a
+            streamlined hub to coordinate contracts, pitch scopes, and scale
+            client delivery without friction.
           </p>
 
           {/* Trust Ratings Stack */}
@@ -134,7 +168,9 @@ const StatsSection = () => {
                 <RiStarFill className="w-4 h-4" />
                 <RiStarFill className="w-4 h-4" />
                 <RiStarFill className="w-4 h-4" />
-                <span className="text-zinc-950 dark:text-white font-bold ml-1">4.9/5</span>
+                <span className="text-zinc-950 dark:text-white font-bold ml-1">
+                  4.9/5
+                </span>
               </div>
               <span className="text-zinc-500 dark:text-zinc-550 text-xs mt-0.5">
                 Average freelancer rating from 15,000+ contracts
@@ -163,7 +199,15 @@ const StatsSection = () => {
                   key={idx}
                   variants={{
                     hidden: { opacity: 0, y: 30 },
-                    visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 90, damping: 15 } },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      transition: {
+                        type: "spring",
+                        stiffness: 90,
+                        damping: 15,
+                      },
+                    },
                   }}
                   whileHover={{ y: -5, transition: { duration: 0.2 } }}
                   className="group relative flex flex-col justify-between p-8 h-48 rounded-2xl border border-zinc-200 dark:border-zinc-900 bg-white dark:bg-zinc-950/40 backdrop-blur-md transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-800 hover:shadow-lg dark:hover:shadow-indigo-500/5 select-none"
@@ -173,9 +217,11 @@ const StatsSection = () => {
                     <div className="w-11 h-11 flex items-center justify-center rounded-xl bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200/50 dark:border-zinc-800/30 text-indigo-600 dark:text-indigo-400 shrink-0 transition-all duration-300 group-hover:scale-105">
                       <Icon className="w-5.5 h-5.5" />
                     </div>
-                    
+
                     {/* Accent glow corner */}
-                    <div className={`absolute top-0 right-0 w-16 h-16 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-10 rounded-tr-2xl blur-lg transition-opacity duration-500`} />
+                    <div
+                      className={`absolute top-0 right-0 w-16 h-16 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-10 rounded-tr-2xl blur-lg transition-opacity duration-500`}
+                    />
                   </div>
 
                   {/* Bottom Section: Stat details */}
