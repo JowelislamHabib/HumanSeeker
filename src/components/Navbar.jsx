@@ -8,7 +8,6 @@ import {
   RiMoonLine,
   RiUserLine,
   RiArrowDownSLine,
-  RiLogOutBoxRLine,
   RiLogoutBoxRLine,
 } from "react-icons/ri";
 import { useTheme } from "next-themes";
@@ -36,6 +35,7 @@ const Navbar = () => {
   const router = useRouter();
 
   const { data: session, isPending } = authClient.useSession();
+  console.log(session);
 
   useEffect(() => {
     setMounted(true);
@@ -65,6 +65,7 @@ const Navbar = () => {
         <Image
           src={session.user.image}
           alt={session.user.name || "User Avatar"}
+          referrerPolicy="no-referrer"
           width={size}
           height={size}
           unoptimized
