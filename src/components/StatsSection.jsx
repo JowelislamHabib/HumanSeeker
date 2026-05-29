@@ -60,7 +60,7 @@ const StatsSection = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
 
       {/* Background Lottie Animation */}
-      <div className="absolute -top-145 left-1/2 -translate-x-1/2 translate-y-[18%] pointer-events-none flex items-center justify-center overflow-hidden z-0 select-none w-full aspect-[2/1]">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-[35%] lg:-translate-y-[42%] pointer-events-none flex items-center justify-center overflow-hidden z-0 select-none w-full min-w-[800px] max-w-[2400px] aspect-[2/1]">
         <div className="w-full h-[200%] absolute top-0 left-0 opacity-30 dark:opacity-40">
           <DotLottieReact src="/globe.json" loop autoplay />
         </div>
