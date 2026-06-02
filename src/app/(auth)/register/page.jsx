@@ -19,6 +19,14 @@ import {
 } from "react-icons/ri";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import {
+  Field,
+  FieldContent,
+  FieldDescription,
+  FieldLabel,
+  FieldTitle,
+} from "@/components/ui/field";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 export default function RegisterPage() {
   const [name, setName] = useState("");
@@ -28,6 +36,7 @@ export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [avatar, setAvatar] = useState("");
+  const [role, setRole] = useState("freelancer");
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -102,6 +111,7 @@ export default function RegisterPage() {
       email,
       password,
       image: avatar,
+      role,
       callbackURL: "http://localhost:3000",
     });
 
@@ -127,8 +137,8 @@ export default function RegisterPage() {
   return (
     <div className="relative w-full min-h-screen flex items-center justify-center bg-zinc-50 dark:bg-zinc-950 overflow-hidden transition-colors duration-300">
       {/* Background glow effects */}
-      <div className="absolute top-0 right-0 w-[800px] h-[600px] bg-indigo-500/5 dark:bg-indigo-500/10 rounded-full blur-3xl pointer-events-none translate-x-1/3 -translate-y-1/3" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-fuchsia-500/5 dark:bg-fuchsia-500/10 rounded-full blur-3xl pointer-events-none -translate-x-1/3 translate-y-1/3" />
+      <div className="absolute top-0 right-0 w-200 h-150 bg-indigo-500/5 dark:bg-indigo-500/10 rounded-full blur-3xl pointer-events-none translate-x-1/3 -translate-y-1/3" />
+      <div className="absolute bottom-0 left-0 w-150 h-150  bg-fuchsia-500/5 dark:bg-fuchsia-500/10 rounded-full blur-3xl pointer-events-none -translate-x-1/3 translate-y-1/3" />
 
       <div className="container w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 px-6 py-12 lg:py-20 relative z-10">
         {/* Left Content Area */}
@@ -140,7 +150,7 @@ export default function RegisterPage() {
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-zinc-950 dark:text-white tracking-tight leading-tight">
               Start building with <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500">
                 WorkLix
               </span>
             </h1>
@@ -382,6 +392,35 @@ export default function RegisterPage() {
                       <span>{errors.avatar}</span>
                     </span>
                   )}
+                </div>
+
+                {/* User Role */}
+
+                <div>
+                  <RadioGroup value={role} onValueChange={setRole} className="grid grid-cols-2 gap-4 w-full">
+                    <FieldLabel htmlFor="freelancer-role">
+                      <Field orientation="horizontal">
+                        <FieldContent>
+                          <FieldTitle>Freelancer</FieldTitle>
+                          <FieldDescription>
+                            I'm looking for work.
+                          </FieldDescription>
+                        </FieldContent>
+                        <RadioGroupItem value="freelancer" id="freelancer-role" />
+                      </Field>
+                    </FieldLabel>
+                    <FieldLabel htmlFor="client-role">
+                      <Field orientation="horizontal">
+                        <FieldContent>
+                          <FieldTitle>Client/Agency</FieldTitle>
+                          <FieldDescription>
+                            I'm looking to hire.
+                          </FieldDescription>
+                        </FieldContent>
+                        <RadioGroupItem value="client" id="client-role" />
+                      </Field>
+                    </FieldLabel>
+                  </RadioGroup>
                 </div>
 
                 {/* Password input */}

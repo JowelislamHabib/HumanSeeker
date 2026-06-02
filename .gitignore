@@ -45,5 +45,7 @@ caveman-instructions.md
 Project-requirements.md
 skills-lock.json
 tailwind_instruction.md
-.agents/
+.agents
 .env*.local
+
+.agents/
