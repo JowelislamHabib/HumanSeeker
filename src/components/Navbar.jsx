@@ -13,7 +13,7 @@ import {
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 import { authClient } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 
 const navLinks = [
@@ -33,6 +33,7 @@ const Navbar = () => {
   const { theme, setTheme } = useTheme();
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
 
   const { data: session, isPending } = authClient.useSession();
   console.log(session);
@@ -54,6 +55,8 @@ const Navbar = () => {
     await authClient.signOut();
     router.push("/login");
   };
+
+  if (pathname?.startsWith("/dashboard")) return null;
 
   const renderAvatar = (isMobile) => {
     if (!session?.user) return null;
