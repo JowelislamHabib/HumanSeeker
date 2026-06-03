@@ -22,8 +22,11 @@ import {
   RiBriefcaseLine,
   RiFileListLine,
   RiSettings3Line,
+  RiSunLine,
+  RiMoonLine,
 } from "react-icons/ri";
 import { authClient } from "@/lib/auth-client";
+import { useTheme } from "next-themes";
 
 const navItems = [
   { title: "Dashboard", url: "/dashboard", icon: RiDashboardLine },
@@ -44,24 +47,35 @@ const navItems = [
 const DashboardSidebar = () => {
   const pathname = usePathname();
   const { data: session, isPending } = authClient.useSession();
+  const { theme, setTheme } = useTheme();
   console.log(session);
 
   return (
     <div>
       <Sidebar
-        className="border-r border-zinc-800 bg-[#121212] text-zinc-300 dark z-60"
+        className="border-r border-border bg-sidebar text-sidebar-foreground z-60"
         collapsible="icon"
       >
         <SidebarHeader className="p-4 group-data-[collapsible=icon]:p-2 border-b-0">
           <div className="flex items-center h-10 px-2 group-data-[collapsible=icon]:justify-center">
-            <Image 
-              src="/worklix-white.png" 
-              alt="WorkLix" 
-              width={140} 
-              height={32} 
-              className="h-7 w-auto object-contain group-data-[collapsible=icon]:hidden" 
-              priority
-            />
+            <div className="group-data-[collapsible=icon]:hidden">
+              <Image 
+                src="/worklix-white.png" 
+                alt="WorkLix" 
+                width={140} 
+                height={32} 
+                className="h-7 w-auto object-contain dark:block hidden" 
+                priority
+              />
+              <Image 
+                src="/worklix-dark.png" 
+                alt="WorkLix" 
+                width={140} 
+                height={32} 
+                className="h-7 w-auto object-contain dark:hidden block" 
+                priority
+              />
+            </div>
             <Image 
               src="/Favicon.png" 
               alt="WL" 
@@ -76,18 +90,18 @@ const DashboardSidebar = () => {
           {/* Profile Section */}
           <div className="mb-8 px-2 group-data-[collapsible=icon]:px-0 group-data-[collapsible=icon]:flex group-data-[collapsible=icon]:justify-center">
             <div className="flex items-center gap-3">
-              <Avatar className="h-10 w-10 border border-zinc-700">
+              <Avatar className="h-10 w-10 border border-border">
                 <AvatarImage src={session?.user?.image} alt={session?.user?.name} />
-                <AvatarFallback>{session?.user?.name[0]}</AvatarFallback>
+                <AvatarFallback>{session?.user?.name?.[0]}</AvatarFallback>
               </Avatar>
               <div className="flex flex-col group-data-[collapsible=icon]:hidden overflow-hidden">
-                <span className="text-sm font-semibold text-white leading-none mb-1.5 truncate">
+                <span className="text-sm font-semibold text-foreground leading-none mb-1.5 truncate">
                   {session?.user?.name}
                 </span>
-                <span className="text-xs text-zinc-400 mb-2 truncate">
+                <span className="text-xs text-muted-foreground mb-2 truncate">
                   {session?.user?.email}
                 </span>
-                <div className="text-[9px] font-bold text-zinc-300 border border-zinc-600 bg-zinc-800/50 px-1.5 py-0.5 rounded uppercase tracking-wider w-fit">
+                <div className="text-[9px] font-bold text-muted-foreground border border-border bg-accent/50 px-1.5 py-0.5 rounded uppercase tracking-wider w-fit">
                   PREMIUM ACCOUNT
                 </div>
               </div>
@@ -105,8 +119,8 @@ const DashboardSidebar = () => {
                     tooltip={item.title}
                     className={`transition-all group-data-[collapsible=icon]:justify-center h-10 ${
                       isActive
-                        ? "bg-[#252525] text-white rounded-md rounded-r-none border-r-[3px] border-white font-medium"
-                        : "text-zinc-400 hover:bg-zinc-800/50 hover:text-white rounded-md font-medium"
+                        ? "bg-accent text-accent-foreground rounded-md rounded-r-none border-r-[3px] border-primary font-medium"
+                        : "text-muted-foreground hover:bg-accent/50 hover:text-foreground rounded-md font-medium"
                     }`}
                   >
                     <Link href={item.url}>
@@ -122,8 +136,16 @@ const DashboardSidebar = () => {
           </SidebarMenu>
         </SidebarContent>
 
-        <SidebarFooter className="p-4 border-t border-zinc-800/50">
-          <SidebarTrigger className="w-full justify-center text-zinc-400 hover:text-white hover:bg-zinc-800/50" />
+        <SidebarFooter className="p-4 border-t border-border flex flex-col gap-2">
+          <button 
+            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            className="w-full flex items-center group-data-[collapsible=icon]:justify-center gap-2 text-muted-foreground hover:text-foreground hover:bg-accent/50 p-2 rounded-md transition-colors"
+          >
+            <RiSunLine className="size-5 shrink-0 hidden dark:block" />
+            <RiMoonLine className="size-5 shrink-0 block dark:hidden" />
+            <span className="group-data-[collapsible=icon]:hidden font-medium text-sm">Toggle Theme</span>
+          </button>
+          <SidebarTrigger className="w-full justify-center text-muted-foreground hover:text-foreground hover:bg-accent/50" />
         </SidebarFooter>
       </Sidebar>
     </div>

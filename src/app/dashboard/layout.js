@@ -8,18 +8,26 @@ const DashboardLayout = ({ children }) => {
   return (
     <TooltipProvider>
       <SidebarProvider defaultOpen={true}>
-        <div className="flex min-h-screen bg-[#0a0a0a] w-full">
+        <div className="flex min-h-screen bg-background w-full">
           <DashboardSidebar />
-          <main className="flex-1 overflow-auto bg-[#0a0a0a] text-white flex flex-col">
-            <header className="flex h-14 shrink-0 items-center gap-2 border-b border-zinc-800/50 px-4 md:hidden">
-              <SidebarTrigger className="-ml-1 text-zinc-400 hover:text-white" />
+          <main className="flex-1 overflow-auto bg-background text-foreground flex flex-col">
+            <header className="flex h-14 shrink-0 items-center gap-2 border-b border-border px-4 md:hidden">
+              <SidebarTrigger className="-ml-1 text-muted-foreground hover:text-foreground" />
               <div className="ml-2">
                 <Image
                   src="/worklix-white.png"
                   alt="WorkLix"
                   width={120}
                   height={28}
-                  className="h-6 w-auto object-contain"
+                  className="h-6 w-auto object-contain dark:block hidden"
+                  priority
+                />
+                <Image
+                  src="/worklix-dark.png"
+                  alt="WorkLix"
+                  width={120}
+                  height={28}
+                  className="h-6 w-auto object-contain dark:hidden block"
                   priority
                 />
               </div>
