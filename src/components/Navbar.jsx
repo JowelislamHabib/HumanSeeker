@@ -23,7 +23,6 @@ const navLinks = [
 ];
 
 const userLinks = [
-  { label: "Dashboard", href: "/dashboard", Icon: RiTeamFill },
   { label: "My Profile", href: "/profile", Icon: RiUserLine },
 ];
 
