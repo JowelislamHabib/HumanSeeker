@@ -43,8 +43,38 @@ const handleCreateNewJob = (e) => {
   console.log(jobData);
 };
 
+const mockCompanies = [
+  {
+    id: "c_1",
+    name: "Google Inc.",
+    category: "Technology",
+    location: "Mountain View",
+    logo: "https://logo.clearbit.com/google.com",
+    status: "Approved",
+  },
+  {
+    id: "c_2",
+    name: "Apple",
+    category: "Technology",
+    location: "Cupertino",
+    logo: "https://logo.clearbit.com/apple.com",
+    status: "Approved",
+  },
+  {
+    id: "c_3",
+    name: "Microsoft",
+    category: "Software",
+    location: "Redmond",
+    logo: "https://logo.clearbit.com/microsoft.com",
+    status: "Approved",
+  }
+];
+
 const CreateNewJobPage = () => {
   const [isRemote, setIsRemote] = React.useState(false);
+  const [selectedCompanyId, setSelectedCompanyId] = React.useState(mockCompanies[0].id);
+
+  const selectedCompany = mockCompanies.find(c => c.id === selectedCompanyId) || mockCompanies[0];
 
   return (
     <div className="flex w-full flex-col max-w-4xl py-6">
@@ -199,12 +229,28 @@ const CreateNewJobPage = () => {
             <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground border-b border-border/50 pb-2">
               Company Details
             </h2>
-            <div className="bg-accent/10 border border-border/50 rounded-lg p-4 flex items-center justify-between mt-1">
+            <div className="mt-1">
+              <Label>Select Company</Label>
+              <Select
+                name="companyId"
+                value={selectedCompanyId}
+                onChange={(e) => setSelectedCompanyId(e.target.value)}
+                className="h-10 mb-4"
+              >
+                {mockCompanies.map((company) => (
+                  <option key={company.id} value={company.id}>
+                    {company.name}
+                  </option>
+                ))}
+              </Select>
+            </div>
+            
+            <div className="bg-accent/10 border border-border/50 rounded-lg p-4 flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <div className="size-12 rounded-lg bg-accent/50 border border-border flex items-center justify-center shrink-0 overflow-hidden relative">
                   <Image
-                    src="https://logo.clearbit.com/google.com"
-                    alt="Google"
+                    src={selectedCompany.logo}
+                    alt={selectedCompany.name}
                     width={48}
                     height={48}
                     className="size-full object-cover relative z-10"
@@ -216,15 +262,15 @@ const CreateNewJobPage = () => {
                 </div>
                 <div className="flex flex-col">
                   <span className="font-semibold text-foreground">
-                    Google Inc.
+                    {selectedCompany.name}
                   </span>
                   <span className="text-xs text-muted-foreground mt-0.5">
-                    Technology • Mountain View
+                    {selectedCompany.category} • {selectedCompany.location}
                   </span>
                 </div>
               </div>
               <span className="text-xs font-medium bg-emerald-500/10 text-emerald-500 dark:bg-emerald-500/20 dark:text-emerald-400 px-2.5 py-1 rounded-full border border-emerald-500/20">
-                Approved
+                {selectedCompany.status}
               </span>
             </div>
             <p className="text-xs text-muted-foreground">
