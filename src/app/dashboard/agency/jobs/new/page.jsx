@@ -74,11 +74,27 @@ const CreateNewJobPage = () => {
     try {
       const formData = new FormData(e.target);
 
-      const { currency, salaryMin, salaryMax, ...rest } =
-        Object.fromEntries(formData);
+      const {
+        title,
+        category,
+        type,
+        salaryMin,
+        salaryMax,
+        applicationDeadline,
+        ...rest
+      } = Object.fromEntries(formData);
+
       const jobData = {
         ...rest,
-        salaryRange: `${currency} ${salaryMin} - ${salaryMax}`,
+        jobTitle: title,
+        jobCategory: category,
+        jobType: type,
+        minSalary: salaryMin,
+        maxSalary: salaryMax,
+        deadline: applicationDeadline,
+        isRemote,
+        status: "active",
+        isPubliclyVisible: true,
       };
 
       const res = await createJob(jobData);
