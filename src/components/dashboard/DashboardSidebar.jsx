@@ -48,7 +48,7 @@ const DashboardSidebar = () => {
   const pathname = usePathname();
   const { data: session, isPending } = authClient.useSession();
   const { theme, setTheme } = useTheme();
-  console.log(session);
+  // console.log(session);
 
   return (
     <div>
@@ -59,28 +59,28 @@ const DashboardSidebar = () => {
         <SidebarHeader className="p-4 group-data-[collapsible=icon]:p-2 border-b-0">
           <div className="flex items-center h-10 px-2 group-data-[collapsible=icon]:justify-center">
             <div className="group-data-[collapsible=icon]:hidden">
-              <Image 
-                src="/worklix-white.png" 
-                alt="WorkLix" 
-                width={140} 
-                height={32} 
-                className="h-7 w-auto object-contain dark:block hidden" 
+              <Image
+                src="/worklix-white.png"
+                alt="WorkLix"
+                width={140}
+                height={32}
+                className="h-7 w-auto object-contain dark:block hidden"
                 priority
               />
-              <Image 
-                src="/worklix-dark.png" 
-                alt="WorkLix" 
-                width={140} 
-                height={32} 
-                className="h-7 w-auto object-contain dark:hidden block" 
+              <Image
+                src="/worklix-dark.png"
+                alt="WorkLix"
+                width={140}
+                height={32}
+                className="h-7 w-auto object-contain dark:hidden block"
                 priority
               />
             </div>
-            <Image 
-              src="/Favicon.png" 
-              alt="WL" 
-              width={32} 
-              height={32} 
+            <Image
+              src="/Favicon.png"
+              alt="WL"
+              width={32}
+              height={32}
               className="h-8 w-auto object-contain hidden group-data-[collapsible=icon]:block"
             />
           </div>
@@ -91,7 +91,10 @@ const DashboardSidebar = () => {
           <div className="mb-8 px-2 group-data-[collapsible=icon]:px-0 group-data-[collapsible=icon]:flex group-data-[collapsible=icon]:justify-center">
             <div className="flex items-center gap-3">
               <Avatar className="h-10 w-10 border border-border">
-                <AvatarImage src={session?.user?.image} alt={session?.user?.name} />
+                <AvatarImage
+                  src={session?.user?.image}
+                  alt={session?.user?.name}
+                />
                 <AvatarFallback>{session?.user?.name?.[0]}</AvatarFallback>
               </Avatar>
               <div className="flex flex-col group-data-[collapsible=icon]:hidden overflow-hidden">
@@ -137,13 +140,15 @@ const DashboardSidebar = () => {
         </SidebarContent>
 
         <SidebarFooter className="p-4 border-t border-border flex flex-col gap-2">
-          <button 
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+          <button
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             className="w-full flex items-center group-data-[collapsible=icon]:justify-center gap-2 text-muted-foreground hover:text-foreground hover:bg-accent/50 p-2 rounded-md transition-colors"
           >
             <RiSunLine className="size-5 shrink-0 hidden dark:block" />
             <RiMoonLine className="size-5 shrink-0 block dark:hidden" />
-            <span className="group-data-[collapsible=icon]:hidden font-medium text-sm">Toggle Theme</span>
+            <span className="group-data-[collapsible=icon]:hidden font-medium text-sm">
+              Toggle Theme
+            </span>
           </button>
           <SidebarTrigger className="w-full justify-center text-muted-foreground hover:text-foreground hover:bg-accent/50" />
         </SidebarFooter>

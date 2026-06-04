@@ -22,9 +22,7 @@ const navLinks = [
   { label: "Pricing", href: "/pricing" },
 ];
 
-const userLinks = [
-  { label: "My Profile", href: "/profile", Icon: RiUserLine },
-];
+const userLinks = [{ label: "My Profile", href: "/profile", Icon: RiUserLine }];
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -35,7 +33,7 @@ const Navbar = () => {
   const pathname = usePathname();
 
   const { data: session, isPending } = authClient.useSession();
-  console.log(session);
+  // console.log(session);
 
   useEffect(() => {
     setMounted(true);
@@ -338,8 +336,10 @@ const Navbar = () => {
             ) : (
               <div className="flex flex-col gap-4 pt-2">
                 <div className="flex items-center justify-between w-full mb-1">
-                   <span className="text-zinc-600 dark:text-zinc-400 font-medium text-sm">Theme Appearance</span>
-                   {renderThemeToggle()}
+                  <span className="text-zinc-600 dark:text-zinc-400 font-medium text-sm">
+                    Theme Appearance
+                  </span>
+                  {renderThemeToggle()}
                 </div>
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                   <Link

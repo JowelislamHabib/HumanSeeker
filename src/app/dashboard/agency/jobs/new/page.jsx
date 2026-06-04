@@ -3,10 +3,12 @@ import React from "react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
 
-const Label = ({ children, className }) => (
+const Label = ({ children, className, ...props }) => (
   <label
     className={`text-xs font-semibold text-foreground/80 mb-1.5 block ${className}`}
+    {...props}
   >
     {children}
   </label>
@@ -42,6 +44,8 @@ const handleCreateNewJob = (e) => {
 };
 
 const CreateNewJobPage = () => {
+  const [isRemote, setIsRemote] = React.useState(false);
+
   return (
     <div className="flex w-full flex-col max-w-4xl py-6">
       <div className="bg-card border border-border rounded-xl shadow-sm overflow-hidden">
@@ -96,12 +100,33 @@ const CreateNewJobPage = () => {
                 </Select>
               </div>
               <div>
-                <Label>Location</Label>
-                <Input
-                  name="location"
-                  placeholder="City, Country or Remote"
-                  className="h-10"
-                />
+                <div className="flex items-center justify-between mb-1.5">
+                  <Label className="mb-0">Location</Label>
+                  <div className="flex items-center gap-2">
+                    <Label htmlFor="is-remote" className="mb-0 font-normal cursor-pointer text-muted-foreground">Remote</Label>
+                    <Switch
+                      id="is-remote"
+                      checked={isRemote}
+                      onCheckedChange={setIsRemote}
+                    />
+                  </div>
+                </div>
+                {isRemote ? (
+                  <Input
+                    key="remote"
+                    name="location"
+                    value="Remote"
+                    readOnly
+                    className="h-10 bg-muted text-muted-foreground cursor-not-allowed focus-visible:ring-0"
+                  />
+                ) : (
+                  <Input
+                    key="local"
+                    name="location"
+                    placeholder="City, Country"
+                    className="h-10"
+                  />
+                )}
               </div>
             </div>
 
