@@ -1,9 +1,12 @@
 "use client";
-import React from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
+import { toast } from "sonner";
+import { createJob } from "@/lib/actions/jobs";
+import { useRouter } from "next/navigation";
 
 const Label = ({ children, className, ...props }) => (
   <label
@@ -30,19 +33,6 @@ const Textarea = ({ className, ...props }) => (
   />
 );
 
-const handleCreateNewJob = (e) => {
-  e.preventDefault();
-  const formData = new FormData(e.target);
-
-  const { currency, salaryMin, salaryMax, ...rest } = Object.fromEntries(formData);
-  const jobData = {
-    ...rest,
-    salaryRange: `${currency} ${salaryMin} - ${salaryMax}`,
-  };
-
-  console.log(jobData);
-};
-
 const mockCompanies = [
   {
     id: "c_1",
@@ -67,14 +57,49 @@ const mockCompanies = [
     location: "Redmond",
     logo: "https://logo.clearbit.com/microsoft.com",
     status: "Approved",
-  }
+  },
 ];
 
 const CreateNewJobPage = () => {
-  const [isRemote, setIsRemote] = React.useState(false);
-  const [selectedCompanyId, setSelectedCompanyId] = React.useState(mockCompanies[0].id);
+  const [isRemote, setIsRemote] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [selectedCompanyId, setSelectedCompanyId] = useState(
+    mockCompanies[0].id,
+  );
+  const router = useRouter();
 
-  const selectedCompany = mockCompanies.find(c => c.id === selectedCompanyId) || mockCompanies[0];
+  const handleCreateNewJob = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      const formData = new FormData(e.target);
+
+      const { currency, salaryMin, salaryMax, ...rest } =
+        Object.fromEntries(formData);
+      const jobData = {
+        ...rest,
+        salaryRange: `${currency} ${salaryMin} - ${salaryMax}`,
+      };
+
+      const res = await createJob(jobData);
+      if (res.insertedId || res.insertedID || res._id) {
+        toast.success("Job created successfully!", { position: "top-right" });
+        e.target.reset();
+        router.push("/dashboard/agency/");
+      } else {
+        toast.error("Failed to create job.", { position: "top-right" });
+      }
+    } catch (error) {
+      toast.error("An error occurred while posting the job.", {
+        position: "top-right",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const selectedCompany =
+    mockCompanies.find((c) => c.id === selectedCompanyId) || mockCompanies[0];
 
   return (
     <div className="flex w-full flex-col max-w-4xl py-6">
@@ -133,7 +158,12 @@ const CreateNewJobPage = () => {
                 <div className="flex items-center justify-between mb-1.5">
                   <Label className="mb-0">Location</Label>
                   <div className="flex items-center gap-2">
-                    <Label htmlFor="is-remote" className="mb-0 font-normal cursor-pointer text-muted-foreground">Remote</Label>
+                    <Label
+                      htmlFor="is-remote"
+                      className="mb-0 font-normal cursor-pointer text-muted-foreground"
+                    >
+                      Remote
+                    </Label>
                     <Switch
                       id="is-remote"
                       checked={isRemote}
@@ -244,7 +274,7 @@ const CreateNewJobPage = () => {
                 ))}
               </Select>
             </div>
-            
+
             <div className="bg-accent/10 border border-border/50 rounded-lg p-4 flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <div className="size-12 rounded-lg bg-accent/50 border border-border flex items-center justify-center shrink-0 overflow-hidden relative">
@@ -290,9 +320,10 @@ const CreateNewJobPage = () => {
             </Button>
             <Button
               type="submit"
+              disabled={isLoading}
               className="px-6 bg-primary text-primary-foreground hover:bg-primary/90 h-10 font-semibold shadow-md"
             >
-              Post Job
+              {isLoading ? "Posting..." : "Post Job"}
             </Button>
           </div>
         </form>

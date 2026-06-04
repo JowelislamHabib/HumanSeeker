@@ -3,6 +3,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Image from "next/image";
 import React from "react";
+import { Toaster } from "@/components/ui/sonner";
 
 const DashboardLayout = ({ children }) => {
   return (
@@ -38,6 +39,7 @@ const DashboardLayout = ({ children }) => {
           </main>
         </div>
       </SidebarProvider>
+      <Toaster />
     </TooltipProvider>
   );
 };
