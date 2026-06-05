@@ -78,13 +78,16 @@ const RegisterCompanyModal = ({ isOpen, onClose, onSuccess }) => {
         status: "pending",
       };
 
-      const res = await fetch("http://localhost:8000/api/companies", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/companies`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
         },
-        body: JSON.stringify(payload),
-      });
+      );
 
       if (res.ok) {
         onSuccess && onSuccess();
