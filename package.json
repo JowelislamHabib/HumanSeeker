@@ -38,5 +38,8 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
     "tailwindcss": "^4"
+  },
+  "overrides": {
+    "kysely": "0.28.17"
   }
 }

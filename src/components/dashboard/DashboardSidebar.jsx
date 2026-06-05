@@ -29,16 +29,16 @@ import { authClient } from "@/lib/auth-client";
 import { useTheme } from "next-themes";
 
 const navItems = [
-  { title: "Dashboard", url: "/dashboard", icon: RiDashboardLine },
-  { title: "My Agency", url: "/dashboard/company", icon: RiBuilding4Line },
+  { title: "Dashboard", url: "/dashboard/agency", icon: RiDashboardLine },
+  { title: "Jobs", url: "/dashboard/agency/jobs", icon: RiBuilding4Line },
   {
-    title: "Manage Projects",
-    url: "/dashboard/manage-projects",
+    title: "Create Job",
+    url: "/dashboard/agency/jobs/new",
     icon: RiBriefcaseLine,
   },
   {
-    title: "Proposals",
-    url: "/dashboard/proposals",
+    title: "Applications",
+    url: "/dashboard/agency/applications",
     icon: RiFileListLine,
   },
   { title: "Settings", url: "/dashboard/settings", icon: RiSettings3Line },
@@ -113,8 +113,7 @@ const DashboardSidebar = () => {
 
           <SidebarMenu className="gap-2">
             {navItems.map((item) => {
-              const isActive =
-                pathname === item.url || pathname?.startsWith(item.url + "/");
+              const isActive = pathname === item.url;
               return (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
