@@ -12,6 +12,7 @@ import {
   RiUploadLine,
 } from "react-icons/ri";
 import Image from "next/image";
+import { toast } from "sonner";
 
 const RegisterCompanyModal = ({ isOpen, onClose, onSuccess }) => {
   const [formData, setFormData] = useState({
@@ -90,6 +91,7 @@ const RegisterCompanyModal = ({ isOpen, onClose, onSuccess }) => {
       );
 
       if (res.ok) {
+        toast.success("Company registered successfully!");
         onSuccess && onSuccess();
         onClose();
         // Reset form
