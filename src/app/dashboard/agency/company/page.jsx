@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import CompanyCard from "@/components/dashboard/CompanyCard";
 import RegisterCompanyModal from "@/components/dashboard/RegisterCompanyModal";
 import { RiAddLine, RiBuilding2Line } from "react-icons/ri";
+import { fetchCompaniesAction } from "@/lib/actions/company";
 
 export default function CompanyProfilePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,12 +14,11 @@ export default function CompanyProfilePage() {
   const fetchCompanies = async () => {
     setIsLoading(true);
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/companies`,
-      );
-      if (res.ok) {
-        const data = await res.json();
-        setCompanies(data);
+      const result = await fetchCompaniesAction();
+      if (result.success) {
+        setCompanies(result.data);
+      } else {
+        console.error("Failed to fetch companies:", result.error);
       }
     } catch (error) {
       console.error("Failed to fetch companies:", error);
