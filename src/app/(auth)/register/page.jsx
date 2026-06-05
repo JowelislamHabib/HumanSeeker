@@ -112,13 +112,13 @@ export default function RegisterPage() {
       password,
       image: avatar,
       role,
-      callbackURL: "http://localhost:3000",
+      callbackURL: `${basePath}/dashboard/agency`,
     });
 
     setIsLoading(false);
 
     if (data?.user) {
-      router.push("/dashboard");
+      router.push(`${basePath}/dashboard/agency`);
     }
     if (error) {
       console.log(error, "error");
@@ -397,7 +397,11 @@ export default function RegisterPage() {
                 {/* User Role */}
 
                 <div>
-                  <RadioGroup value={role} onValueChange={setRole} className="grid grid-cols-2 gap-4 w-full">
+                  <RadioGroup
+                    value={role}
+                    onValueChange={setRole}
+                    className="grid grid-cols-2 gap-4 w-full"
+                  >
                     <FieldLabel htmlFor="freelancer-role">
                       <Field orientation="horizontal">
                         <FieldContent>
@@ -406,7 +410,10 @@ export default function RegisterPage() {
                             I'm looking for work.
                           </FieldDescription>
                         </FieldContent>
-                        <RadioGroupItem value="freelancer" id="freelancer-role" />
+                        <RadioGroupItem
+                          value="freelancer"
+                          id="freelancer-role"
+                        />
                       </Field>
                     </FieldLabel>
                     <FieldLabel htmlFor="client-role">

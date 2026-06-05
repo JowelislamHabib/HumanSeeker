@@ -24,12 +24,18 @@ import {
   RiSettings3Line,
   RiSunLine,
   RiMoonLine,
+  RiBuilding2Line,
 } from "react-icons/ri";
 import { authClient } from "@/lib/auth-client";
 import { useTheme } from "next-themes";
 
 const navItems = [
   { title: "Dashboard", url: "/dashboard/agency", icon: RiDashboardLine },
+  {
+    title: "Company Profile",
+    url: "/dashboard/agency/company",
+    icon: RiBuilding2Line,
+  },
   { title: "Jobs", url: "/dashboard/agency/jobs", icon: RiBuilding4Line },
   {
     title: "Create Job",

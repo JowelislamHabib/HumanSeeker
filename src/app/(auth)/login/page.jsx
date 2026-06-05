@@ -19,6 +19,7 @@ import {
 import { createAuthClient } from "better-auth/client";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
+import { basePath } from "@/utils/EnvConfig";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -68,13 +69,13 @@ export default function LoginPage() {
     const { data, error } = await authClient.signIn.email({
       email,
       password,
-      callbackURL: "http://localhost:3000/dashboard",
+      callbackURL: `${basePath}/dashboard/agency`,
     });
 
     setIsLoading(false);
 
     if (data?.user) {
-      router.push("/dashboard");
+      router.push("/dashboard/agency");
     }
     if (error) {
       console.log(error, "error");
