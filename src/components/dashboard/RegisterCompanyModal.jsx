@@ -2,7 +2,15 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { RiCloseLine, RiImageAddLine, RiGlobalLine, RiMapPinLine, RiBuilding4Line, RiTeamLine, RiUploadLine } from "react-icons/ri";
+import {
+  RiCloseLine,
+  RiImageAddLine,
+  RiGlobalLine,
+  RiMapPinLine,
+  RiBuilding4Line,
+  RiTeamLine,
+  RiUploadLine,
+} from "react-icons/ri";
 
 const RegisterCompanyModal = ({ isOpen, onClose, onSuccess }) => {
   const [formData, setFormData] = useState({
@@ -27,10 +35,13 @@ const RegisterCompanyModal = ({ isOpen, onClose, onSuccess }) => {
     formDataObj.append("image", file);
 
     try {
-      const res = await fetch(`https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMGBB_API_KEY}`, {
-        method: "POST",
-        body: formDataObj,
-      });
+      const res = await fetch(
+        `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMGBB_API_KEY}`,
+        {
+          method: "POST",
+          body: formDataObj,
+        },
+      );
       const data = await res.json();
       if (data.success) {
         setFormData((prev) => ({ ...prev, logoUrl: data.data.url }));
@@ -57,9 +68,9 @@ const RegisterCompanyModal = ({ isOpen, onClose, onSuccess }) => {
     try {
       const payload = {
         ...formData,
-        status: "PENDING",
+        status: "pending",
       };
-      
+
       const res = await fetch("http://localhost:8000/api/companies", {
         method: "POST",
         headers: {
@@ -67,7 +78,7 @@ const RegisterCompanyModal = ({ isOpen, onClose, onSuccess }) => {
         },
         body: JSON.stringify(payload),
       });
-      
+
       if (res.ok) {
         onSuccess && onSuccess();
         onClose();
@@ -115,8 +126,12 @@ const RegisterCompanyModal = ({ isOpen, onClose, onSuccess }) => {
               <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-primary/40 via-primary to-primary/40" />
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-2xl font-bold text-foreground tracking-tight">Register Company</h2>
-                  <p className="text-sm text-muted-foreground mt-1.5 font-medium">Add your business details to start hiring talent.</p>
+                  <h2 className="text-2xl font-bold text-foreground tracking-tight">
+                    Register Company
+                  </h2>
+                  <p className="text-sm text-muted-foreground mt-1.5 font-medium">
+                    Add your business details to start hiring talent.
+                  </p>
                 </div>
                 <button
                   onClick={onClose}
@@ -128,12 +143,16 @@ const RegisterCompanyModal = ({ isOpen, onClose, onSuccess }) => {
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="px-8 py-6 flex-1 overflow-y-auto">
+            <form
+              onSubmit={handleSubmit}
+              className="px-8 py-6 flex-1 overflow-y-auto"
+            >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-7">
-                
                 {/* Company Name */}
                 <div>
-                  <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2 block ml-1">Company Name</label>
+                  <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2 block ml-1">
+                    Company Name
+                  </label>
                   <div className="relative group">
                     <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-muted-foreground group-focus-within:text-primary transition-colors">
                       <RiBuilding4Line className="size-5" />
@@ -152,7 +171,9 @@ const RegisterCompanyModal = ({ isOpen, onClose, onSuccess }) => {
 
                 {/* Industry / Category */}
                 <div>
-                  <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2 block ml-1">Industry</label>
+                  <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2 block ml-1">
+                    Industry
+                  </label>
                   <div className="relative group">
                     <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-muted-foreground group-focus-within:text-primary transition-colors">
                       <RiGlobalLine className="size-5" />
@@ -171,16 +192,32 @@ const RegisterCompanyModal = ({ isOpen, onClose, onSuccess }) => {
                       <option value="Other">Other</option>
                     </select>
                     <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-muted-foreground">
-                      <svg className="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                      <svg
+                        className="size-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M19 9l-7 7-7-7"
+                        ></path>
+                      </svg>
                     </div>
                   </div>
                 </div>
 
                 {/* Website URL */}
                 <div>
-                  <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2 block ml-1">Website URL</label>
+                  <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2 block ml-1">
+                    Website URL
+                  </label>
                   <div className="relative flex items-center group">
-                    <span className="absolute left-4 text-muted-foreground text-sm font-semibold group-focus-within:text-primary transition-colors">https://</span>
+                    <span className="absolute left-4 text-muted-foreground text-sm font-semibold group-focus-within:text-primary transition-colors">
+                      https://
+                    </span>
                     <input
                       type="text"
                       name="website"
@@ -194,7 +231,9 @@ const RegisterCompanyModal = ({ isOpen, onClose, onSuccess }) => {
 
                 {/* Location */}
                 <div>
-                  <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2 block ml-1">Location</label>
+                  <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2 block ml-1">
+                    Location
+                  </label>
                   <div className="relative group">
                     <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-muted-foreground group-focus-within:text-primary transition-colors">
                       <RiMapPinLine className="size-5" />
@@ -212,7 +251,9 @@ const RegisterCompanyModal = ({ isOpen, onClose, onSuccess }) => {
 
                 {/* Employee Count */}
                 <div>
-                  <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2 block ml-1">Company Size</label>
+                  <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2 block ml-1">
+                    Company Size
+                  </label>
                   <div className="relative group">
                     <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-muted-foreground group-focus-within:text-primary transition-colors">
                       <RiTeamLine className="size-5" />
@@ -231,22 +272,45 @@ const RegisterCompanyModal = ({ isOpen, onClose, onSuccess }) => {
                       <option value="1000+">1000+ employees</option>
                     </select>
                     <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-muted-foreground">
-                      <svg className="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                      <svg
+                        className="size-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M19 9l-7 7-7-7"
+                        ></path>
+                      </svg>
                     </div>
                   </div>
                 </div>
 
                 {/* Company Logo Upload */}
                 <div>
-                  <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-3 block ml-1">Company Logo</label>
+                  <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-3 block ml-1">
+                    Company Logo
+                  </label>
                   <label className="flex items-center gap-4 cursor-pointer group">
                     <div className="relative shrink-0 w-12 h-12 rounded-xl border-2 border-dashed border-border flex items-center justify-center bg-muted/20 group-hover:bg-muted/50 group-hover:border-primary/40 transition-all overflow-hidden shadow-xs">
                       {isUploading ? (
                         <div className="animate-pulse flex items-center justify-center w-full h-full bg-muted">
-                          <span className="text-[10px] text-muted-foreground font-medium">Up...</span>
+                          <span className="text-[10px] text-muted-foreground font-medium">
+                            Up...
+                          </span>
                         </div>
                       ) : formData.logoUrl ? (
-                        <img src={formData.logoUrl} alt="Preview" className="w-full h-full object-cover" onError={(e) => { e.target.style.display = 'none' }} />
+                        <img
+                          src={formData.logoUrl}
+                          alt="Preview"
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            e.target.style.display = "none";
+                          }}
+                        />
                       ) : (
                         <RiUploadLine className="size-5 text-muted-foreground group-hover:text-primary transition-colors" />
                       )}
@@ -272,7 +336,9 @@ const RegisterCompanyModal = ({ isOpen, onClose, onSuccess }) => {
 
               {/* Brief Description */}
               <div className="mt-8">
-                <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2 block ml-1">About the Company</label>
+                <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2 block ml-1">
+                  About the Company
+                </label>
                 <div className="relative group">
                   <textarea
                     name="description"

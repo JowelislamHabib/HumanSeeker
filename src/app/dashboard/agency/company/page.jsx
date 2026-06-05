@@ -13,7 +13,9 @@ export default function CompanyProfilePage() {
   const fetchCompanies = async () => {
     setIsLoading(true);
     try {
-      const res = await fetch("http://localhost:8000/api/companies");
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/companies`,
+      );
       if (res.ok) {
         const data = await res.json();
         setCompanies(data);
@@ -54,7 +56,10 @@ export default function CompanyProfilePage() {
       {isLoading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {[...Array(3)].map((_, i) => (
-            <div key={i} className="h-[280px] rounded-2xl bg-muted/30 animate-pulse border border-border/50" />
+            <div
+              key={i}
+              className="h-70 rounded-2xl bg-muted/30 animate-pulse border border-border/50"
+            />
           ))}
         </div>
       ) : companies.length === 0 ? (
@@ -62,9 +67,12 @@ export default function CompanyProfilePage() {
           <div className="w-16 h-16 rounded-2xl bg-muted flex items-center justify-center mb-4">
             <RiBuilding2Line className="size-8 text-muted-foreground" />
           </div>
-          <h3 className="text-lg font-bold text-foreground mb-2">No companies found</h3>
+          <h3 className="text-lg font-bold text-foreground mb-2">
+            No companies found
+          </h3>
           <p className="text-muted-foreground text-sm max-w-sm mb-6">
-            You haven't registered any companies yet. Get started by registering your first company.
+            You haven't registered any companies yet. Get started by registering
+            your first company.
           </p>
           <button
             onClick={() => setIsModalOpen(true)}
@@ -77,7 +85,7 @@ export default function CompanyProfilePage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {companies.map((company) => (
-            <CompanyCard key={company._id || company.name} company={company} />
+            <CompanyCard key={company._id || company?.name} company={company} />
           ))}
         </div>
       )}
