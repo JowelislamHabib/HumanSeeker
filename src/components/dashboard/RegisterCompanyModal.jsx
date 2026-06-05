@@ -91,7 +91,9 @@ const RegisterCompanyModal = ({ isOpen, onClose, onSuccess }) => {
       );
 
       if (res.ok) {
-        toast.success("Company registered successfully!");
+        toast.success("Company registered successfully!", {
+          position: "top-right",
+        });
         onSuccess && onSuccess();
         onClose();
         // Reset form
@@ -318,7 +320,8 @@ const RegisterCompanyModal = ({ isOpen, onClose, onSuccess }) => {
                         <Image
                           src={formData.logoUrl}
                           alt="Preview"
-                          className="w-full h-full object-cover"
+                          fill
+                          className="object-cover"
                           onError={(e) => {
                             e.target.style.display = "none";
                           }}
