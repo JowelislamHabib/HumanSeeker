@@ -11,6 +11,7 @@ import {
   RiTeamLine,
   RiUploadLine,
 } from "react-icons/ri";
+import Image from "next/image";
 
 const RegisterCompanyModal = ({ isOpen, onClose, onSuccess }) => {
   const [formData, setFormData] = useState({
@@ -29,6 +30,12 @@ const RegisterCompanyModal = ({ isOpen, onClose, onSuccess }) => {
   const handleLogoUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
+
+    // Check file size (5MB = 5 * 1024 * 1024 bytes)
+    if (file.size > 5 * 1024 * 1024) {
+      alert("Image must be smaller than 5MB");
+      return;
+    }
 
     setIsUploading(true);
     const formDataObj = new FormData();
@@ -303,7 +310,7 @@ const RegisterCompanyModal = ({ isOpen, onClose, onSuccess }) => {
                           </span>
                         </div>
                       ) : formData.logoUrl ? (
-                        <img
+                        <Image
                           src={formData.logoUrl}
                           alt="Preview"
                           className="w-full h-full object-cover"
