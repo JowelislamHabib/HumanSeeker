@@ -4,7 +4,7 @@ import { RiMapPinLine, RiTeamLine, RiGlobalLine } from "react-icons/ri";
 
 const CompanyCard = ({ company }) => {
   const isApproved = company?.status === "APPROVED";
-  console.log(company, "from companycard");
+  // console.log(company, "from companycard");
 
   return (
     <div className="group relative rounded-2xl border border-border/50 bg-card p-6 shadow-xs hover:shadow-md transition-all duration-300 hover:-translate-y-1 overflow-hidden">

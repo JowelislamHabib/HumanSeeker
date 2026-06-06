@@ -1,20 +1,22 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import CompanyCard from "@/components/dashboard/CompanyCard";
 import RegisterCompanyModal from "@/components/dashboard/RegisterCompanyModal";
 import { RiAddLine, RiBuilding2Line } from "react-icons/ri";
 import { fetchCompaniesAction } from "@/lib/actions/company";
 
-export default function CompanyProfilePage() {
+export default function CompanyProfilePage({ agency }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [companies, setCompanies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  // console.log(agency.id, "from company profile");
+
   const fetchCompanies = async () => {
     setIsLoading(true);
     try {
-      const result = await fetchCompaniesAction();
+      const result = await fetchCompaniesAction(agency?.id);
       if (result.success) {
         setCompanies(result.data);
       } else {
@@ -92,6 +94,7 @@ export default function CompanyProfilePage() {
 
       {/* Modal */}
       <RegisterCompanyModal
+        agencyId={agency?.id}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSuccess={fetchCompanies}

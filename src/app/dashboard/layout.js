@@ -2,12 +2,10 @@ import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Image from "next/image";
-import React from "react";
 import { Toaster } from "@/components/ui/sonner";
-
 const DashboardLayout = ({ children }) => {
   return (
-    <TooltipProvider>
+    <TooltipProvider suppressHydrationWarning>
       <SidebarProvider defaultOpen={true}>
         <div className="flex min-h-screen bg-background w-full">
           <DashboardSidebar />
