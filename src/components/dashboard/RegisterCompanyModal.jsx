@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   RiCloseLine,
-  RiImageAddLine,
   RiGlobalLine,
   RiMapPinLine,
   RiBuilding4Line,
@@ -13,7 +12,6 @@ import {
 } from "react-icons/ri";
 import Image from "next/image";
 import { toast } from "sonner";
-
 const RegisterCompanyModal = ({ isOpen, onClose, onSuccess }) => {
   const [formData, setFormData] = useState({
     name: "",
@@ -23,6 +21,7 @@ const RegisterCompanyModal = ({ isOpen, onClose, onSuccess }) => {
     employeeCount: "1-10",
     logoUrl: "",
     description: "",
+    status: "pending",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -76,7 +75,6 @@ const RegisterCompanyModal = ({ isOpen, onClose, onSuccess }) => {
     try {
       const payload = {
         ...formData,
-        status: "pending",
       };
 
       const res = await fetch(
@@ -105,6 +103,7 @@ const RegisterCompanyModal = ({ isOpen, onClose, onSuccess }) => {
           employeeCount: "1-10",
           logoUrl: "",
           description: "",
+          status: "pending",
         });
       }
     } catch (error) {

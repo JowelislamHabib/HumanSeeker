@@ -112,7 +112,6 @@ export default function RegisterPage() {
       password,
       image: avatar,
       role,
-      callbackURL: `${basePath}/dashboard/agency`,
     });
 
     setIsLoading(false);

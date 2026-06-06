@@ -101,7 +101,7 @@ const CreateNewJobPage = () => {
       if (res.insertedId || res.insertedID || res._id) {
         toast.success("Job created successfully!", { position: "top-right" });
         e.target.reset();
-        router.push("/dashboard/agency/");
+        router.push("/dashboard/agency/jobs");
       } else {
         toast.error("Failed to create job.", { position: "top-right" });
       }

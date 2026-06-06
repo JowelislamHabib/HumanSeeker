@@ -69,7 +69,6 @@ export default function LoginPage() {
     const { data, error } = await authClient.signIn.email({
       email,
       password,
-      callbackURL: `${basePath}/dashboard/agency`,
     });
 
     setIsLoading(false);

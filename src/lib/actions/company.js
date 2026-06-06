@@ -1,8 +1,17 @@
 "use server";
 
+import { serverMutation } from "../core/server";
+import { basePath } from "@/utils/EnvConfig";
+
+export const createCompany = async (newCompanyData) => {
+  return await serverMutation("/api/companies", newCompanyData);
+};
+
 export async function fetchCompaniesAction() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/companies`);
+    const res = await fetch(`${basePath}/api/companies`, {
+      cache: "no-store",
+    });
     if (!res.ok) {
       throw new Error("Failed to fetch companies");
     }
