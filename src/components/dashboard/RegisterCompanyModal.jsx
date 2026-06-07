@@ -77,6 +77,7 @@ const RegisterCompanyModal = ({ isOpen, onClose, onSuccess, agencyId }) => {
     try {
       const payload = {
         ...formData,
+        createdAt: new Date(),
       };
 
       const res = await fetch(

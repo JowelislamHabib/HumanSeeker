@@ -6,12 +6,12 @@ import RegisterCompanyModal from "@/components/dashboard/RegisterCompanyModal";
 import { RiAddLine, RiBuilding2Line } from "react-icons/ri";
 import { fetchCompaniesAction } from "@/lib/actions/company";
 
-export default function CompanyProfilePage({ agency, company }) {
+export default function CompanyProfilePage({ agency, companies }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [companies, setCompanies] = useState([]);
+  const [company, setCompany] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log(company, "from company profile");
+  console.log(companies, "from company profile");
 
   // const fetchCompanies = async () => {
   //   setIsLoading(true);
@@ -64,7 +64,7 @@ export default function CompanyProfilePage({ agency, company }) {
             />
           ))}
         </div>
-      ) : companies.length === 0 ? (
+      ) : !companies || companies.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 px-4 text-center border border-dashed border-border/60 rounded-2xl bg-card/50">
           <div className="w-16 h-16 rounded-2xl bg-muted flex items-center justify-center mb-4">
             <RiBuilding2Line className="size-8 text-muted-foreground" />
@@ -97,7 +97,7 @@ export default function CompanyProfilePage({ agency, company }) {
         agencyId={agency?.id}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onSuccess={fetchCompanies}
+        onSuccess={companies}
       />
     </div>
   );
