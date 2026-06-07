@@ -1,5 +1,10 @@
 import { basePath } from "@/utils/EnvConfig";
 
+export const serverFetch = async (path) => {
+  const res = await fetch(`${basePath}${path}`);
+  return res.json();
+};
+
 export const serverMutation = async (path, data) => {
   const res = await fetch(`${basePath}${path}`, {
     method: "POST",

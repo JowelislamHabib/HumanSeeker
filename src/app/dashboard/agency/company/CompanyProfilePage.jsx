@@ -6,32 +6,32 @@ import RegisterCompanyModal from "@/components/dashboard/RegisterCompanyModal";
 import { RiAddLine, RiBuilding2Line } from "react-icons/ri";
 import { fetchCompaniesAction } from "@/lib/actions/company";
 
-export default function CompanyProfilePage({ agency }) {
+export default function CompanyProfilePage({ agency, company }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [companies, setCompanies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // console.log(agency.id, "from company profile");
+  console.log(company, "from company profile");
 
-  const fetchCompanies = async () => {
-    setIsLoading(true);
-    try {
-      const result = await fetchCompaniesAction(agency?.id);
-      if (result.success) {
-        setCompanies(result.data);
-      } else {
-        console.error("Failed to fetch companies:", result.error);
-      }
-    } catch (error) {
-      console.error("Failed to fetch companies:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  // const fetchCompanies = async () => {
+  //   setIsLoading(true);
+  //   try {
+  //     const result = await fetchCompaniesAction(agency?.id);
+  //     if (result.success) {
+  //       setCompanies(result.data);
+  //     } else {
+  //       console.error("Failed to fetch companies:", result.error);
+  //     }
+  //   } catch (error) {
+  //     console.error("Failed to fetch companies:", error);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchCompanies();
-  }, []);
+  // useEffect(() => {
+  //   fetchCompanies();
+  // }, []);
 
   return (
     <div className="p-6 md:p-8 max-w-7xl mx-auto w-full">

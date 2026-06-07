@@ -1,11 +1,13 @@
 import { getUserSession } from "@/lib/core/session";
 import CompanyProfilePage from "./CompanyProfilePage";
+import { getAgencyId } from "@/lib/api/company";
 const CompanyPage = async () => {
   const user = await getUserSession();
-  console.log(user, "from company page");
+  const companies = await getAgencyId(user?.id);
+  //   console.log(company, "from company page");
   return (
     <div>
-      <CompanyProfilePage agency={user} />
+      <CompanyProfilePage agency={user} companies={companies} />
     </div>
   );
 };
