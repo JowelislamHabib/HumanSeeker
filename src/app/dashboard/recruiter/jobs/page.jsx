@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/tooltip";
 import Link from "next/link";
 
-const AgenciesJobsPage = async () => {
+const RecruiterJobsPage = async () => {
   const jobs = (await getCompanyJobs()) || [];
 
   return (
@@ -29,7 +29,7 @@ const AgenciesJobsPage = async () => {
           Company Jobs
         </h2>
         <Button asChild>
-          <Link href="/dashboard/agency/jobs/new">Post New Job</Link>
+          <Link href="/dashboard/recruiter/jobs/new">Post New Job</Link>
         </Button>
       </div>
       <Frame
@@ -175,4 +175,4 @@ const AgenciesJobsPage = async () => {
   );
 };
 
-export default AgenciesJobsPage;
+export default RecruiterJobsPage;

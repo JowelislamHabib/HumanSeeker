@@ -12,7 +12,7 @@ import {
 } from "react-icons/ri";
 import Image from "next/image";
 import { toast } from "sonner";
-const RegisterCompanyModal = ({ isOpen, onClose, onSuccess, agencyId }) => {
+const RegisterCompanyModal = ({ isOpen, onClose, onSuccess, recruiterId }) => {
   const [formData, setFormData] = useState({
     name: "",
     industry: "Technology",
@@ -22,9 +22,9 @@ const RegisterCompanyModal = ({ isOpen, onClose, onSuccess, agencyId }) => {
     logoUrl: "",
     description: "",
     status: "pending",
-    agencyId: agencyId, // for future use
+    recruiterId: recruiterId, // for future use
   });
-  // console.log(agencyId, "from register modal");
+  // console.log(recruiterId, "from register modal");
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
@@ -107,7 +107,7 @@ const RegisterCompanyModal = ({ isOpen, onClose, onSuccess, agencyId }) => {
           logoUrl: "",
           description: "",
           status: "pending",
-          agencyId: agencyId,
+          recruiterId: recruiterId,
         });
       }
     } catch (error) {

@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -13,7 +12,6 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarTrigger,
-  useSidebar,
 } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -30,21 +28,21 @@ import { authClient } from "@/lib/auth-client";
 import { useTheme } from "next-themes";
 
 const navItems = [
-  { title: "Dashboard", url: "/dashboard/agency", icon: RiDashboardLine },
+  { title: "Dashboard", url: "/dashboard/recruiter", icon: RiDashboardLine },
   {
     title: "Company Profile",
-    url: "/dashboard/agency/company",
+    url: "/dashboard/recruiter/company",
     icon: RiBuilding2Line,
   },
-  { title: "Jobs", url: "/dashboard/agency/jobs", icon: RiBuilding4Line },
+  { title: "Jobs", url: "/dashboard/recruiter/jobs", icon: RiBuilding4Line },
   {
     title: "Create Job",
-    url: "/dashboard/agency/jobs/new",
+    url: "/dashboard/recruiter/jobs/new",
     icon: RiBriefcaseLine,
   },
   {
     title: "Applications",
-    url: "/dashboard/agency/applications",
+    url: "/dashboard/recruiter/applications",
     icon: RiFileListLine,
   },
   { title: "Settings", url: "/dashboard/settings", icon: RiSettings3Line },

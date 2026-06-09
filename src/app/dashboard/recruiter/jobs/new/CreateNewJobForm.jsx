@@ -7,6 +7,10 @@ import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import { createJob } from "@/lib/actions/jobs";
 import { useRouter } from "next/navigation";
+import { fetchCompaniesAction } from "@/lib/actions/company";
+
+const recruiterId = fetchCompaniesAction();
+console.log(recruiterId);
 
 const Label = ({ children, className, ...props }) => (
   <label
@@ -60,12 +64,13 @@ const mockCompanies = [
   },
 ];
 
-const CreateNewJobPage = () => {
+const CreateNewJobPage = ({ recruiterCompany }) => {
   const [isRemote, setIsRemote] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedCompanyId, setSelectedCompanyId] = useState(
     mockCompanies[0].id,
   );
+  console.log(recruiterCompany, "From job createjob page component");
   const router = useRouter();
 
   const handleCreateNewJob = async (e) => {
@@ -101,7 +106,7 @@ const CreateNewJobPage = () => {
       if (res.insertedId || res.insertedID || res._id) {
         toast.success("Job created successfully!", { position: "top-right" });
         e.target.reset();
-        router.push("/dashboard/agency/jobs");
+        router.push("/dashboard/recruiter/jobs");
       } else {
         toast.error("Failed to create job.", { position: "top-right" });
       }

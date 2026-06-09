@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { MagicCard } from "@/components/ui/magic-card";
 import {
@@ -117,7 +117,7 @@ export default function RegisterPage() {
     setIsLoading(false);
 
     if (data?.user) {
-      router.push(`${basePath}/dashboard/agency`);
+      router.push(`${basePath}/dashboard/recruiter`);
     }
     if (error) {
       console.log(error, "error");
@@ -418,7 +418,7 @@ export default function RegisterPage() {
                     <FieldLabel htmlFor="client-role">
                       <Field orientation="horizontal">
                         <FieldContent>
-                          <FieldTitle>Client/Agency</FieldTitle>
+                          <FieldTitle>Client/Recruiter</FieldTitle>
                           <FieldDescription>
                             I'm looking to hire.
                           </FieldDescription>

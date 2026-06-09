@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { MagicCard } from "@/components/ui/magic-card";
 import {
@@ -11,15 +11,12 @@ import {
   RiRocketLine,
   RiShieldStarLine,
   RiCheckDoubleLine,
-  RiGoogleFill,
   RiEyeLine,
   RiEyeOffLine,
   RiErrorWarningLine,
 } from "react-icons/ri";
-import { createAuthClient } from "better-auth/client";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
-import { basePath } from "@/utils/EnvConfig";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -74,7 +71,7 @@ export default function LoginPage() {
     setIsLoading(false);
 
     if (data?.user) {
-      router.push("/dashboard/agency");
+      router.push("/dashboard/recruiter");
     }
     if (error) {
       console.log(error, "error");

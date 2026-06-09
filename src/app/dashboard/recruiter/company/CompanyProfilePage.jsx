@@ -1,37 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import CompanyCard from "@/components/dashboard/CompanyCard";
 import RegisterCompanyModal from "@/components/dashboard/RegisterCompanyModal";
 import { RiAddLine, RiBuilding2Line } from "react-icons/ri";
-import { fetchCompaniesAction } from "@/lib/actions/company";
 
-export default function CompanyProfilePage({ agency, companies }) {
+export default function CompanyProfilePage({ recruiter, recruiterCompany }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [company, setCompany] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  console.log(companies, "from company profile");
-
-  // const fetchCompanies = async () => {
-  //   setIsLoading(true);
-  //   try {
-  //     const result = await fetchCompaniesAction(agency?.id);
-  //     if (result.success) {
-  //       setCompanies(result.data);
-  //     } else {
-  //       console.error("Failed to fetch companies:", result.error);
-  //     }
-  //   } catch (error) {
-  //     console.error("Failed to fetch companies:", error);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchCompanies();
-  // }, []);
+  // console.log(recruiterCompany, "from CPP");
 
   return (
     <div className="p-6 md:p-8 max-w-7xl mx-auto w-full">
@@ -94,10 +71,10 @@ export default function CompanyProfilePage({ agency, companies }) {
 
       {/* Modal */}
       <RegisterCompanyModal
-        agencyId={agency?.id}
+        recruiterId={recruiter?.id}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onSuccess={companies}
+        onSuccess={recruiterCompany}
       />
     </div>
   );
