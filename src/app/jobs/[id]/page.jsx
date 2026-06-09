@@ -1,7 +1,7 @@
 import React from "react";
 import { getJobById } from "@/lib/api/job";
 import { Button } from "@/components/ui/button";
-import { MapPin, Briefcase, CircleDollar, Calendar, ArrowUpRight } from "lucide-react";
+import { MapPin, Briefcase, CircleDollarSign, Calendar, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
 export default async function JobDetailsPage({ params }) {
@@ -125,7 +125,7 @@ export default async function JobDetailsPage({ params }) {
 
             {/* Comp/Salary Element */}
             <div className="flex items-start gap-3">
-              <CircleDollar className="text-primary w-5 h-5 mt-0.5 flex-shrink-0" />
+              <CircleDollarSign className="text-primary w-5 h-5 mt-0.5 flex-shrink-0" />
               <div>
                 <span className="text-xs text-muted-foreground block">Salary Range</span>
                 <span className="text-sm font-medium text-foreground/90">
