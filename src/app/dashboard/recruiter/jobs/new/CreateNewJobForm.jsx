@@ -37,40 +37,16 @@ const Textarea = ({ className, ...props }) => (
   />
 );
 
-const mockCompanies = [
-  {
-    id: "c_1",
-    name: "Google Inc.",
-    category: "Technology",
-    location: "Mountain View",
-    logo: "https://logo.clearbit.com/google.com",
-    status: "Approved",
-  },
-  {
-    id: "c_2",
-    name: "Apple",
-    category: "Technology",
-    location: "Cupertino",
-    logo: "https://logo.clearbit.com/apple.com",
-    status: "Approved",
-  },
-  {
-    id: "c_3",
-    name: "Microsoft",
-    category: "Software",
-    location: "Redmond",
-    logo: "https://logo.clearbit.com/microsoft.com",
-    status: "Approved",
-  },
-];
+// mockCompanies removed
 
 const CreateNewJobPage = ({ recruiterCompany }) => {
+  const companies = Array.isArray(recruiterCompany) ? recruiterCompany : (recruiterCompany ? [recruiterCompany] : []);
+  
   const [isRemote, setIsRemote] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedCompanyId, setSelectedCompanyId] = useState(
-    mockCompanies[0].id,
+    companies.length > 0 ? (companies[0]._id || companies[0].id) : ""
   );
-  console.log(recruiterCompany, "From job createjob page component");
   const router = useRouter();
 
   const handleCreateNewJob = async (e) => {
@@ -100,12 +76,16 @@ const CreateNewJobPage = ({ recruiterCompany }) => {
         isRemote,
         status: "active",
         isPubliclyVisible: true,
+        companyId: selectedCompanyId,
+        companyName: selectedCompany?.name,
+        companyLogo: selectedCompany?.logoUrl || selectedCompany?.logo,
       };
 
       const res = await createJob(jobData);
       if (res.insertedId || res.insertedID || res._id) {
         toast.success("Job created successfully!", { position: "top-right" });
         e.target.reset();
+        router.refresh();
         router.push("/dashboard/recruiter/jobs");
       } else {
         toast.error("Failed to create job.", { position: "top-right" });
@@ -120,7 +100,18 @@ const CreateNewJobPage = ({ recruiterCompany }) => {
   };
 
   const selectedCompany =
-    mockCompanies.find((c) => c.id === selectedCompanyId) || mockCompanies[0];
+    companies.find((c) => (c._id || c.id) === selectedCompanyId) || companies[0];
+
+  if (companies.length === 0) {
+    return (
+      <div className="flex w-full flex-col max-w-4xl py-6">
+        <div className="bg-card border border-border rounded-xl shadow-sm p-6 text-center">
+          <h2 className="text-xl font-bold mb-2">No Companies Found</h2>
+          <p className="text-muted-foreground text-sm">Please register a company first before posting a job.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex w-full flex-col max-w-4xl py-6">
@@ -288,40 +279,46 @@ const CreateNewJobPage = ({ recruiterCompany }) => {
                 onChange={(e) => setSelectedCompanyId(e.target.value)}
                 className="h-10 mb-4"
               >
-                {mockCompanies.map((company) => (
-                  <option key={company.id} value={company.id}>
-                    {company.name}
-                  </option>
-                ))}
+                {companies.map((company) => {
+                  const compId = company._id || company.id;
+                  return (
+                    <option key={compId} value={compId}>
+                      {company.name}
+                    </option>
+                  );
+                })}
               </Select>
             </div>
 
             <div className="bg-accent/10 border border-border/50 rounded-lg p-4 flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <div className="size-12 rounded-lg bg-accent/50 border border-border flex items-center justify-center shrink-0 overflow-hidden relative">
-                  <Image
-                    src={selectedCompany.logo}
-                    alt={selectedCompany.name}
-                    width={48}
-                    height={48}
-                    className="size-full object-cover relative z-10"
-                    unoptimized
-                  />
-                  <span className="text-muted-foreground text-xs font-semibold absolute z-0">
-                    LOGO
-                  </span>
+                  {(selectedCompany?.logoUrl || selectedCompany?.logo) ? (
+                    <Image
+                      src={selectedCompany.logoUrl || selectedCompany.logo}
+                      alt={selectedCompany?.name || "Company"}
+                      width={48}
+                      height={48}
+                      className="size-full object-cover relative z-10"
+                      unoptimized
+                    />
+                  ) : (
+                    <span className="text-muted-foreground text-xs font-semibold absolute z-0">
+                      LOGO
+                    </span>
+                  )}
                 </div>
                 <div className="flex flex-col">
                   <span className="font-semibold text-foreground">
-                    {selectedCompany.name}
+                    {selectedCompany?.name}
                   </span>
                   <span className="text-xs text-muted-foreground mt-0.5">
-                    {selectedCompany.category} • {selectedCompany.location}
+                    {selectedCompany?.industry || selectedCompany?.category} • {selectedCompany?.location}
                   </span>
                 </div>
               </div>
-              <span className="text-xs font-medium bg-emerald-500/10 text-emerald-500 dark:bg-emerald-500/20 dark:text-emerald-400 px-2.5 py-1 rounded-full border border-emerald-500/20">
-                {selectedCompany.status}
+              <span className="text-xs font-medium bg-emerald-500/10 text-emerald-500 dark:bg-emerald-500/20 dark:text-emerald-400 px-2.5 py-1 rounded-full border border-emerald-500/20 capitalize">
+                {selectedCompany?.status || "active"}
               </span>
             </div>
             <p className="text-xs text-muted-foreground">

@@ -1,6 +1,8 @@
 "use server";
 
 import { serverFetch, serverMutation } from "../core/server";
+import { getUserSession } from "../core/session";
+import { getRecruiterId } from "../api/company";
 
 export const createCompany = async (newCompanyData) => {
   return await serverMutation("/api/companies", newCompanyData);
@@ -12,5 +14,5 @@ export async function fetchCompaniesAction(recruiterId) {
 
 export const getLoggedInRecruiterCompany = async () => {
   const user = await getUserSession();
-  return getRecruiterCompany(user?.id);
+  return getRecruiterId(user?.id);
 };

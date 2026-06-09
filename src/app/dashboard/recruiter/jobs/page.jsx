@@ -1,4 +1,5 @@
 import { getCompanyJobs } from "@/lib/api/job";
+import { getLoggedInRecruiterCompany } from "@/lib/actions/company";
 import { Eye, Edit2, Trash2 } from "lucide-react";
 import { Badge } from "@/components/reui/badge";
 import { Frame, FramePanel } from "@/components/reui/frame";
@@ -20,7 +21,14 @@ import {
 import Link from "next/link";
 
 const RecruiterJobsPage = async () => {
-  const jobs = (await getCompanyJobs()) || [];
+  const companies = await getLoggedInRecruiterCompany();
+  // Assume it's an array and use the first company, or it's an object
+  const company = Array.isArray(companies) && companies.length > 0 ? companies[0] : (Array.isArray(companies) ? null : companies);
+  
+  let jobs = [];
+  if (company) {
+    jobs = (await getCompanyJobs(company._id || company.id)) || [];
+  }
 
   return (
     <div className="flex w-full flex-col">

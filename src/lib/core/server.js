@@ -1,11 +1,17 @@
 import { basePath } from "@/utils/EnvConfig";
 
 export const serverFetch = async (path) => {
-  const res = await fetch(`${basePath}${path}`);
+  if (!basePath) {
+    throw new Error("Missing NEXT_PUBLIC_BASE_URL in .env");
+  }
+  const res = await fetch(`${basePath}${path}`, { cache: "no-store" });
   return res.json();
 };
 
 export const serverMutation = async (path, data) => {
+  if (!basePath) {
+    throw new Error("Missing NEXT_PUBLIC_BASE_URL in .env");
+  }
   const res = await fetch(`${basePath}${path}`, {
     method: "POST",
     headers: {

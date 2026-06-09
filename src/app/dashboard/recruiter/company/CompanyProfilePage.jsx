@@ -4,11 +4,15 @@ import { useState } from "react";
 import CompanyCard from "@/components/dashboard/CompanyCard";
 import RegisterCompanyModal from "@/components/dashboard/RegisterCompanyModal";
 import { RiAddLine, RiBuilding2Line } from "react-icons/ri";
+import { useRouter } from "next/navigation";
 
 export default function CompanyProfilePage({ recruiter, recruiterCompany }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  // console.log(recruiterCompany, "from CPP");
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  
+  // Assumes recruiterCompany is an array of companies
+  const companies = Array.isArray(recruiterCompany) ? recruiterCompany : (recruiterCompany ? [recruiterCompany] : []);
 
   return (
     <div className="p-6 md:p-8 max-w-7xl mx-auto w-full">
@@ -74,7 +78,10 @@ export default function CompanyProfilePage({ recruiter, recruiterCompany }) {
         recruiterId={recruiter?.id}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onSuccess={recruiterCompany}
+        onSuccess={() => {
+          router.refresh();
+          setIsModalOpen(false);
+        }}
       />
     </div>
   );

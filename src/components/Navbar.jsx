@@ -18,6 +18,7 @@ import Image from "next/image";
 
 const navLinks = [
   { label: "Browse Projects", href: "/projects" },
+  { label: "Browse Jobs", href: "/jobs" },
   { label: "Agencies", href: "/agencies" },
   { label: "Pricing", href: "/pricing" },
 ];
