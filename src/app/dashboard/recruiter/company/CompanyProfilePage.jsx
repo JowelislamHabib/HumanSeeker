@@ -12,7 +12,8 @@ export default function CompanyProfilePage({ recruiter, recruiterCompany }) {
   const router = useRouter();
   
   // Assumes recruiterCompany is an array of companies
-  const companies = Array.isArray(recruiterCompany) ? recruiterCompany : (recruiterCompany ? [recruiterCompany] : []);
+  const companies = (Array.isArray(recruiterCompany) ? recruiterCompany : (recruiterCompany ? [recruiterCompany] : []))
+    .filter(c => c && Object.keys(c).length > 0);
 
   return (
     <div className="p-6 md:p-8 max-w-7xl mx-auto w-full">
