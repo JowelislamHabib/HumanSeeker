@@ -25,6 +25,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className="h-full" suppressHydrationWarning>
       <body
         className={`${inter.variable} ${plusJakartaSans.variable} font-sans min-h-full flex flex-col antialiased`}
+        suppressHydrationWarning
       >
         <ThemeProvider
           attribute="class"

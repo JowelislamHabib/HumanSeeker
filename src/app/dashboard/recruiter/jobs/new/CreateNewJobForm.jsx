@@ -7,10 +7,6 @@ import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import { createJob } from "@/lib/actions/jobs";
 import { useRouter } from "next/navigation";
-import { fetchCompaniesAction } from "@/lib/actions/company";
-
-const recruiterId = fetchCompaniesAction();
-console.log(recruiterId);
 
 const Label = ({ children, className, ...props }) => (
   <label
@@ -32,20 +28,22 @@ const Select = ({ children, className, ...props }) => (
 
 const Textarea = ({ className, ...props }) => (
   <textarea
-    className={`flex min-h-[120px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 dark:bg-input/30 ${className}`}
+    className={`flex min-h-30 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 dark:bg-input/30 ${className}`}
     {...props}
   />
 );
 
-// mockCompanies removed
-
 const CreateNewJobPage = ({ recruiterCompany }) => {
-  const companies = Array.isArray(recruiterCompany) ? recruiterCompany : (recruiterCompany ? [recruiterCompany] : []);
-  
+  const companies = Array.isArray(recruiterCompany)
+    ? recruiterCompany
+    : recruiterCompany
+      ? [recruiterCompany]
+      : [];
+
   const [isRemote, setIsRemote] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedCompanyId, setSelectedCompanyId] = useState(
-    companies.length > 0 ? (companies[0]._id || companies[0].id) : ""
+    companies.length > 0 ? companies[0]._id || companies[0].id : "",
   );
   const router = useRouter();
 
@@ -100,14 +98,17 @@ const CreateNewJobPage = ({ recruiterCompany }) => {
   };
 
   const selectedCompany =
-    companies.find((c) => (c._id || c.id) === selectedCompanyId) || companies[0];
+    companies.find((c) => (c._id || c.id) === selectedCompanyId) ||
+    companies[0];
 
   if (companies.length === 0) {
     return (
       <div className="flex w-full flex-col max-w-4xl py-6">
         <div className="bg-card border border-border rounded-xl shadow-sm p-6 text-center">
           <h2 className="text-xl font-bold mb-2">No Companies Found</h2>
-          <p className="text-muted-foreground text-sm">Please register a company first before posting a job.</p>
+          <p className="text-muted-foreground text-sm">
+            Please register a company first before posting a job.
+          </p>
         </div>
       </div>
     );
@@ -293,7 +294,7 @@ const CreateNewJobPage = ({ recruiterCompany }) => {
             <div className="bg-accent/10 border border-border/50 rounded-lg p-4 flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <div className="size-12 rounded-lg bg-accent/50 border border-border flex items-center justify-center shrink-0 overflow-hidden relative">
-                  {(selectedCompany?.logoUrl || selectedCompany?.logo) ? (
+                  {selectedCompany?.logoUrl || selectedCompany?.logo ? (
                     <Image
                       src={selectedCompany.logoUrl || selectedCompany.logo}
                       alt={selectedCompany?.name || "Company"}
@@ -313,7 +314,8 @@ const CreateNewJobPage = ({ recruiterCompany }) => {
                     {selectedCompany?.name}
                   </span>
                   <span className="text-xs text-muted-foreground mt-0.5">
-                    {selectedCompany?.industry || selectedCompany?.category} • {selectedCompany?.location}
+                    {selectedCompany?.industry || selectedCompany?.category} •{" "}
+                    {selectedCompany?.location}
                   </span>
                 </div>
               </div>
