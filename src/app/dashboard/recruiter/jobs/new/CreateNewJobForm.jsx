@@ -262,7 +262,7 @@ const CreateNewJobPage = ({ recruiterCompany }) => {
               <Textarea
                 name="benefits"
                 placeholder="What perks do you offer?"
-                className="min-h-[80px]"
+                className="min-h-20"
               />
             </div>
           </section>
