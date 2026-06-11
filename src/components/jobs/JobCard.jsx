@@ -45,7 +45,7 @@ export default function JobCard({ job }) {
   };
 
   return (
-    <Card className="w-full max-w-110 relative overflow-hidden group hover:-translate-y-1.5 transition-transform duration-500">
+    <Card className="w-full max-w-110 relative overflow-hidden group hover:-translate-y-1.5 transition-transform duration-500 h-full flex flex-col">
       <div className="absolute top-0 right-0 -mr-16 -mt-16 w-40 h-40 rounded-full bg-primary/10 blur-[40px] group-hover:bg-primary/20 transition-colors duration-700 pointer-events-none" />
 
       <CardHeader className="flex flex-col gap-4 pb-2 z-10 relative">
@@ -90,7 +90,7 @@ export default function JobCard({ job }) {
         )}
       </CardHeader>
 
-      <CardContent className="flex flex-col gap-4 py-3 z-10 relative">
+      <CardContent className="flex flex-col gap-4 py-3 z-10 relative flex-1">
         <div className="flex flex-wrap gap-2.5 mt-1">
           {job.location && (
             <div className="flex items-center gap-1.5 bg-blue-500/10 dark:bg-blue-500/20 px-3 py-1.5 rounded-lg text-blue-700 dark:text-blue-300 border border-blue-500/10">
@@ -119,7 +119,7 @@ export default function JobCard({ job }) {
         </div>
       </CardContent>
 
-      <CardFooter className="pt-5 pb-6 z-10 relative">
+      <CardFooter className="pt-5 pb-6 z-10 relative mt-auto">
         <Button
           asChild
           className="w-full bg-foreground text-background hover:bg-primary hover:text-primary-foreground shadow-lg hover:shadow-primary/25 transition-all duration-300 group/btn h-12 rounded-xl font-semibold text-sm"
