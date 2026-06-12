@@ -1,12 +1,18 @@
-import React from "react";
 import { getJobById } from "@/lib/api/job";
 import { Button } from "@/components/ui/button";
-import { MapPin, Briefcase, CircleDollarSign, Calendar, ArrowUpRight } from "lucide-react";
+import {
+  MapPin,
+  Briefcase,
+  CircleDollarSign,
+  Calendar,
+  ArrowUpRight,
+} from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default async function JobDetailsPage({ params }) {
   const { id } = await params;
-  
+
   let jobData = null;
   try {
     const res = await getJobById(id);
@@ -19,7 +25,9 @@ export default async function JobDetailsPage({ params }) {
   if (!jobData) {
     return (
       <div className="w-full min-h-screen bg-background flex flex-col justify-center items-center text-foreground p-6">
-        <p className="text-muted-foreground text-lg">Job position could not be found or is no longer active.</p>
+        <p className="text-muted-foreground text-lg">
+          Job position could not be found or is no longer active.
+        </p>
       </div>
     );
   }
@@ -28,7 +36,9 @@ export default async function JobDetailsPage({ params }) {
   const formatSalary = (amount) => {
     if (!amount) return "0";
     const numericAmount = parseInt(amount, 10);
-    return numericAmount >= 1000 ? `${(numericAmount / 1000).toLocaleString()}k` : amount;
+    return numericAmount >= 1000
+      ? `${(numericAmount / 1000).toLocaleString()}k`
+      : amount;
   };
 
   // Humanize standard date formats
@@ -43,24 +53,28 @@ export default async function JobDetailsPage({ params }) {
 
   return (
     <main className="w-full min-h-screen bg-background text-foreground p-6 md:p-12 lg:p-16">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
-        
+      <div className="container px-6 mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
         {/* LEFT BLOCK: Corporate Identity, Description & Details (Spans 2 columns) */}
         <div className="lg:col-span-2 space-y-8 mt-4">
-          
           {/* Header Group */}
           <div className="space-y-4">
             <div className="flex items-center gap-4">
               {jobData.companyLogo && (
-                <img
+                <Image
                   src={jobData.companyLogo}
                   alt={`${jobData.companyName} Branding`}
                   className="w-14 h-14 object-contain bg-card border border-border p-2 rounded-xl shadow-xs"
+                  width={50}
+                  height={50}
                 />
               )}
               <div>
-                <h2 className="text-xl font-medium text-foreground/90">{jobData.companyName || "Confidential"}</h2>
-                <p className="text-sm text-muted-foreground capitalize">{jobData.jobCategory} Role</p>
+                <h2 className="text-xl font-medium text-foreground/90">
+                  {jobData.companyName || "Confidential"}
+                </h2>
+                <p className="text-sm text-muted-foreground capitalize">
+                  {jobData.jobCategory} Role
+                </p>
               </div>
             </div>
 
@@ -71,18 +85,24 @@ export default async function JobDetailsPage({ params }) {
 
           {/* Section: Responsibilities */}
           <section className="space-y-3">
-            <h3 className="text-xl font-semibold text-foreground">Core Responsibilities</h3>
+            <h3 className="text-xl font-semibold text-foreground">
+              Core Responsibilities
+            </h3>
             <p className="text-foreground/80 text-base leading-relaxed whitespace-pre-line">
-              {jobData.responsibilities || "No specific responsibilities detailed for this listing."}
+              {jobData.responsibilities ||
+                "No specific responsibilities detailed for this listing."}
             </p>
           </section>
 
           {/* Section: Core Technical Requirements */}
           <section className="space-y-3">
-            <h3 className="text-xl font-semibold text-foreground">Requirements & Credentials</h3>
+            <h3 className="text-xl font-semibold text-foreground">
+              Requirements & Credentials
+            </h3>
             <div className="bg-card border border-border rounded-2xl p-5 shadow-xs">
               <p className="text-foreground/80 text-base leading-relaxed whitespace-pre-line">
-                {jobData.requirements || "Standard industry qualifications apply."}
+                {jobData.requirements ||
+                  "Standard industry qualifications apply."}
               </p>
             </div>
           </section>
@@ -90,7 +110,9 @@ export default async function JobDetailsPage({ params }) {
           {/* Section: Benefits & Perks */}
           {jobData.benefits && (
             <section className="space-y-3">
-              <h3 className="text-xl font-semibold text-foreground">Benefits & Perks</h3>
+              <h3 className="text-xl font-semibold text-foreground">
+                Benefits & Perks
+              </h3>
               <p className="text-foreground/80 text-base leading-relaxed whitespace-pre-line">
                 {jobData.benefits}
               </p>
@@ -100,16 +122,25 @@ export default async function JobDetailsPage({ params }) {
 
         {/* RIGHT BLOCK: Core Structural Metadata Panel Widget */}
         <aside className="bg-card border border-border rounded-3xl p-6 lg:sticky lg:top-8 space-y-6 shadow-md mt-4">
-          <h3 className="text-lg font-semibold text-foreground">Job Overview</h3>
+          <h3 className="text-lg font-semibold text-foreground">
+            Job Overview
+          </h3>
 
           <div className="space-y-4">
             {/* Location Element */}
             <div className="flex items-start gap-3">
               <MapPin className="text-primary w-5 h-5 mt-0.5 flex-shrink-0" />
               <div>
-                <span className="text-xs text-muted-foreground block">Location</span>
+                <span className="text-xs text-muted-foreground block">
+                  Location
+                </span>
                 <span className="text-sm font-medium text-foreground/90">
-                  {jobData.location} {jobData.isRemote && <span className="text-primary font-normal text-xs ml-1">(Remote Friendly)</span>}
+                  {jobData.location}{" "}
+                  {jobData.isRemote && (
+                    <span className="text-primary font-normal text-xs ml-1">
+                      (Remote Friendly)
+                    </span>
+                  )}
                 </span>
               </div>
             </div>
@@ -118,8 +149,12 @@ export default async function JobDetailsPage({ params }) {
             <div className="flex items-start gap-3">
               <Briefcase className="text-primary w-5 h-5 mt-0.5 flex-shrink-0" />
               <div>
-                <span className="text-xs text-muted-foreground block">Job Type</span>
-                <span className="text-sm font-medium text-foreground/90 capitalize">{jobData.jobType?.replace("-", " ")}</span>
+                <span className="text-xs text-muted-foreground block">
+                  Job Type
+                </span>
+                <span className="text-sm font-medium text-foreground/90 capitalize">
+                  {jobData.jobType?.replace("-", " ")}
+                </span>
               </div>
             </div>
 
@@ -127,7 +162,9 @@ export default async function JobDetailsPage({ params }) {
             <div className="flex items-start gap-3">
               <CircleDollarSign className="text-primary w-5 h-5 mt-0.5 flex-shrink-0" />
               <div>
-                <span className="text-xs text-muted-foreground block">Salary Range</span>
+                <span className="text-xs text-muted-foreground block">
+                  Salary Range
+                </span>
                 <span className="text-sm font-medium text-foreground/90">
                   {jobData.minSalary && jobData.maxSalary
                     ? `$${formatSalary(jobData.minSalary)} – $${formatSalary(jobData.maxSalary)} / year`
@@ -140,8 +177,12 @@ export default async function JobDetailsPage({ params }) {
             <div className="flex items-start gap-3">
               <Calendar className="text-primary w-5 h-5 mt-0.5 flex-shrink-0" />
               <div>
-                <span className="text-xs text-muted-foreground block">Application Deadline</span>
-                <span className="text-sm font-medium text-foreground/90">{formatDate(jobData.deadline)}</span>
+                <span className="text-xs text-muted-foreground block">
+                  Application Deadline
+                </span>
+                <span className="text-sm font-medium text-foreground/90">
+                  {formatDate(jobData.deadline)}
+                </span>
               </div>
             </div>
           </div>
@@ -158,7 +199,6 @@ export default async function JobDetailsPage({ params }) {
             </Link>
           </Button>
         </aside>
-
       </div>
     </main>
   );
