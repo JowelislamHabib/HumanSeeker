@@ -1,3 +1,4 @@
+import ApplyNotAllowed from "@/components/jobs/ApplyNotAllowed";
 import { getUserSession } from "@/lib/core/session";
 import { redirect } from "next/navigation";
 
@@ -9,7 +10,9 @@ const ApplyPage = async ({ params }) => {
   if (!user) {
     redirect(`/login?redirect=/jobs/${id}/apply`);
   }
-
+  if (user.role !== "freelancer") {
+    return <ApplyNotAllowed />;
+  }
   return (
     <div>
       <h1>Apply For This Job</h1>
