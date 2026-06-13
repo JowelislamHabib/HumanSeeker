@@ -1,6 +1,8 @@
 import ApplyNotAllowed from "@/components/jobs/ApplyNotAllowed";
+import { getJobById } from "@/lib/api/job";
 import { getUserSession } from "@/lib/core/session";
 import { redirect } from "next/navigation";
+import JobApply from "./JobApply";
 
 const ApplyPage = async ({ params }) => {
   const { id } = await params;
@@ -13,9 +15,10 @@ const ApplyPage = async ({ params }) => {
   if (user.role !== "freelancer") {
     return <ApplyNotAllowed />;
   }
+  const job = await getJobById(id);
   return (
     <div>
-      <h1>Apply For This Job</h1>
+      <JobApply applicant={user} job={job} />
     </div>
   );
 };
