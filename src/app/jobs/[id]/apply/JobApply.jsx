@@ -21,17 +21,27 @@ import {
 } from "lucide-react";
 import { Field, FieldLabel, FieldContent } from "@/components/ui/field";
 import Image from "next/image";
+import { submitApplication } from "@/lib/actions/applications";
 
 const JobApply = ({ job, applicant }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-    }, 1000);
+    
+    const formData = new FormData(e.target);
+    const submissionData = {
+      jobId: job._id || job.id,
+      companyName: job.companyName,
+      applicantId: applicant._id || applicant.id,
+      resumeLink: formData.get("resume"),
+      portfolio: formData.get("portfolio"),
+      message: formData.get("message"),
+    };
+
+    const res = await submitApplication(submissionData);
+    setIsSubmitting(false);
   };
 
   return (
@@ -92,6 +102,7 @@ const JobApply = ({ job, applicant }) => {
                   <LinkIcon className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                   <Input
                     id="resume"
+                    name="resume"
                     placeholder="https://drive.google.com/..."
                     className="pl-10"
                     required
@@ -107,6 +118,7 @@ const JobApply = ({ job, applicant }) => {
                   <Briefcase className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                   <Input
                     id="portfolio"
+                    name="portfolio"
                     placeholder="https://yourportfolio.com"
                     className="pl-10"
                     required
@@ -124,6 +136,7 @@ const JobApply = ({ job, applicant }) => {
                   <FileText className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                   <textarea
                     id="message"
+                    name="message"
                     placeholder="Why are you a good fit for this role?"
                     className="flex min-h-[140px] w-full rounded-md border border-input bg-background pl-10 pr-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-y"
                     required
