@@ -194,7 +194,7 @@ export default async function JobDetailsPage({ params }) {
             className="w-full font-medium py-6 rounded-xl shadow-sm transition-colors flex items-center justify-center gap-2 mt-4"
           >
             <Link href={`/jobs/${id}/apply`}>
-              Apply For This Job
+              Apply Now
               <ArrowUpRight className="w-4 h-4 ml-1" />
             </Link>
           </Button>
