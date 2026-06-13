@@ -18,7 +18,7 @@ import {
   RiErrorWarningLine,
 } from "react-icons/ri";
 import { authClient } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   Field,
   FieldContent,
@@ -41,6 +41,9 @@ export default function RegisterPage() {
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect") || "/";
+
   const router = useRouter();
 
   const handleInputChange = (field, value, setter) => {
@@ -59,7 +62,7 @@ export default function RegisterPage() {
       provider: "google",
     });
     if (data?.user) {
-      router.push("/dashboard");
+      router.push(redirectTo);
     }
   };
 
@@ -117,7 +120,7 @@ export default function RegisterPage() {
     setIsLoading(false);
 
     if (data?.user) {
-      router.push(`${basePath}/dashboard/recruiter`);
+      router.push(redirectTo);
     }
     if (error) {
       console.log(error, "error");
@@ -619,7 +622,7 @@ export default function RegisterPage() {
                 <span className="text-zinc-500 dark:text-zinc-400">
                   Already have an account?{" "}
                   <Link
-                    href="/login"
+                    href={`/login?redirect=${redirectTo}`}
                     className="text-indigo-600 dark:text-indigo-400 hover:underline font-bold"
                   >
                     Sign in instead

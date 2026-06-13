@@ -129,7 +129,7 @@ export default async function JobDetailsPage({ params }) {
           <div className="space-y-4">
             {/* Location Element */}
             <div className="flex items-start gap-3">
-              <MapPin className="text-primary w-5 h-5 mt-0.5 flex-shrink-0" />
+              <MapPin className="text-primary w-5 h-5 mt-0.5 shrink-0" />
               <div>
                 <span className="text-xs text-muted-foreground block">
                   Location
@@ -147,7 +147,7 @@ export default async function JobDetailsPage({ params }) {
 
             {/* Position Type Element */}
             <div className="flex items-start gap-3">
-              <Briefcase className="text-primary w-5 h-5 mt-0.5 flex-shrink-0" />
+              <Briefcase className="text-primary w-5 h-5 mt-0.5 shrink-0" />
               <div>
                 <span className="text-xs text-muted-foreground block">
                   Job Type
@@ -160,7 +160,7 @@ export default async function JobDetailsPage({ params }) {
 
             {/* Comp/Salary Element */}
             <div className="flex items-start gap-3">
-              <CircleDollarSign className="text-primary w-5 h-5 mt-0.5 flex-shrink-0" />
+              <CircleDollarSign className="text-primary w-5 h-5 mt-0.5 shrink-0" />
               <div>
                 <span className="text-xs text-muted-foreground block">
                   Salary Range
@@ -175,7 +175,7 @@ export default async function JobDetailsPage({ params }) {
 
             {/* Deadline Element */}
             <div className="flex items-start gap-3">
-              <Calendar className="text-primary w-5 h-5 mt-0.5 flex-shrink-0" />
+              <Calendar className="text-primary w-5 h-5 mt-0.5 shrink-0" />
               <div>
                 <span className="text-xs text-muted-foreground block">
                   Application Deadline
