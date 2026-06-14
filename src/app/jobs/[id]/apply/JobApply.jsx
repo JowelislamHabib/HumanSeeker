@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -25,6 +26,7 @@ import { submitApplication } from "@/lib/actions/applications";
 
 const JobApply = ({ job, applicant }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,6 +43,7 @@ const JobApply = ({ job, applicant }) => {
     };
 
     const res = await submitApplication(submissionData);
+    router.refresh();
     setIsSubmitting(false);
   };
 
