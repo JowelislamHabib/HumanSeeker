@@ -48,51 +48,52 @@ const JobApply = ({ job, applicant }) => {
   };
 
   return (
-    <div className="container max-w-2xl mx-auto py-12 px-4">
-      <Card className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-        <CardHeader>
-          <div className="flex items-center gap-3 mb-2">
+    <div className="w-full">
+      <Card className="border-border/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] bg-card/40 backdrop-blur-xl rounded-3xl overflow-hidden">
+        <CardHeader className="bg-muted/20 border-b border-border/40 pb-8 pt-8 px-8">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-5 mb-2">
             {job?.companyLogo ? (
               <Image
-                width={50}
-                height={50}
+                width={64}
+                height={64}
                 src={job.companyLogo}
                 alt={job.companyName || "Company"}
-                className="w-12 h-12 rounded-xl object-cover shadow-sm ring-1 ring-border"
+                className="w-16 h-16 rounded-2xl object-cover shadow-sm ring-1 ring-border/50"
               />
             ) : (
-              <div className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-xl ring-1 ring-primary/20">
-                <Briefcase className="w-6 h-6 text-primary" />
+              <div className="flex shrink-0 items-center justify-center w-16 h-16 bg-primary/10 rounded-2xl ring-1 ring-primary/20">
+                <Briefcase className="w-8 h-8 text-primary" />
               </div>
             )}
             <div>
-              <CardTitle className="text-2xl">
+              <CardTitle className="text-2xl sm:text-3xl font-bold tracking-tight">
                 Apply for {job?.jobTitle || job?.title || "Position"}
               </CardTitle>
-              <CardDescription className="text-base mt-1">
-                {job?.companyName || "Company Name"} •{" "}
-                {job?.jobType || "Full-time"}
+              <CardDescription className="text-base sm:text-lg mt-2 text-muted-foreground flex flex-wrap items-center gap-2">
+                <span className="font-medium text-foreground">{job?.companyName || "Company Name"}</span>
+                <span className="hidden sm:inline">•</span>
+                <span>{job?.jobType || "Full-time"}</span>
               </CardDescription>
             </div>
           </div>
         </CardHeader>
         <form onSubmit={handleSubmit}>
-          <CardContent className="space-y-6 pb-4">
-            <div className="bg-muted/40 p-4 rounded-xl flex items-center gap-4 border border-border/50">
-              <Avatar className="w-12 h-12">
+          <CardContent className="space-y-8 p-8">
+            <div className="bg-background/60 p-5 rounded-2xl flex flex-col sm:flex-row sm:items-center gap-5 border border-border/40 shadow-sm">
+              <Avatar className="w-14 h-14 ring-2 ring-background shadow-sm">
                 <AvatarImage
                   src={applicant?.image || applicant?.avatar}
                   alt={applicant?.name}
                 />
-                <AvatarFallback className="bg-secondary">
-                  <User className="w-6 h-6 text-secondary-foreground" />
+                <AvatarFallback className="bg-primary/10 text-primary">
+                  <User className="w-6 h-6" />
                 </AvatarFallback>
               </Avatar>
               <div>
-                <p className="text-sm font-medium">
+                <p className="text-base font-semibold">
                   Applying as {applicant?.name || "Freelancer"}
                 </p>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-muted-foreground mt-0.5">
                   {applicant?.email || "freelancer@example.com"}
                 </p>
               </div>
@@ -100,14 +101,14 @@ const JobApply = ({ job, applicant }) => {
 
             <Field>
               <FieldContent>
-                <FieldLabel htmlFor="resume">Resume Link</FieldLabel>
-                <div className="relative">
-                  <LinkIcon className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <FieldLabel htmlFor="resume" className="text-base font-medium">Resume Link</FieldLabel>
+                <div className="relative mt-2">
+                  <LinkIcon className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                   <Input
                     id="resume"
                     name="resume"
                     placeholder="https://drive.google.com/..."
-                    className="pl-10"
+                    className="pl-12 h-14 rounded-xl bg-background/50 border-border/50 focus-visible:ring-primary/30 focus-visible:border-primary transition-all text-base"
                     required
                   />
                 </div>
@@ -116,14 +117,14 @@ const JobApply = ({ job, applicant }) => {
 
             <Field>
               <FieldContent>
-                <FieldLabel htmlFor="portfolio">Portfolio URL</FieldLabel>
-                <div className="relative">
-                  <Briefcase className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <FieldLabel htmlFor="portfolio" className="text-base font-medium">Portfolio URL</FieldLabel>
+                <div className="relative mt-2">
+                  <Briefcase className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                   <Input
                     id="portfolio"
                     name="portfolio"
                     placeholder="https://yourportfolio.com"
-                    className="pl-10"
+                    className="pl-12 h-14 rounded-xl bg-background/50 border-border/50 focus-visible:ring-primary/30 focus-visible:border-primary transition-all text-base"
                     required
                   />
                 </div>
@@ -132,34 +133,34 @@ const JobApply = ({ job, applicant }) => {
 
             <Field>
               <FieldContent>
-                <FieldLabel htmlFor="message">
+                <FieldLabel htmlFor="message" className="text-base font-medium">
                   Short Message (Cover Letter)
                 </FieldLabel>
-                <div className="relative">
-                  <FileText className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <div className="relative mt-2">
+                  <FileText className="absolute left-4 top-4 h-5 w-5 text-muted-foreground" />
                   <textarea
                     id="message"
                     name="message"
                     placeholder="Why are you a good fit for this role?"
-                    className="flex min-h-[140px] w-full rounded-md border border-input bg-background pl-10 pr-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-y"
+                    className="flex min-h-[160px] w-full rounded-xl border border-border/50 bg-background/50 pl-12 pr-4 py-4 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:border-primary disabled:cursor-not-allowed disabled:opacity-50 resize-y transition-all"
                     required
                   />
                 </div>
               </FieldContent>
             </Field>
           </CardContent>
-          <CardFooter className="bg-muted/20 pt-6 rounded-b-2xl border-t border-border/50">
+          <CardFooter className="bg-muted/10 p-8 border-t border-border/40 rounded-b-3xl">
             <Button
               type="submit"
               size="lg"
-              className="w-full"
+              className="w-full h-14 text-lg font-medium rounded-xl shadow-lg shadow-primary/20 transition-all hover:scale-[1.01] active:scale-[0.99]"
               disabled={isSubmitting}
             >
               {isSubmitting ? (
-                "Submitting..."
+                "Submitting Application..."
               ) : (
                 <>
-                  <Send className="w-4 h-4 mr-2" />
+                  <Send className="w-5 h-5 mr-3" />
                   Submit Application
                 </>
               )}
