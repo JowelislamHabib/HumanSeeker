@@ -1,17 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
-import { 
-  RiVipCrownLine, 
-  RiBarChartLine, 
-  RiFlashlightLine, 
-  RiCheckLine, 
+import {
+  RiVipCrownLine,
+  RiBarChartLine,
+  RiFlashlightLine,
+  RiCheckLine,
   RiSubtractLine,
   RiAddLine,
-  RiArrowRightLine, 
-  RiStarFill
+  RiArrowRightLine,
+  RiStarFill,
 } from "react-icons/ri";
 import { cn } from "@/lib/utils";
 
@@ -38,7 +38,8 @@ const jobSeekerPlans = [
     icon: RiBarChartLine,
     price: 19,
     priceSuffix: "/month",
-    description: "For active job seekers who want to land roles faster with priority tools.",
+    description:
+      "For active job seekers who want to land roles faster with priority tools.",
     features: [
       "Apply to up to 30 jobs per month",
       "Unlimited saved jobs",
@@ -55,7 +56,8 @@ const jobSeekerPlans = [
     icon: RiStarFill,
     price: 39,
     priceSuffix: "/month",
-    description: "For job seekers who want maximum visibility and early access.",
+    description:
+      "For job seekers who want maximum visibility and early access.",
     features: [
       "Everything in Pro + unlimited applications",
       "Profile boost to recruiters",
@@ -91,7 +93,8 @@ const recruiterPlans = [
     icon: RiBarChartLine,
     price: 49,
     priceSuffix: "/month",
-    description: "For growing teams that need applicant tracking and analytics.",
+    description:
+      "For growing teams that need applicant tracking and analytics.",
     features: [
       "Up to 10 active job posts",
       "Applicant tracking",
@@ -126,19 +129,23 @@ const recruiterPlans = [
 const faqs = [
   {
     question: "Can I cancel my subscription?",
-    answer: "Yes, you can cancel your subscription at any time directly from your Billing settings page. Your premium access will remain active until the end of your current billing period.",
+    answer:
+      "Yes, you can cancel your subscription at any time directly from your Billing settings page. Your premium access will remain active until the end of your current billing period.",
   },
   {
     question: "What is your refund policy?",
-    answer: "We offer a 14-day money-back guarantee for all premium plans. If you are not satisfied with your plan, you can request a refund within 14 days of purchase by contacting our support team.",
+    answer:
+      "We offer a 14-day money-back guarantee for all premium plans. If you are not satisfied with your plan, you can request a refund within 14 days of purchase by contacting our support team.",
   },
   {
     question: "Which payment methods are supported?",
-    answer: "We accept all major credit and debit cards (Visa, MasterCard, American Express, Discover) processed securely through Stripe. Bank transfers are also available for Enterprise contracts.",
+    answer:
+      "We accept all major credit and debit cards (Visa, MasterCard, American Express, Discover) processed securely through Stripe. Bank transfers are also available for Enterprise contracts.",
   },
   {
     question: "Can I switch plans later?",
-    answer: "Absolutely. You can upgrade or downgrade your plan at any time. When upgrading, your billing will be prorated automatically so you only pay for the remaining portion of your billing cycle.",
+    answer:
+      "Absolutely. You can upgrade or downgrade your plan at any time. When upgrading, your billing will be prorated automatically so you only pay for the remaining portion of your billing cycle.",
   },
 ];
 
@@ -165,7 +172,11 @@ export default function PricingPage() {
           animate="visible"
           variants={{
             hidden: { opacity: 0, y: 30 },
-            visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 80, damping: 15 } }
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: { type: "spring", stiffness: 80, damping: 15 },
+            },
           }}
           className="flex flex-col items-center gap-4 max-w-3xl"
         >
@@ -179,10 +190,14 @@ export default function PricingPage() {
             </span>
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-zinc-950 dark:text-white tracking-tight leading-tight transition-colors duration-300">
-            Pricing for <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-fuchsia-500">everyone</span>
+            Pricing for{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-fuchsia-500">
+              everyone
+            </span>
           </h1>
           <p className="text-zinc-650 dark:text-zinc-400 text-base sm:text-lg max-w-xl leading-relaxed mt-2 transition-colors">
-            Choose the plan that fits your goals. Whether you are looking for your next dream job or searching for the perfect candidate.
+            Choose the plan that fits your goals. Whether you are looking for
+            your next dream job or searching for the perfect candidate.
           </p>
         </motion.div>
 
@@ -190,7 +205,12 @@ export default function PricingPage() {
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ type: "spring", stiffness: 100, damping: 15, delay: 0.1 }}
+          transition={{
+            type: "spring",
+            stiffness: 100,
+            damping: 15,
+            delay: 0.1,
+          }}
           className="relative flex items-center bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-1.5 rounded-full transition-colors"
         >
           <button
@@ -237,7 +257,9 @@ export default function PricingPage() {
           animate="visible"
           variants={{
             hidden: {},
-            visible: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
+            visible: {
+              transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+            },
           }}
           className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl mt-4 items-stretch"
         >
@@ -253,13 +275,13 @@ export default function PricingPage() {
                     opacity: 1,
                     y: 0,
                     scale: plan.isFeatured ? 1.04 : 1.0,
-                    transition: { type: "spring", stiffness: 80, damping: 14 }
-                  }
+                    transition: { type: "spring", stiffness: 80, damping: 14 },
+                  },
                 }}
                 whileHover={{
                   y: -10,
                   scale: plan.isFeatured ? 1.05 : 1.02,
-                  transition: { type: "spring", stiffness: 260, damping: 20 }
+                  transition: { type: "spring", stiffness: 260, damping: 20 },
                 }}
                 className="flex flex-col h-full w-full"
               >
@@ -268,15 +290,17 @@ export default function PricingPage() {
                     "group relative flex flex-col justify-between p-8 rounded-3xl transition-all duration-300 border bg-white dark:bg-zinc-900/40 h-full w-full overflow-visible",
                     plan.isFeatured
                       ? "border-2 border-indigo-500 dark:border-indigo-400 shadow-xl shadow-indigo-500/10 dark:shadow-indigo-400/5 z-10"
-                      : "border-zinc-200 dark:border-zinc-900 hover:border-zinc-300 dark:hover:border-zinc-800 shadow-xs"
+                      : "border-zinc-200 dark:border-zinc-900 hover:border-zinc-300 dark:hover:border-zinc-800 shadow-xs",
                   )}
                 >
                   {/* Accent glow corner */}
-                  <div className={cn(
-                    "absolute top-0 right-0 w-32 h-32 bg-gradient-to-br opacity-0 transition-opacity duration-500 rounded-tr-3xl blur-2xl pointer-events-none z-0",
-                    plan.isFeatured ? "opacity-15" : "group-hover:opacity-15",
-                    plan.color
-                  )} />
+                  <div
+                    className={cn(
+                      "absolute top-0 right-0 w-32 h-32 bg-gradient-to-br opacity-0 transition-opacity duration-500 rounded-tr-3xl blur-2xl pointer-events-none z-0",
+                      plan.isFeatured ? "opacity-15" : "group-hover:opacity-15",
+                      plan.color,
+                    )}
+                  />
 
                   {plan.isFeatured && (
                     <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20">
@@ -289,10 +313,13 @@ export default function PricingPage() {
 
                   {/* Header */}
                   <div className="relative z-10 flex flex-col items-start gap-4 pb-6 border-b border-zinc-100 dark:border-zinc-800/60">
-                    <span className={cn(
-                      "flex items-center justify-center w-11 h-11 rounded-2xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 shadow-sm",
-                      plan.isFeatured && "text-indigo-600 dark:text-indigo-400 border-indigo-500/20"
-                    )}>
+                    <span
+                      className={cn(
+                        "flex items-center justify-center w-11 h-11 rounded-2xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 shadow-sm",
+                        plan.isFeatured &&
+                          "text-indigo-600 dark:text-indigo-400 border-indigo-500/20",
+                      )}
+                    >
                       <Icon className="w-5.5 h-5.5 text-indigo-600 dark:text-indigo-400" />
                     </span>
                     <div className="flex flex-col text-left">
@@ -312,7 +339,11 @@ export default function PricingPage() {
                             initial={{ y: -24, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             exit={{ y: 24, opacity: 0 }}
-                            transition={{ type: "spring", stiffness: 350, damping: 25 }}
+                            transition={{
+                              type: "spring",
+                              stiffness: 350,
+                              damping: 25,
+                            }}
                             className="relative z-10 inline-block"
                           >
                             {plan.price}
@@ -332,7 +363,10 @@ export default function PricingPage() {
                     </p>
                     <ul className="flex flex-col gap-3.5">
                       {plan.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-3 text-left">
+                        <li
+                          key={idx}
+                          className="flex items-start gap-3 text-left"
+                        >
                           <span className="flex items-center justify-center w-5 h-5 rounded-md bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900/40 text-indigo-600 dark:text-indigo-400 shrink-0 select-none">
                             <RiCheckLine className="w-3.5 h-3.5" />
                           </span>
@@ -346,18 +380,23 @@ export default function PricingPage() {
 
                   {/* CTA button */}
                   <div className="relative z-10 pt-2">
-                    <Link
-                      href={plan.href}
-                      className={cn(
-                        "w-full py-3.5 px-4 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 transition-all active:scale-[0.98] group cursor-pointer",
-                        plan.isFeatured
-                          ? "bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-600/25"
-                          : "bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-800"
-                      )}
-                    >
-                      <span>{plan.cta}</span>
-                      <RiArrowRightLine className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
-                    </Link>
+                    <form action="/api/checkout_sessions" method="POST">
+                      <section>
+                        <button
+                          type="submit"
+                          role="link"
+                          className={cn(
+                            "w-full py-3.5 px-4 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 transition-all active:scale-[0.98] group cursor-pointer",
+                            plan.isFeatured
+                              ? "bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-600/25"
+                              : "bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-800",
+                          )}
+                        >
+                          Checkout
+                          <RiArrowRightLine className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+                        </button>
+                      </section>
+                    </form>
                   </div>
                 </div>
               </motion.div>
@@ -377,7 +416,8 @@ export default function PricingPage() {
             Frequently Asked Questions
           </h2>
           <p className="text-zinc-550 dark:text-zinc-400 text-sm mt-2 max-w-xl mx-auto">
-            Find immediate answers regarding billing, subscription cancellation, switching tiers, and our refund terms.
+            Find immediate answers regarding billing, subscription cancellation,
+            switching tiers, and our refund terms.
           </p>
         </motion.div>
 
@@ -440,7 +480,8 @@ export default function PricingPage() {
             Ready to get started?
           </h3>
           <p className="text-zinc-550 dark:text-zinc-400 text-sm max-w-md leading-relaxed">
-            Create an account for free today, apply to vetted jobs, or start hiring top talent.
+            Create an account for free today, apply to vetted jobs, or start
+            hiring top talent.
           </p>
           <Link
             href="/signup"
@@ -449,7 +490,6 @@ export default function PricingPage() {
             Get Started For Free
           </Link>
         </motion.div>
-
       </div>
     </div>
   );
