@@ -71,6 +71,9 @@ export default function RegisterPage() {
     setErrors({});
     setIsLoading(true);
 
+    const plan =
+      role === "freelancer" ? "seeker_free" : "recruiter_free";
+
     const newErrors = {};
     if (!name.trim()) {
       newErrors.name = "Full name is required";
@@ -115,6 +118,7 @@ export default function RegisterPage() {
       password,
       image: avatar,
       role,
+      plan,
     });
 
     setIsLoading(false);

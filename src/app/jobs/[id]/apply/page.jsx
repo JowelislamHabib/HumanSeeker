@@ -6,6 +6,7 @@ import JobApply from "./JobApply";
 import { getApplicationsByApplicant } from "@/lib/api/applications";
 import { AlertCircle, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
+import { getPlanById } from "@/lib/api/plans";
 
 const ApplyPage = async ({ params }) => {
   const { id } = await params;
@@ -18,10 +19,10 @@ const ApplyPage = async ({ params }) => {
     return <ApplyNotAllowed />;
   }
   const job = await getJobById(id);
-  const plan = {
-    name: "free",
-    maxApplicationsPerMonth: 3,
-  };
+
+  const plan = await getPlanById(user?.plan || "seeker_free");
+  console.log(plan, "plan page");
+
   const applications = await getApplicationsByApplicant(user?.id);
   const applicationsCount = applications?.length || 0;
   const maxApps = plan.maxApplicationsPerMonth;
@@ -33,7 +34,7 @@ const ApplyPage = async ({ params }) => {
     <div className="min-h-screen bg-background relative overflow-hidden">
       {/* Premium subtle background glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] opacity-10 pointer-events-none bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary via-background to-background" />
-      
+
       <div className="relative py-16 px-4 sm:px-6 lg:px-8">
         <div className="container mx-auto">
           {canApply ? (
@@ -54,7 +55,10 @@ const ApplyPage = async ({ params }) => {
                     <span className="font-semibold text-foreground capitalize">
                       {plan.name}
                     </span>{" "}
-                    plan. You have <span className="font-medium text-foreground">{remaining}</span>{" "}
+                    plan. You have{" "}
+                    <span className="font-medium text-foreground">
+                      {remaining}
+                    </span>{" "}
                     {remaining === 1 ? "application" : "applications"} remaining
                     this month.
                   </p>
@@ -62,7 +66,9 @@ const ApplyPage = async ({ params }) => {
 
                 <div className="w-full md:w-64 shrink-0 space-y-4">
                   <div className="flex justify-between text-sm font-medium">
-                    <span className="text-muted-foreground">{applicationsCount} Used</span>
+                    <span className="text-muted-foreground">
+                      {applicationsCount} Used
+                    </span>
                     <span className="text-foreground">{maxApps} Total</span>
                   </div>
                   <div className="h-2 w-full bg-secondary/50 rounded-full overflow-hidden">
@@ -96,8 +102,9 @@ const ApplyPage = async ({ params }) => {
                     Monthly Limit Reached
                   </h3>
                   <p className="text-muted-foreground text-lg leading-relaxed">
-                    You have used all {maxApps} applications for this month. Upgrade
-                    your plan to unlock unlimited potential and apply for more jobs.
+                    You have used all {maxApps} applications for this month.
+                    Upgrade your plan to unlock unlimited potential and apply
+                    for more jobs.
                   </p>
                 </div>
                 <Link

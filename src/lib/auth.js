@@ -14,6 +14,9 @@ export const auth = betterAuth({
       role: {
         default: "freelancer",
       },
+      plan: {
+        default: "seeker_free",
+      },
     },
   },
   emailAndPassword: {
