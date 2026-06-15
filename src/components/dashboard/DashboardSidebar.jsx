@@ -1,58 +1,58 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
 import {
-  Sidebar,
-  SidebarContent,
-  SidebarHeader,
-  SidebarFooter,
-  SidebarMenu,
-  SidebarMenuItem,
-  SidebarMenuButton,
-  SidebarTrigger,
+    Sidebar,
+    SidebarContent,
+    SidebarHeader,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem
 } from "@/components/ui/sidebar";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  RiDashboardLine,
-  RiBuilding4Line,
-  RiBriefcaseLine,
-  RiFileListLine,
-  RiSettings3Line,
-  RiSunLine,
-  RiMoonLine,
-  RiBuilding2Line,
-  RiVipCrownLine,
-} from "react-icons/ri";
 import { authClient } from "@/lib/auth-client";
 import { useTheme } from "next-themes";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import {
+    RiBankCardLine,
+    RiBookmarkLine,
+    RiBriefcaseLine,
+    RiBuilding2Line,
+    RiBuilding4Line,
+    RiDashboardLine,
+    RiFileListLine,
+    RiSettings3Line,
+    RiVipCrownLine
+} from "react-icons/ri";
 
-const navItems = [
-  { title: "Dashboard", url: "/dashboard/recruiter", icon: RiDashboardLine },
-  {
-    title: "Company Profile",
-    url: "/dashboard/recruiter/company",
-    icon: RiBuilding2Line,
-  },
-  { title: "Jobs", url: "/dashboard/recruiter/jobs", icon: RiBuilding4Line },
-  {
-    title: "Create Job",
-    url: "/dashboard/recruiter/jobs/new",
-    icon: RiBriefcaseLine,
-  },
-  {
-    title: "Applications",
-    url: "/dashboard/recruiter/applications",
-    icon: RiFileListLine,
-  },
-  { title: "Settings", url: "/dashboard/settings", icon: RiSettings3Line },
-];
+
 
 const DashboardSidebar = () => {
   const pathname = usePathname();
   const { data: session, isPending } = authClient.useSession();
   const { theme, setTheme } = useTheme();
+
+  const role = session?.user?.role || "freelancer";
+
+  const recruiterNavItems = [
+    { title: "Dashboard", url: "/dashboard/recruiter", icon: RiDashboardLine },
+    { title: "Company Profile", url: "/dashboard/recruiter/company", icon: RiBuilding2Line },
+    { title: "Jobs", url: "/dashboard/recruiter/jobs", icon: RiBuilding4Line },
+    { title: "Create Job", url: "/dashboard/recruiter/jobs/new", icon: RiBriefcaseLine },
+    { title: "Applications", url: "/dashboard/recruiter/applications", icon: RiFileListLine },
+    { title: "Settings", url: "/dashboard/settings", icon: RiSettings3Line },
+  ];
+
+  const seekerNavItems = [
+    { title: "Dashboard", url: "/dashboard/freelancer", icon: RiDashboardLine },
+    { title: "Jobs", url: "/dashboard/freelancer/jobs", icon: RiBriefcaseLine },
+    { title: "Saved Jobs", url: "/dashboard/freelancer/saved-jobs", icon: RiBookmarkLine },
+    { title: "Applications", url: "/dashboard/freelancer/applications", icon: RiFileListLine },
+    { title: "Billing", url: "/dashboard/freelancer/billing", icon: RiBankCardLine },
+    { title: "Settings", url: "/dashboard/settings", icon: RiSettings3Line },
+  ];
+
+  const navItems = role === "client" ? recruiterNavItems : seekerNavItems;
 
   return (
     <div className="relative group/sidebar transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]">
