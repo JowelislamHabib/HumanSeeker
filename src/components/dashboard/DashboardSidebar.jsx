@@ -23,6 +23,7 @@ import {
   RiSunLine,
   RiMoonLine,
   RiBuilding2Line,
+  RiVipCrownLine,
 } from "react-icons/ri";
 import { authClient } from "@/lib/auth-client";
 import { useTheme } from "next-themes";
@@ -52,15 +53,14 @@ const DashboardSidebar = () => {
   const pathname = usePathname();
   const { data: session, isPending } = authClient.useSession();
   const { theme, setTheme } = useTheme();
-  // console.log(session);
 
   return (
-    <div>
+    <div className="relative group/sidebar transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]">
       <Sidebar
-        className="border-r border-border bg-sidebar text-sidebar-foreground z-60"
+        className="border-r border-border/50 bg-background text-sidebar-foreground z-60 transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]"
         collapsible="icon"
       >
-        <SidebarHeader className="p-4 group-data-[collapsible=icon]:p-2 border-b-0">
+        <SidebarHeader className="p-6 group-data-[collapsible=icon]:p-4 border-b border-border/30">
           <div className="flex items-center h-10 px-2 group-data-[collapsible=icon]:justify-center">
             <div className="group-data-[collapsible=icon]:hidden">
               <Image
@@ -68,7 +68,7 @@ const DashboardSidebar = () => {
                 alt="WorkLix"
                 width={140}
                 height={32}
-                className="h-7 w-auto object-contain dark:block hidden"
+                className="h-6 w-auto object-contain dark:block hidden"
                 priority
               />
               <Image
@@ -76,7 +76,7 @@ const DashboardSidebar = () => {
                 alt="WorkLix"
                 width={140}
                 height={32}
-                className="h-7 w-auto object-contain dark:hidden block"
+                className="h-6 w-auto object-contain dark:hidden block"
                 priority
               />
             </div>
@@ -90,32 +90,24 @@ const DashboardSidebar = () => {
           </div>
         </SidebarHeader>
 
-        <SidebarContent className="px-3 py-4">
-          {/* Profile Section */}
+        <SidebarContent className="px-4 py-6">
+          {/* Premium Plan Card */}
           <div className="mb-8 px-2 group-data-[collapsible=icon]:px-0 group-data-[collapsible=icon]:flex group-data-[collapsible=icon]:justify-center">
-            <div className="flex items-center gap-3">
-              <Avatar className="h-10 w-10 border border-border">
-                <AvatarImage
-                  src={session?.user?.image}
-                  alt={session?.user?.name}
-                />
-                <AvatarFallback>{session?.user?.name?.[0]}</AvatarFallback>
-              </Avatar>
-              <div className="flex flex-col group-data-[collapsible=icon]:hidden overflow-hidden">
-                <span className="text-sm font-semibold text-foreground leading-none mb-1.5 truncate">
-                  {session?.user?.name}
-                </span>
-                <span className="text-xs text-muted-foreground mb-2 truncate">
-                  {session?.user?.email}
-                </span>
-                <div className="text-[9px] font-bold text-muted-foreground border border-border bg-accent/50 px-1.5 py-0.5 rounded uppercase tracking-wider w-fit">
-                  PREMIUM ACCOUNT
-                </div>
+            <div className="p-4 rounded-3xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20 group-data-[collapsible=icon]:p-0 group-data-[collapsible=icon]:bg-transparent group-data-[collapsible=icon]:border-transparent transition-all duration-500 relative overflow-hidden flex items-center gap-4">
+              <div className="absolute top-0 right-0 -mr-4 -mt-4 w-16 h-16 bg-primary/20 rounded-full blur-xl group-data-[collapsible=icon]:hidden" />
+              
+              <div className="flex items-center justify-center size-10 shrink-0 rounded-2xl bg-primary/20 text-primary border border-primary/30 group-data-[collapsible=icon]:size-8 group-data-[collapsible=icon]:rounded-xl">
+                <RiVipCrownLine className="size-5 group-data-[collapsible=icon]:size-4" />
+              </div>
+              
+              <div className="flex flex-col group-data-[collapsible=icon]:hidden">
+                <span className="text-[10px] uppercase tracking-widest font-bold text-primary mb-0.5">Current Plan</span>
+                <span className="text-sm font-black text-foreground tracking-tight leading-none">Premium</span>
               </div>
             </div>
           </div>
 
-          <SidebarMenu className="gap-2">
+          <SidebarMenu className="gap-3">
             {navItems.map((item) => {
               const isActive = pathname === item.url;
               return (
@@ -123,15 +115,18 @@ const DashboardSidebar = () => {
                   <SidebarMenuButton
                     asChild
                     tooltip={item.title}
-                    className={`transition-all group-data-[collapsible=icon]:justify-center h-10 ${
+                    className={`transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-data-[collapsible=icon]:justify-center h-12 relative overflow-hidden group/item ${
                       isActive
-                        ? "bg-accent text-accent-foreground rounded-md rounded-r-none border-r-[3px] border-primary font-medium"
-                        : "text-muted-foreground hover:bg-accent/50 hover:text-foreground rounded-md font-medium"
+                        ? "bg-foreground text-background rounded-2xl font-bold shadow-md hover:bg-foreground hover:text-background"
+                        : "text-muted-foreground hover:bg-accent/50 hover:text-foreground rounded-2xl font-medium"
                     }`}
                   >
-                    <Link href={item.url}>
-                      <item.icon className="size-5 shrink-0" />
-                      <span className="group-data-[collapsible=icon]:hidden ml-1">
+                    <Link href={item.url} className="px-4">
+                      {isActive && (
+                        <div className="absolute inset-0 bg-white/10 dark:bg-black/10 mix-blend-overlay pointer-events-none" />
+                      )}
+                      <item.icon className={`size-[1.125rem] shrink-0 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${isActive ? 'scale-110' : 'group-hover/item:scale-110'}`} />
+                      <span className="group-data-[collapsible=icon]:hidden ml-3 tracking-wide">
                         {item.title}
                       </span>
                     </Link>
@@ -141,20 +136,6 @@ const DashboardSidebar = () => {
             })}
           </SidebarMenu>
         </SidebarContent>
-
-        <SidebarFooter className="p-4 border-t border-border flex flex-col gap-2">
-          <button
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="w-full flex items-center group-data-[collapsible=icon]:justify-center gap-2 text-muted-foreground hover:text-foreground hover:bg-accent/50 p-2 rounded-md transition-colors"
-          >
-            <RiSunLine className="size-5 shrink-0 hidden dark:block" />
-            <RiMoonLine className="size-5 shrink-0 block dark:hidden" />
-            <span className="group-data-[collapsible=icon]:hidden font-medium text-sm">
-              Toggle Theme
-            </span>
-          </button>
-          <SidebarTrigger className="w-full justify-center text-muted-foreground hover:text-foreground hover:bg-accent/50" />
-        </SidebarFooter>
       </Sidebar>
     </div>
   );

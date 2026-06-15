@@ -49,3 +49,4 @@ tailwind_instruction.md
 .env*.local
 
 .agents/
+.agents
