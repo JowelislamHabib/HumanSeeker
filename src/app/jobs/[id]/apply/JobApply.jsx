@@ -1,28 +1,28 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
 } from "@/components/ui/card";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import {
-  Briefcase,
-  Link as LinkIcon,
-  FileText,
-  Send,
-  User,
-} from "lucide-react";
-import { Field, FieldLabel, FieldContent } from "@/components/ui/field";
-import Image from "next/image";
+import { Field, FieldContent, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
 import { submitApplication } from "@/lib/actions/applications";
+import {
+    Briefcase,
+    FileText,
+    Link as LinkIcon,
+    Send,
+    User,
+} from "lucide-react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const JobApply = ({ job, applicant }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -36,6 +36,7 @@ const JobApply = ({ job, applicant }) => {
     const submissionData = {
       jobId: job._id || job.id,
       companyName: job.companyName,
+      companyLogo: job.companyLogo,
       applicantId: applicant._id || applicant.id,
       resumeLink: formData.get("resume"),
       portfolio: formData.get("portfolio"),
