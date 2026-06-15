@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils";
 
 const jobSeekerPlans = [
   {
+    id: "seeker_free",
     name: "Free",
     icon: RiVipCrownLine,
     price: 0,
@@ -34,6 +35,7 @@ const jobSeekerPlans = [
     color: "from-sky-500 to-indigo-500",
   },
   {
+    id: "seeker_pro",
     name: "Pro",
     icon: RiBarChartLine,
     price: 19,
@@ -52,6 +54,7 @@ const jobSeekerPlans = [
     color: "from-fuchsia-500 to-pink-500",
   },
   {
+    id: "seeker_premium",
     name: "Premium",
     icon: RiStarFill,
     price: 39,
@@ -73,6 +76,7 @@ const jobSeekerPlans = [
 
 const recruiterPlans = [
   {
+    id: "recruiter_free",
     name: "Free",
     icon: RiVipCrownLine,
     price: 0,
@@ -89,6 +93,7 @@ const recruiterPlans = [
     color: "from-sky-500 to-indigo-500",
   },
   {
+    id: "recruiter_growth",
     name: "Growth",
     icon: RiBarChartLine,
     price: 49,
@@ -107,6 +112,7 @@ const recruiterPlans = [
     color: "from-fuchsia-500 to-pink-500",
   },
   {
+    id: "recruiter_enterprise",
     name: "Enterprise",
     icon: RiFlashlightLine,
     price: 149,
@@ -381,6 +387,7 @@ export default function PricingPage() {
                   {/* CTA button */}
                   <div className="relative z-10 pt-2">
                     <form action="/api/checkout_sessions" method="POST">
+                      <input type="hidden" name="planId" value={plan.id} />
                       <section>
                         <button
                           type="submit"
