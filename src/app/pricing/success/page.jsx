@@ -58,10 +58,10 @@ const SuccessPage = async ({ searchParams }) => {
 
           <div className="pt-4 space-y-4">
             <Link
-              href="/dashboard"
+              href="/jobs"
               className="w-full flex items-center justify-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 px-6 py-3.5 rounded-full font-medium hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-all active:scale-[0.98]"
             >
-              Go to Dashboard
+              Browse the jobs
               <ArrowRight className="w-4 h-4" />
             </Link>
 
