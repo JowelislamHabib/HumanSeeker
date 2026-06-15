@@ -1,29 +1,21 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import {
-  RiTeamFill,
-  RiSunLine,
-  RiMoonLine,
-  RiUserLine,
-  RiArrowDownSLine,
-  RiLogoutBoxRLine,
-} from "react-icons/ri";
-import { useTheme } from "next-themes";
+import { authClient, useSession } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
-import { authClient } from "@/lib/auth-client";
-import { useRouter, usePathname } from "next/navigation";
+import { useTheme } from "next-themes";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import {
+    RiArrowDownSLine,
+    RiLogoutBoxRLine,
+    RiMoonLine,
+    RiSunLine,
+    RiUserLine
+} from "react-icons/ri";
 
-const navLinks = [
-  { label: "Browse Projects", href: "/projects" },
-  { label: "Browse Jobs", href: "/jobs" },
-  { label: "Agencies", href: "/agencies" },
-  { label: "Pricing", href: "/pricing" },
-];
 
-const userLinks = [{ label: "My Profile", href: "/profile", Icon: RiUserLine }];
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -33,8 +25,30 @@ const Navbar = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const { data: session, isPending } = authClient.useSession();
-  // console.log(session);
+const userLinks = [{ label: "My Profile", href: "/profile", Icon: RiUserLine }];
+
+  const { data: session } = useSession();
+  const user = session?.user;
+
+  const dashboardLink = {
+    freelancer: "/dashboard/freelancer",
+    client: "/dashboard/recruiter",
+    admin: "/dashboard/admin",
+  };
+
+  const navLinks = [
+    { label: "Browse Projects", href: "/projects" },
+    { label: "Browse Jobs", href: "/jobs" },
+    { label: "Agencies", href: "/agencies" },
+    { label: "Pricing", href: "/pricing" },
+  ];
+
+  if (session?.user?.email) {
+      navLinks.push({
+        label: "Dashboard",
+      href: dashboardLink[user?.role || "freelancer"],
+      });
+    }
 
   useEffect(() => {
     setMounted(true);
@@ -171,7 +185,7 @@ const Navbar = () => {
           <div className="h-4 w-px bg-zinc-200 dark:bg-zinc-800 transition-colors" />
 
           {/* Sign In & Get Started / Profile Dropdown */}
-          {!isPending &&
+          {
             (session ? (
               <div className="relative">
                 <button
@@ -299,7 +313,7 @@ const Navbar = () => {
             ))}
           </div>
 
-          {!isPending &&
+          {
             (session ? (
               <div className="flex flex-col gap-4 bg-zinc-50 dark:bg-zinc-900/50 -mx-3 px-3 py-4 rounded-2xl border border-zinc-100 dark:border-zinc-800/80">
                 <div className="flex items-center justify-between gap-3">
