@@ -1,25 +1,24 @@
 "use client";
 
-import React from "react";
-import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
 } from "@/components/ui/card";
 import {
-  MapPin,
-  Briefcase,
-  CircleDollarSign,
-  ArrowRight,
-  Bookmark,
-  Clock,
+    ArrowRight,
+    Bookmark,
+    Briefcase,
+    CircleDollarSign,
+    Clock,
+    MapPin,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { motion } from "motion/react";
+import Link from "next/link";
 
 const JobCard = ({ job, id }) => {
   return (

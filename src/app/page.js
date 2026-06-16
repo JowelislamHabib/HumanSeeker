@@ -1,8 +1,8 @@
 import Banner from "@/components/Banner";
-import StatsSection from "@/components/StatsSection";
+import CtaSection from "@/components/CtaSection";
 import FeaturedJobs from "@/components/FeaturedJobs";
 import PricingSection from "@/components/PricingSection";
-import CtaSection from "@/components/CtaSection";
+import StatsSection from "@/components/StatsSection";
 
 export default function Home() {
   return (
