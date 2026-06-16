@@ -9,13 +9,6 @@ import {
   RiCheckLine,
 } from "react-icons/ri";
 import { cn } from "@/lib/utils";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
 import { motion, AnimatePresence } from "motion/react";
 
 const plans = [
@@ -24,6 +17,7 @@ const plans = [
     icon: RiVipCrownLine,
     priceMonthly: 0,
     priceYearly: 0,
+    description: "Ideal for casual users looking to explore platform basics.",
     features: [
       "Browse jobs & search listings",
       "Save up to 10 jobs for later",
@@ -38,6 +32,7 @@ const plans = [
     icon: RiBarChartLine,
     priceMonthly: 29,
     priceYearly: 22,
+    description: "For active users who want to land roles faster with priority tools.",
     features: [
       "Unlimited job applications",
       "Unlimited bookmarked/saved jobs",
@@ -45,13 +40,14 @@ const plans = [
       "Application tracking & salary insights",
     ],
     isFeatured: true,
-    color: "from-fuchsia-500 to-pink-500",
+    color: "from-indigo-500 to-pink-500",
   },
   {
     name: "Enterprise",
     icon: RiFlashlightLine,
     priceMonthly: 99,
     priceYearly: 74,
+    description: "For teams and organizations seeking advanced features.",
     features: [
       "Everything in Pro included",
       "Unlimited employer job postings",
@@ -96,10 +92,10 @@ const PricingSection = () => {
           }}
           className="flex flex-col items-center text-center"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-fuchsia-500/20 dark:border-fuchsia-400/25 bg-fuchsia-50/50 dark:bg-fuchsia-950/30 text-fuchsia-600 dark:text-fuchsia-400 shadow-xs backdrop-blur-xs select-none">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-indigo-500/20 dark:border-indigo-400/25 bg-indigo-50/50 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-400 shadow-xs backdrop-blur-xs select-none">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-fuchsia-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-fuchsia-500"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
             </span>
             <span className="text-[10px] sm:text-xs font-bold tracking-widest uppercase">
               Pricing Plans
@@ -158,7 +154,7 @@ const PricingSection = () => {
             )}
             <span className="relative z-10 flex items-center gap-1.5">
               <span>Yearly</span>
-              <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-fuchsia-600 text-white font-bold">
+              <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-indigo-600 text-white font-bold">
                 25%
               </span>
             </span>
@@ -190,29 +186,29 @@ const PricingSection = () => {
                   visible: {
                     opacity: 1,
                     y: 0,
-                    scale: plan.isFeatured ? 1.05 : 1.0,
+                    scale: plan.isFeatured ? 1.04 : 1.0,
                     transition: { type: "spring", stiffness: 80, damping: 14 },
                   },
                 }}
                 whileHover={{
-                  y: -12,
-                  scale: plan.isFeatured ? 1.06 : 1.02,
+                  y: -10,
+                  scale: plan.isFeatured ? 1.05 : 1.02,
                   transition: { type: "spring", stiffness: 260, damping: 20 },
                 }}
                 className="flex flex-col h-full w-full"
               >
-                <Card
+                <div
                   className={cn(
-                    "group relative flex flex-col justify-between transition-all duration-300 border bg-white dark:bg-zinc-900/40 h-full w-full overflow-visible",
+                    "group relative flex flex-col justify-between p-8 rounded-3xl transition-all duration-300 border bg-white dark:bg-zinc-900/40 h-full w-full overflow-visible",
                     plan.isFeatured
-                      ? "border-2 border-fuchsia-500 dark:border-fuchsia-400 shadow-xl shadow-fuchsia-500/10 dark:shadow-fuchsia-400/5 z-10"
+                      ? "border-2 border-indigo-500 dark:border-indigo-400 shadow-xl shadow-indigo-500/10 dark:shadow-indigo-400/5 z-10"
                       : "border-zinc-200 dark:border-zinc-900 hover:border-zinc-300 dark:hover:border-zinc-800 shadow-xs",
                   )}
                 >
                   {/* Accent glow corner */}
                   <div
                     className={cn(
-                      "absolute top-0 right-0 w-24 h-24 bg-gradient-to-br opacity-0 transition-opacity duration-500 rounded-tr-xl blur-xl pointer-events-none z-0",
+                      "absolute top-0 right-0 w-32 h-32 bg-gradient-to-br opacity-0 transition-opacity duration-500 rounded-tr-3xl blur-2xl pointer-events-none z-0",
                       plan.isFeatured ? "opacity-15" : "group-hover:opacity-15",
                       plan.color,
                     )}
@@ -220,24 +216,34 @@ const PricingSection = () => {
 
                   {plan.isFeatured && (
                     <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20">
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-fuchsia-600 text-white shadow-md shadow-fuchsia-600/20">
-                        <RiVipCrownLine className="w-3.5 h-3.5 animate-bounce" />
+                      <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-indigo-600 text-white shadow-md shadow-indigo-600/20">
+                        <RiVipCrownLine className="w-3.5 h-3.5" />
                         Most Popular
                       </span>
                     </div>
                   )}
 
-                  <CardHeader className="flex flex-row items-center justify-between border-b border-zinc-100 dark:border-zinc-800/50 pb-6 pt-6 px-6">
-                    <div className="flex items-center gap-2.5">
-                      <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 transition-colors">
-                        <Icon className="w-5 h-5 text-fuchsia-600 dark:text-fuchsia-400" />
-                      </span>
-                      <CardTitle className="text-lg font-bold text-zinc-950 dark:text-white tracking-tight transition-colors">
+                  {/* Header */}
+                  <div className="relative z-10 flex flex-col items-start gap-4 pb-6 border-b border-zinc-100 dark:border-zinc-800/60">
+                    <span
+                      className={cn(
+                        "flex items-center justify-center w-11 h-11 rounded-2xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 shadow-sm",
+                        plan.isFeatured &&
+                          "text-indigo-600 dark:text-indigo-400 border-indigo-500/20",
+                      )}
+                    >
+                      <Icon className="w-5.5 h-5.5 text-indigo-600 dark:text-indigo-400" />
+                    </span>
+                    <div className="flex flex-col text-left">
+                      <h3 className="text-xl font-bold text-zinc-950 dark:text-white tracking-tight">
                         {plan.name}
-                      </CardTitle>
+                      </h3>
+                      <p className="text-zinc-500 dark:text-zinc-400 text-xs mt-1.5 font-normal leading-relaxed">
+                        {plan.description}
+                      </p>
                     </div>
-                    <div className="flex items-baseline text-zinc-950 dark:text-white transition-colors">
-                      <span className="text-3xl font-extrabold flex items-center relative overflow-hidden h-9">
+                    <div className="flex items-baseline text-zinc-950 dark:text-white mt-2">
+                      <span className="text-4xl font-extrabold flex items-center relative overflow-hidden h-11">
                         <span className="relative z-10">$</span>
                         <AnimatePresence mode="popLayout" initial={false}>
                           <motion.span
@@ -256,44 +262,46 @@ const PricingSection = () => {
                           </motion.span>
                         </AnimatePresence>
                       </span>
-                      <span className="text-zinc-500 dark:text-zinc-400 text-xs ml-1">
+                      <span className="text-zinc-500 dark:text-zinc-400 text-xs ml-1 font-semibold uppercase tracking-wider">
                         /mo
                       </span>
                     </div>
-                  </CardHeader>
+                  </div>
 
-                  <CardContent className="flex-1 flex flex-col gap-6 pt-6 px-6 pb-6">
-                    <p className="text-zinc-500 dark:text-zinc-400 text-xs font-semibold uppercase tracking-wider">
-                      Start building your insights hub:
+                  {/* Features */}
+                  <div className="relative z-10 flex-1 flex flex-col gap-6 pt-6 pb-8">
+                    <p className="text-zinc-550 dark:text-zinc-400 text-[10px] font-bold uppercase tracking-wider text-left">
+                      Included with {plan.name}:
                     </p>
-                    <ul className="flex flex-col gap-3">
+                    <ul className="flex flex-col gap-3.5">
                       {plan.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-3">
-                          <span className="flex items-center justify-center w-5 h-5 rounded-md bg-fuchsia-50 dark:bg-fuchsia-950/30 border border-fuchsia-100 dark:border-fuchsia-900/40 text-fuchsia-600 dark:text-fuchsia-400 shrink-0 select-none transition-colors">
+                        <li key={idx} className="flex items-start gap-3 text-left">
+                          <span className="flex items-center justify-center w-5 h-5 rounded-md bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900/40 text-indigo-600 dark:text-indigo-400 shrink-0 select-none">
                             <RiCheckLine className="w-3.5 h-3.5" />
                           </span>
-                          <span className="text-zinc-750 dark:text-zinc-300 text-sm leading-relaxed transition-colors">
+                          <span className="text-zinc-700 dark:text-zinc-300 text-sm leading-relaxed font-normal">
                             {feature}
                           </span>
                         </li>
                       ))}
                     </ul>
-                  </CardContent>
+                  </div>
 
-                  <CardFooter className="pt-2 pb-6 px-6">
+                  {/* CTA button */}
+                  <div className="relative z-10 pt-2">
                     <button
                       className={cn(
-                        "w-full py-3 px-4 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer active:scale-[0.98] group",
+                        "w-full py-3.5 px-4 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 transition-all active:scale-[0.98] group cursor-pointer",
                         plan.isFeatured
-                          ? "bg-fuchsia-600 hover:bg-fuchsia-500 text-white shadow-md shadow-fuchsia-500/25"
+                          ? "bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-600/25"
                           : "bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-800",
                       )}
                     >
-                      <span>Choose This Plan</span>
+                      Choose This Plan
                       <RiArrowRightLine className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
                     </button>
-                  </CardFooter>
-                </Card>
+                  </div>
+                </div>
               </motion.div>
             );
           })}
