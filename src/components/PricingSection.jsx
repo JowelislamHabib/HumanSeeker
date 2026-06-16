@@ -7,61 +7,131 @@ import {
   RiFlashlightLine,
   RiArrowRightLine,
   RiCheckLine,
+  RiStarFill,
 } from "react-icons/ri";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "motion/react";
 
-const plans = [
+const jobSeekerPlans = [
   {
+    id: "seeker_free",
     name: "Free",
     icon: RiVipCrownLine,
-    priceMonthly: 0,
-    priceYearly: 0,
-    description: "Ideal for casual users looking to explore platform basics.",
+    price: 0,
+    priceSuffix: "/forever",
+    description: "Ideal for casual job seekers looking to discover open roles.",
     features: [
-      "Browse jobs & search listings",
-      "Save up to 10 jobs for later",
-      "Basic candidate profile details",
-      "Daily email notifications",
+      "Browse & save up to 10 jobs",
+      "Apply to up to 3 jobs per month",
+      "Basic profile",
+      "Email alerts",
     ],
+    cta: "Start Free",
+    href: "/signup",
     isFeatured: false,
     color: "from-sky-500 to-indigo-500",
   },
   {
+    id: "seeker_pro",
     name: "Pro",
     icon: RiBarChartLine,
-    priceMonthly: 29,
-    priceYearly: 22,
-    description: "For active users who want to land roles faster with priority tools.",
+    price: 19,
+    priceSuffix: "/month",
+    description:
+      "For active job seekers who want to land roles faster with priority tools.",
     features: [
-      "Unlimited job applications",
-      "Unlimited bookmarked/saved jobs",
-      "Priority candidate list placement",
-      "Application tracking & salary insights",
+      "Apply to up to 30 jobs per month",
+      "Unlimited saved jobs",
+      "Application tracking",
+      "Salary insights",
     ],
+    cta: "Go Pro",
+    href: "/signup",
     isFeatured: true,
     color: "from-indigo-500 to-pink-500",
   },
   {
+    id: "seeker_premium",
+    name: "Premium",
+    icon: RiStarFill,
+    price: 39,
+    priceSuffix: "/month",
+    description:
+      "For job seekers who want maximum visibility and early access.",
+    features: [
+      "Everything in Pro + unlimited applications",
+      "Profile boost to recruiters",
+      "Early access to new jobs",
+      "Priority support",
+    ],
+    cta: "Get Premium",
+    href: "/signup",
+    isFeatured: false,
+    color: "from-purple-500 to-violet-500",
+  },
+];
+
+const recruiterPlans = [
+  {
+    id: "recruiter_free",
+    name: "Free",
+    icon: RiVipCrownLine,
+    price: 0,
+    priceSuffix: "/forever",
+    description: "Great for a company's first year of hiring.",
+    features: [
+      "Up to 3 active job posts",
+      "Basic applicant management",
+      "Standard listing visibility",
+    ],
+    cta: "Start Free",
+    href: "/signup",
+    isFeatured: false,
+    color: "from-sky-500 to-indigo-500",
+  },
+  {
+    id: "recruiter_growth",
+    name: "Growth",
+    icon: RiBarChartLine,
+    price: 49,
+    priceSuffix: "/month",
+    description:
+      "For growing teams that need applicant tracking and analytics.",
+    features: [
+      "Up to 10 active job posts",
+      "Applicant tracking",
+      "Basic analytics",
+      "Email support",
+    ],
+    cta: "Get Growth",
+    href: "/signup",
+    isFeatured: true,
+    color: "from-indigo-500 to-pink-500",
+  },
+  {
+    id: "recruiter_enterprise",
     name: "Enterprise",
     icon: RiFlashlightLine,
-    priceMonthly: 99,
-    priceYearly: 74,
-    description: "For teams and organizations seeking advanced features.",
+    price: 149,
+    priceSuffix: "/month",
+    description: "For established companies seeking advanced recruiting power.",
     features: [
-      "Everything in Pro included",
-      "Unlimited employer job postings",
-      "Applicant Tracking System (ATS)",
-      "Team collaboration & analytics",
-      "Dedicated support & branding",
+      "Up to 50 active job posts",
+      "Advanced analytics dashboard",
+      "Featured job listings",
+      "Team collaboration & custom branding",
+      "Priority support",
     ],
+    cta: "Get Enterprise",
+    href: "/signup",
     isFeatured: false,
     color: "from-purple-500 to-violet-500",
   },
 ];
 
 const PricingSection = () => {
-  const [billing, setBilling] = useState("monthly");
+  const [userType, setUserType] = useState("seekers");
+  const currentPlans = userType === "seekers" ? jobSeekerPlans : recruiterPlans;
 
   return (
     <section className="relative w-full bg-zinc-50 dark:bg-zinc-950 py-24 border-t border-zinc-200 dark:border-zinc-900 overflow-hidden transition-colors duration-300">
@@ -119,50 +189,49 @@ const PricingSection = () => {
           className="relative flex items-center bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-1.5 rounded-full transition-colors"
         >
           <button
-            onClick={() => setBilling("monthly")}
+            onClick={() => setUserType("seekers")}
             className={cn(
               "relative z-10 px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-colors cursor-pointer",
-              billing === "monthly"
+              userType === "seekers"
                 ? "text-white dark:text-zinc-950 font-bold"
                 : "text-zinc-500 hover:text-zinc-900 dark:text-white/70 dark:hover:text-white",
             )}
           >
-            {billing === "monthly" && (
+            {userType === "seekers" && (
               <motion.span
-                layoutId="activeBilling"
+                layoutId="pricingSectionTab"
                 className="absolute inset-0 bg-zinc-950 dark:bg-white rounded-full shadow-sm"
                 transition={{ type: "spring", stiffness: 380, damping: 30 }}
               />
             )}
-            <span className="relative z-10">Monthly</span>
+            <span className="relative z-10">For Job Seekers</span>
           </button>
           <button
-            onClick={() => setBilling("yearly")}
+            onClick={() => setUserType("recruiters")}
             className={cn(
               "relative z-10 px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-colors flex items-center gap-1.5 cursor-pointer",
-              billing === "yearly"
+              userType === "recruiters"
                 ? "text-white dark:text-zinc-950 font-bold"
                 : "text-zinc-500 hover:text-zinc-900 dark:text-white/70 dark:hover:text-white",
             )}
           >
-            {billing === "yearly" && (
+            {userType === "recruiters" && (
               <motion.span
-                layoutId="activeBilling"
+                layoutId="pricingSectionTab"
                 className="absolute inset-0 bg-zinc-950 dark:bg-white rounded-full shadow-sm"
                 transition={{ type: "spring", stiffness: 380, damping: 30 }}
               />
             )}
-            <span className="relative z-10 flex items-center gap-1.5">
-              <span>Yearly</span>
-              <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-indigo-600 text-white font-bold">
-                25%
-              </span>
-            </span>
+            <span className="relative z-10">For Recruiters</span>
           </button>
         </motion.div>
 
         {/* Grid of Cards */}
         <motion.div
+          key={userType}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
           variants={{
             hidden: {},
             visible: {
@@ -173,14 +242,12 @@ const PricingSection = () => {
           }}
           className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl mt-4 items-stretch"
         >
-          {plans.map((plan, index) => {
+          {currentPlans.map((plan, index) => {
             const Icon = plan.icon;
-            const price =
-              billing === "monthly" ? plan.priceMonthly : plan.priceYearly;
 
             return (
               <motion.div
-                key={index}
+                key={userType + index}
                 variants={{
                   hidden: { opacity: 0, y: 40, scale: 0.95 },
                   visible: {
@@ -247,7 +314,7 @@ const PricingSection = () => {
                         <span className="relative z-10">$</span>
                         <AnimatePresence mode="popLayout" initial={false}>
                           <motion.span
-                            key={price}
+                            key={plan.price}
                             initial={{ y: -24, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             exit={{ y: 24, opacity: 0 }}
@@ -258,12 +325,12 @@ const PricingSection = () => {
                             }}
                             className="relative z-10 inline-block"
                           >
-                            {price}
+                            {plan.price}
                           </motion.span>
                         </AnimatePresence>
                       </span>
                       <span className="text-zinc-500 dark:text-zinc-400 text-xs ml-1 font-semibold uppercase tracking-wider">
-                        /mo
+                        {plan.priceSuffix}
                       </span>
                     </div>
                   </div>
@@ -289,17 +356,24 @@ const PricingSection = () => {
 
                   {/* CTA button */}
                   <div className="relative z-10 pt-2">
-                    <button
-                      className={cn(
-                        "w-full py-3.5 px-4 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 transition-all active:scale-[0.98] group cursor-pointer",
-                        plan.isFeatured
-                          ? "bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-600/25"
-                          : "bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-800",
-                      )}
-                    >
-                      Choose This Plan
-                      <RiArrowRightLine className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
-                    </button>
+                    <form action="/api/checkout_sessions" method="POST">
+                      <input type="hidden" name="planId" value={plan.id} />
+                      <section>
+                        <button
+                          type="submit"
+                          role="link"
+                          className={cn(
+                            "w-full py-3.5 px-4 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 transition-all active:scale-[0.98] group cursor-pointer",
+                            plan.isFeatured
+                              ? "bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-600/25"
+                              : "bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-800",
+                          )}
+                        >
+                          Checkout
+                          <RiArrowRightLine className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+                        </button>
+                      </section>
+                    </form>
                   </div>
                 </div>
               </motion.div>
